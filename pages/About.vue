@@ -1,13 +1,13 @@
 <template>
     <main>
-            <div id="hero">
+            <section id="hero">
                 <h1 class="display-9 extra-bold display-7-mobile color-primary">За нас</h1>
                 <div class="spacer-24"></div>
                 <p class="paragraph-medium color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing eli <br/>mattis sit phasellus mollis sit aliquam sit nullam.</p>
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02">
                     <div id="section-1-image-container">
-                        <img src="/dogs/dog1.jpg" alt="placeholder" />	
+                        <img src="/photos/photo1.jpg" alt="placeholder" />	
                     </div>
                     <div id="section-1-text-container">
                         <div class="logo-container">
@@ -36,7 +36,7 @@
                             </p>
                         </div>
                         <div id="section-2-image-container">
-                            <img class="hero-image" src="/dogs/dog2.jpg" alt="placeholder" />
+                            <img class="hero-image" src="/photos/photo2.jpg" alt="placeholder" />
                         </div>
                     </div>
                     <div id="section-3" class="shadow-02">
@@ -47,8 +47,8 @@
                             </p>
                         </div>
                 </div>
-            </div>
-            <div id="firmi"> 
+            </section>
+            <section id="firmi"> 
                     <p class="paragraph-medium color-secondary align-right">Работим с фирми от различни индустрии и размери</p>
                     <h2 class="display-7 extra-bold color-primary align-left">Фирми с които работим</h2>
                 <div class="spacer-56"></div>
@@ -90,22 +90,16 @@
                         <img src="/logos/Logo-11.png" alt="logo" />
                     </div> 
                 </div>
-            </div>
-        <div class="section-container bg-dark">
+            </section>
+        <section class="section-container bg-dark">
             <div id="call-to-action" class="bg-dark">
                 <h3 class="display-7 extra-bold color-light">
                     Свържете се с нас днес и започнете да създавате по-стабилна и успешна финансова бъдеще.
                 </h3>
-                <div class="button-default bg-light color-secondary">
-                    <p class="display-2">Свържете се с нас</p>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="#4C5186" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.19984 4.99999L0.799896 4.99999" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
+                <Button buttonText="Свържете се с нас" light arrow/>
             </div>  
-        </div>
-        <div id="team-container">
+        </section>
+        <section id="team-container">
             <div id="team">
                 <div class="images" :style="{transform: `translateX(${-currentImage*368}px)`}">
                    <div class="image-container" v-for="(image, index) in images" :key="index">
@@ -115,7 +109,7 @@
                <div class="spacer-48 mobile-hidden"></div>
                <div id="team-content">
                     <div>
-                        <h2 class="display-8 color-primary extra-bold">Meet our talented team</h2>
+                        <h2 class="display-8 color-primary extra-bold">Нашият екип</h2>
                         <div class="spacer-24"></div>
                         <p class="paragraph-medium color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit <br/>phasellus mollis sit aliquam sit nullam.</p>
                     </div>
@@ -136,7 +130,7 @@
                     </div>
                </div>
             </div>
-        </div>
+        </section>
     </main>
 </template>
 
@@ -162,14 +156,12 @@ export default {
 
 <style scoped>
 /* Add your custom styles here */
-main {
-margin-top: 80px;
-}
 
 #hero {
     text-align: center;
     width: 100%;
     max-width: var(--max-width-medium);
+    padding: var(--section-padding);
 }
 
 #section-1 {
@@ -258,6 +250,7 @@ margin-top: 80px;
     flex-direction: column;
     width: 100%;
     max-width: var(--max-width-medium);
+    padding: var(--section-padding);
 }
 
 #logos {
@@ -271,14 +264,12 @@ margin-top: 80px;
     
 }
 
-
- 
-
 #call-to-action {
     display: flex;
     justify-content: space-between;
     max-width: var(--max-width-medium);
     align-items: center;
+    padding: var(--section-padding);
 }
 
 #call-to-action > h3 {
@@ -286,7 +277,8 @@ margin-top: 80px;
 }
 
 #team-container {
-    padding: 80px 0px;
+    padding: var(--section-padding);
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -298,7 +290,7 @@ margin-top: 80px;
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: var(--max-width-medium);
+    max-width: var(--max-width-medium)
 }
 
 .images {
@@ -339,6 +331,11 @@ margin-top: 80px;
 }
 
 @media screen and (max-width: 768px) {
+
+    #hero {
+        padding: 0px 16px;
+    }
+
     #section-1 {
         flex-direction: column;
         gap: 0px;

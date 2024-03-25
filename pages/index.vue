@@ -1,6 +1,6 @@
 <template>
     <main class="home">
-            <div id="hero">
+            <section id="hero">
                 <div id="hero-content" class="shadow-02">
                     <h1 class="display-9 color-primary align-left extra-bold align-center-mobile display-7-mobile">Счетоводна къща<br/> "АКТИВ”</h1>
                     <div class="spacer-24"></div>
@@ -9,51 +9,45 @@
                     </p>
                     <div class="spacer-32"></div>
                 <div id="hero-buttons">
-                    <div class="button-default  button-dark color-light">
-                        <p>Свържете се с нас</p>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9.19984 4.99999L0.799896 4.99999" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-                    </div>
-                    <div class="button-default button-light ">Услуги</div>
+                    <Button buttonText="Свържете се с нас" isScrollButton sectionId="contacts-container" arrow />
+                    <Button buttonText="Услуги" isScrollButton sectionId="serviceContainer" light />
                 </div>
                 </div>
                 <div id='hero-image-container'>
                     <img id="hero-image" src="/hero.png" alt="Hero Image" />
                 </div>
-            </div>
-            <div id="statistics">
+            </section>
+            <section id="statistics">
                 <h2 class="display-7 color-primary">Числа с които се гордеем</h2>
                 <div class="spacer-32"></div>
                 <div id="statistics-content" class="shadow-02">
                     <div class="statistic">
-                        <h3 class="display-8 color-primary semi-bold line-height-1">21</h3>
+                        <h3 class="display-8 color-primary semi-bold line-height-1">+21</h3>
                         <div class="spacer-16"></div>
-                        <h4 class="display-4 semi-bold color-primary line-height-1">Години в бизнеса</h4>
+                        <h4 class="display-4 semi-bold color-primary line-height-1">Години Опит в Бизнеса</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam mauris sed ma</p>
+                        <p class="color-secondary" style="max-width: 400px;">Над 21 години опит в счетоводството и финансите, потвърждавайки ни като утвърден партньор за нашите клиенти</p>
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
                         <h3 class="display-8 color-primary semi-bold line-height-1">+100</h3>
                         <div class="spacer-16"></div>
-                        <h4 class="display-4 semi-bold color-primary line-height-1">Фирми</h4>
+                        <h4 class="display-4 semi-bold color-primary line-height-1">Доволни Клиенти</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam mauris sed ma</p>
+                        <p class="color-secondary" style="max-width: 400px;">Осигуряваме услуги на над 1000 доволни клиенти, подчертавайки нашата способност да отговаряме на техните нужди</p>
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
-                        <h3 class="display-8 color-primary semi-bold line-height-1">21</h3>
+                        <h3 class="display-8 color-primary semi-bold line-height-1">100%</h3>
                         <div class="spacer-16"></div>
-                        <h4 class="display-4 semi-bold color-primary line-height-1">Години в бизнеса</h4>
+                        <h4 class="display-4 semi-bold color-primary line-height-1">Удовлетворение</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam mauris sed ma</p>
+                        <p class="color-secondary" style="max-width: 400px;">Гордеем се със 100% клиентско удовлетворение и сме посветени на предоставяне на висококачествено обслужване за всеки клиент</p>
                     </div>
                 </div>
-            </div>
-        <ServicesHome />
-            <div id="companies">
+            </section>
+        <ServicesHome  />
+            <section id="companies">
                 <h4 class="display-3 semi-bold color-dark">
                     Някои от нашите клиенти
                 </h4>
@@ -78,14 +72,32 @@
                         <img src="/logos/Logo-6.png" alt="Company Logo" />
                     </div>
                 </div>
-            </div>
+            </section>
         <Contacts />
     </main>
 </template>
 
 <script>
+    import { allConsentGranted } from '../js/cookies.js';
 export default {
     name: 'HomePage',
+    methods:{ 
+        scrollToElement(refName) {
+            console.log(this.$refs)
+      // Get a reference to the element you want to scroll to
+      const element = document.getElementById(refName);
+      
+      const offset = element.offsetTop - 110;
+      // Scroll to the element
+      window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+    },
+        acceptCookies(){
+            allConsentGranted();
+        }
+    }
 }
 </script>
 
@@ -95,7 +107,7 @@ export default {
     position: relative;
     width: 100%;
     max-width: var(--max-width-medium);
-    padding: 48px 0px;
+    padding: 48px 32px;
     display: flex;
     justify-content: flex-end;
 }
@@ -123,7 +135,7 @@ export default {
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 32px;
     bottom: 0;
 }
 
@@ -137,6 +149,7 @@ export default {
     width: 100%;
     max-width: var(--max-width-medium);
     text-align: center;
+    padding: 0 32px;
 }
 
 #statistics-content{
@@ -176,10 +189,6 @@ export default {
 
 @media screen and (max-width: 768px) {
 
-    main{
-        margin-top: 70px;
-    }
-
     #hero{
         position:relative;
         justify-content: center;
@@ -192,6 +201,7 @@ export default {
         width: 100%;
         height: 548px;
         top: auto;
+        left: 0;
         bottom: 0;
         right: 0;
     }
@@ -201,6 +211,7 @@ export default {
         padding: 36px 24px;
         align-items: center;
         border-radius: 8px;
+        margin: 0px 16px;
     }
 
     #hero-buttons{
@@ -211,7 +222,7 @@ export default {
     }
 
     #statistics{
-        padding: 0px 20px;
+        padding: 0px 16px;
     }
 
     #statistics-content{
@@ -224,6 +235,10 @@ export default {
     .separator-stat{
         width: 100%;
         height: 1px;
+    }
+
+    #companies{
+        display: none;
     }
 
 }

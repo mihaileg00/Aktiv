@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <section id="serviceContainer">
         <div id="services">
         <h2 class="color-primary display-7 extra-bold">Услуги</h2>
         <div class="spacer-24"></div>
         <p class="color-secondary paragraph-medium align-center">
-            Lorem ipsum dolor sit amet consectetur adipiscing eli mattis <br/>sit phasellus mollis sit aliquam sit nullam neque ultrices.
+            Предлагаме широк спектър от счетоводни, данъчни и консултантски услуги,<br/> осигуряващи най-доброто решение за вашия бизнес.
         </p>
         <div class="spacer-32"></div>
         <div id="services-content">
@@ -24,7 +24,17 @@
                             <p class="color-secondary paragraph-medium">{{ services[currentSlide].description }}</p>
                             <div class="spacer-32"></div>
                             </div>
-                            <p class="learn-more">Научи повече</p>
+                            <Nuxt-link v-if="services[currentSlide].link" :to="services[currentSlide].link" class="link service-link">
+                                <p class="learn-more">Научи повече</p> 
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.5369 7.5L3.03699 7.5" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </Nuxt-link>
+                            <div v-else class="">
+                                <p class="color-secondary paragraph-medium">Още въпроси?</p>
+                                <p @click="scrollToElement('contacts-container')" class="learn-more">Попитайте тук</p>
+                            </div>
                         </div>
                         <div class="service-image-container">
                             <img class="service-image" :src="services[currentSlide].img" alt="Service Image" />
@@ -47,11 +57,17 @@
                 <div class="spacer-16"></div>
                 <p class="color-secondary paragraph-default">{{ service.description }}</p>
                 <div class="spacer-32"></div>
-                <p class="learn-more">Научи повече</p>
+                <Nuxt-link v-if="service.link" :to="service.link" class="link service-link">
+                                <p class="learn-more">Научи повече</p> 
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.5369 7.5L3.03699 7.5" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                </Nuxt-link>
             </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -64,35 +80,52 @@ export default {
                             title: "Абонаментно обслужване",
                             description: "Заложете спокойствие и непрекъснато счетоводно поддръжка с нашето абонаментно обслужване. Предлагаме редовни счетоводни услуги и данъчни консултации по гъвкав абонаментен план, което ви позволява да се фокусирате върху бизнеса си, без да се тревожите за финансовите аспекти.",
                             icon: "/icons/Cloud.svg",
-                            img: "/icons/Cloud.svg",
+                            img: "/photos/photo1.jpg",
+                            link: "/Services/subscription-services",
                             index: 0
                         },
                         {
                             title: "Годишно счетоводно приключване",
                             description: "Предоставяме годишно приключване на счетоводната дейност за вашата фирма. Нашите специалисти ще изготвят годишни отчети, справки и данъчни декларации, за да отговарят на законодателството и да гарантират точност и съответствие.",
                             icon: "/icons/Cloud.svg",
-                            img: "/icons/Cloud.svg",
+                            img: "/photos/photo2.jpg",
+                            link: "/Services/annual-closure",
                             index: 1
                         },
                         {
                             title: "Обработка на заплати/ТРЗ услуги",
                             description: "Нашите експерти ви предоставят консултации и помощ в областта на ТРЗ, социалното, здравното и пенсионното осигуряване. Осигуряваме ви информация относно вашите права, задължения и предимства, свързани с тези видове осигуряване, за да ви помогнем да вземете информирани решения.",
                             icon: "/icons/Cloud.svg",
-                            img: "/icons/Cloud.svg",
+                            img: "/photos/photo3.jpg",
+                            link: "/Services/annual-closure",
                             index: 2
                         },
                         {
                             title: "Допълнителни услуги",
                             description: "Предоставяме и еднократни услуги по ваше желание. Това може да включва съставяне на финансови отчети, данъчни консултации, подготовка на данъчни декларации или други счетоводни услуги според вашите нужди.",
                             icon: "/icons/Cloud.svg",
-                            img: "/icons/Cloud.svg",
+                            img: "/photos/photo4.jpg",
                             index: 3
                         }
                     ],
                     currentSlide: 1
                 }
-    }
+    },
     // Your component's options go here
+    methods: {
+        // Your component's methods go here
+        scrollToElement(elementID) {
+      const element = document.getElementById(elementID);
+      
+      const offset = element.offsetTop - 110;
+      // Scroll to the element
+      window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+    }
+        
+    }
 }
 </script>
 
@@ -103,7 +136,8 @@ export default {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: var(--max-width-small);
+    max-width: var(--max-width-medium);
+    padding: var(--section-padding);
 }
 
 #services-mobile{
@@ -157,6 +191,7 @@ export default {
     padding: 20px 20px 20px 40px;
     height: 368px;
     width: 75%;
+    gap: 40px;
     border: 1px solid var(--neutral-300);
     border-radius: 8px;
 }
@@ -175,8 +210,17 @@ export default {
 }
 
 .service-image{
-    width: 50%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.service-link{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -191,6 +235,7 @@ export default {
         align-items: center;
         width: 100%;
         max-width: var(--max-width-small);
+        padding: 0 16px;
     }
 
     #services-content-mobile{

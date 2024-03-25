@@ -9,13 +9,7 @@
                     <div class="spacer-24"></div>
                     <p class="paragraph-medium align-center-mobile color-secondary">{{serviceData.hero.description}}</p>
                     <div class="spacer-32"></div>
-                    <div class="button-default button-dark  color-light">
-                        <p>Свържете се с нас</p>
-                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9.19984 4.99999L0.799896 4.99999" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    </div>
+                    <Button buttonText="Свържете се с нас"  link="/#contacts-container" arrow />
                     </div>
             </div>
             <div id="description">
@@ -26,25 +20,25 @@
                 </div>
                 <div class="spacer-32"></div>
                 <div id="description-content" class="shadow-mobile-02">
-                    <div class="services-half shadow-02 shadow-mobile-none" >
-                        <div class="service-bullet" v-for="service in serviceData.description.bullets.slice(0, Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
+                    <ul class="services-half shadow-02 shadow-mobile-none" >
+                        <li class="service-bullet" v-for="service in serviceData.description.bullets.slice(0, Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
                             <div class="bullet-icon">
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div>
-                            <p class="paragraph-medium color-secondary">Hendrerit sagittis pretium, enim mi duis euol vitae nunc penatibus fermentum id velit.</p>
-                        </div>
-                    </div>
-                    <div class="services-half shadow-02 shadow-mobile-none" >
-                        <div class="service-bullet" v-for="service in serviceData.description.bullets.slice(Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
+                            <p class="paragraph-medium color-secondary">{{ service }}</p>
+                        </li>
+                    </ul>
+                    <ul class="services-half shadow-02 shadow-mobile-none" >
+                        <li class="service-bullet" v-for="service in serviceData.description.bullets.slice(Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
                             <div class="bullet-icon">
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div> 
-                            <p class="paragraph-medium color-secondary">Hendrerit sagittis pretium, enim mi duis euol vitae nunc penatibus fermentum id velit.</p>
-                        </div>
-                        <div class="service-bullet" v-if="serviceData.description.bullets.length%2 == 1"><p class="paragraph-medium color-secondary">Kurwa</p></div>
-                    </div>
+                            <p class="paragraph-medium color-secondary">{{ service }}</p>
+                        </li>
+                        <li class="service-bullet" v-if="serviceData.description.bullets.length%2 == 1"><p class="paragraph-medium color-secondary">Kurwa</p></li>
+                    </ul>
                 </div>
-            </div>
+                </div>
             <div id="call-to-action">
                 <div id="cta-content">
                     <h3 class="display-7 extra-bold color-light">
@@ -53,13 +47,7 @@
                     <div class="spacer-24"></div>
                     <p class="paragraph-medium color-light">Свържете се с нас днес и започнете да създавате по-стабилна и успешна финансова бъдеще.</p>
                     <div class="spacer-32"></div>
-                    <div class="button-default bg-light  color-secondary bg-light-mobile color-secondary-mobile">
-                        <p>Свържете се с нас</p>
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919" stroke="#4C5186" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.19984 4.99999L0.799896 4.99999" stroke="#4C5186" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <Button buttonText="Свържете се с нас" light  link="/#contacts-container" arrow />
                 </div>
                 <div id="cta-image-container">
                     <img id="cta-image" src="/hero.png" alt="Call to Action Image">
@@ -79,6 +67,7 @@ position: relative;
 width: 100%;
 height: 550px;
 max-width: var(--max-width-medium);
+padding: var(--section-padding);
 display: flex;
 align-items: center;
 justify-content: flex-end;
@@ -87,7 +76,7 @@ justify-content: flex-end;
 .image-container {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 32px;
     bottom: 0;
     width: 80%;
 }
@@ -115,6 +104,11 @@ max-width: 500px;
 #description{
     width: 100%;
     max-width: var(--max-width-medium);
+    padding: var(--section-padding);
+}
+
+#description-header{
+    max-width: 800px;
 }
 
 #description-content{
@@ -129,21 +123,23 @@ max-width: 500px;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    align-items: center;
+    align-items: flex-start;
     border: 1px solid var(--neutral-400);
 }
 
 .service-bullet{
     display: flex;
     gap: 24px;
-    align-items: center;
+    align-items: flex-start;
 }
 
 #call-to-action{
     position: relative;
-    width: 100%;
-    max-width: var(--max-width-medium);
+    width: calc(100% - 64px);
+    max-width: 1216px;
     padding: 100px 80px 68px 80px;
+    margin-left: 32px;
+    margin-right: 32px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-color: var(--secondary-color);
@@ -174,6 +170,7 @@ max-width: 500px;
 
     #hero{
         height: auto;
+        justify-content: center;
     }
     
     .image-container{
@@ -204,6 +201,7 @@ max-width: 500px;
 
     #call-to-action{
         padding: 36px 20px;
+        width: 100%;
         border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     }
@@ -213,6 +211,7 @@ max-width: 500px;
         padding: 0px;
         text-align: center;
         margin-bottom: 48px;
+        max-width: none;
     }
 
     #cta-image-container{
@@ -228,6 +227,10 @@ max-width: 500px;
 
 <script setup>
 import currentSercives from '~/js/currentServices.js'
+
+definePageMeta({
+    middleware: 'services',
+})
 
 const { service, path } = useRoute().params
 const serviceData = currentSercives[service]

@@ -11,7 +11,12 @@
   },
   "dependencies": {
     "nuxt": "^3.10.3",
+    "nuxt-mail": "^4.0.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
+    "nuxt-gtag": "^2.0.5"
   }
 }

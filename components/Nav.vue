@@ -12,53 +12,51 @@
                 <img src="/name.svg" alt="Aktiv logo" />
             </div>
             <div class="nav-middle">
-                <Nuxt-link class="link display-3" to="/">Начало</Nuxt-link>
+                <p class="link display-3 color-primary" @click="scrollToTop" v-if="$route.path === '/'">Начало</p>
+                <Nuxt-link v-else class="link display-3 color-primary" to="/">Начало</Nuxt-link>
                 <div id="services-link">
                     <div class="services-text">
-                        <p class="display-3 display-3">Услуги</p>
+                        <p class="display-3 display-3 color-primary">Услуги</p>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.2676 4.53846L7.76758 10.4615L2.26758 4.53846" stroke="#4C5186" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <div id="services-option" >
-                        <Nuxt-link class="link" to="/Services/serviceOne">
-                            <div class="service-option">Абонаментно обслужване</div>
+                        <div class="service-option" v-for="(route, index) in routes" :key="index">
+                        <p @click="scrollToTop" v-if="$route.path === `/Services/${route.route}`">{{ route.name }}</p>
+                        <Nuxt-link class="link" v-else :to='`/Services/${route.route}`'>
+                            <div>{{ route.name }}</div>
                         </Nuxt-link>
-                        <Nuxt-link class="link" to="/Services/serviceTwo">
-                            <div class="service-option">Годишно счетоводно приключване</div>
-                        </Nuxt-link>
-                        <Nuxt-link class="link" to="/Services/serviceOne">
-                            <div class="service-option">Обработка на заплати/ТРЗ услуги</div>
-                        </Nuxt-link>
+                        </div>
                     </div>
                 </div>
-                <Nuxt-link class="link display-3" to="/About">За нас</Nuxt-link>
+                <p class="link display-3 color-primary" @click="scrollToTop" v-if="$route.path === '/About'">За нас</p>
+                <Nuxt-link v-else class="link display-3 color-primary" to="/About">За нас</Nuxt-link>
             </div>
             <div class="nav-right">
-                <div class="button-default button-dark" >
-                    <p class="display-2">Свържете се с нас</p>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M9.19984 4.99999L0.799896 4.99999" stroke="white" stroke-width="1.28571" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
+                <Button v-if="$route.path === '/'" buttonText="Свържете се с нас" arrow isScrollButton sectionId="contacts-container"/>
+                <Button v-else buttonText="Свържете се с нас" arrow  link="/#contacts-container"/>
             </div>
         </nav>
         <div v-if="menuOn" id="mobile-menu">
             <div class="separation-line-nav"></div>
-                <Nuxt-link class="mobile-menu-item link" :class="$route.path === '/' ? 'mobile-menu-item-active' : ''" to="/">
+                <Nuxt-link @click="menuOn = false" class="mobile-menu-item link" :class="$route.path === '/' ? 'mobile-menu-item-active' : ''" to="/">
                     <p class="display-3">Начало</p>
                 </Nuxt-link >
             <div class="separation-line-nav"></div>
-                <Nuxt-link class="mobile-menu-item link" :class="$route.path === '/Services' ? 'mobile-menu-item-active' : ''" to="/Services">
+                <div class="mobile-menu-item link" :class="$route.path === '/Services' ? 'mobile-menu-item-active' : ''" to="/Services" @click="serviceOn = !serviceOn">
                     <p class="display-3 ">Услуги</p>
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16 13.0954L10.5 7.17236L5 13.0954" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-                </Nuxt-link>
+                    <path d="M16 13.0954L10.5 7.17236L5 13.0954" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div id="services-option-mobile" v-if="serviceOn" >
+                    <Nuxt-link class="service-option-mobile link" v-for="(route, index) in routes" :key="index" @click="menuOn = false" :to="`/Services/${route.route}`">
+                        <p class="service-option">{{ route.name }}</p>
+                    </Nuxt-link>
+                </div>
             <div class="separation-line-nav"></div>
-                <Nuxt-link class="mobile-menu-item link" :class="$route.path === '/About' ? 'mobile-menu-item-active' : ''" to="/About">
+                <Nuxt-link @click="menuOn = false" class="mobile-menu-item link" :class="$route.path === '/About' ? 'mobile-menu-item-active' : ''" to="/About">
                     <p class="display-3">За нас</p>
                 </Nuxt-link>
         </div>
@@ -72,8 +70,19 @@ export default {
         return {
             // Your component's data goes here
             menuOn: false,
+            serviceOn: false,
+            routes: useAppConfig().services
         }
     },
+    methods: {
+        // Your component's methods go here
+        scrollToTop () {
+            window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        }
+    }
     // Your component's logic goes here
 }
 
@@ -100,6 +109,7 @@ nav {
     width: 100%;
     height: 88px;
     max-width: var(--max-width-medium);
+    padding: var(--section-padding);
 }
 
 #mobile-menu{
@@ -121,10 +131,6 @@ nav {
     gap: 24px;
 }
 
-.link{
-    color: var(--secondary-color);
-    text-decoration: none;
-}
 
 #services-link{
     position: relative;
@@ -146,7 +152,7 @@ nav {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 100%;
+    top: calc(100% );
     left: 50%;
     transform: translateX(-50%);
     width: 240px;
@@ -202,6 +208,7 @@ nav {
         display: flex;
         flex-direction: column;
         width: 100%;
+        height: 100vh;
         position: relative;
         left: 0;
         z-index: 1000;
@@ -239,6 +246,25 @@ nav {
     .mobile-menu-item-active path{
         stroke: var(--main-bg-color);
     }
+
+    #services-option-mobile{
+        padding: 16px;
+        width: 100%;
+    }
+
+    .service-option-mobile{
+        padding: 20px 0px;
+        border-radius: 8px;
+        color: var(--secondary-text-color);
+        transition: all 0.2s;
+    }
+
+    .service-option-mobile-active{
+        background-color: var(--neutral-400);
+        font-weight: 600;
+        color: var(--primary-text-color);
+    }
+
 }
 
 </style>

@@ -51,32 +51,32 @@
                     src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=AIzaSyCLSacJxzfGaFZ3rmPYkWHt6H4MHs0oFKc"
                 />
             </div>
-            <form id="form" class="shadow-02">
+            <form id="form" class="shadow-mobile-02">
                 <div class="form-row">
                     <div class="form-group">
                         <label class="display-2 semi-bold color-primary" for="name">Име</label>
-                        <input class="display-2 color-secondary shadow-02" placeholder="Иван Иванов" type="text" id="name" v-model="name" required>
+                        <input class="display-2 color-secondary shadow-02" autocomplete="name" placeholder="Иван Иванов" type="text" id="name" v-model="name" required>
                     </div>
                     <div class="form-group">
                         <label class="display-2 semi-bold color-primary" for="email">Имейл</label>
-                        <input class="display-2 color-secondary shadow-02" placeholder="example@gmail.com" type="email" id="email" v-model="email" required>
+                        <input class="display-2 color-secondary shadow-02" autocomplete="email" placeholder="example@gmail.com" type="email" id="email" v-model="email" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label class="display-2 semi-bold color-primary" for="phone">Телефон</label>
-                        <input class="display-2 color-secondary shadow-02" placeholder="088 888 8888" type="tel" id="phone" v-model="phone" required>
+                        <input class="display-2 color-secondary shadow-02" autocomplete="tel" placeholder="088 888 8888" type="tel" id="phone" v-model="phone" required>
                     </div>
                     <div class="form-group">
                         <label class="display-2 semi-bold color-primary" for="company">Компания</label>
-                        <input class="display-2 color-secondary shadow-02" type="text" placeholder="Фирма" id="company" v-model="company" required>
+                        <input class="display-2 color-secondary shadow-02" autocomplete="organization" type="text" placeholder="Фирма" id="company" v-model="company" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="display-2 semi-bold color-primary" for="message">Съобщение</label>
                     <textarea class="color-secondary display-2 shadow-02" placeholder="Съобщение" id="message" rows="3" v-model="message" required></textarea>
                 </div>
-                <button class="button-default bg-blue color-light" type="submit">Изпрати съобщение</button>
+                <div class="button-default bg-blue color-light" @click="sendEmail" type="submit">Изпрати съобщение</div>
             </form>
         </div>
     </div>
@@ -88,10 +88,31 @@ export default {
     data() {
         return {
             // Your data properties go here
+            name: '',
+            email: '',
+            phone: '',
+            company: '',
+            message: '',
         };
     },
     methods: {
         // Your methods go here
+        sendEmail() {
+
+            const messageFull = `
+                Name: ${this.name}\n
+                Email: ${this.email}\n
+                Phone: ${this.phone}\n
+                Company: ${this.company}\n
+                Message: ${this.message}
+                `;
+
+            this.$mail.send({
+                from: process.env.SMTP_USER,
+                subject: 'Contact Form Submission',
+                html: messageFull
+            })
+        }
     },
     mounted() {
         // Code to run when the component is mounted goes here
@@ -109,18 +130,22 @@ export default {
     align-items: center;
     width: 100%;
     max-width: var(--max-width-medium);
+    margin-bottom: 40px;
+    padding: 0 32px;
 }
 
 #contacts{
     display: flex;
     justify-content: center;
     gap: 40px;
+    width: 100%;
 }
 
 .contact{
     display: flex;
     gap: 16px;
     align-items: center;
+    align-self: center;
 }   
 
 .contact-icon{
@@ -198,6 +223,11 @@ textarea{
 }
 
 @media screen and (max-width: 768px) {
+
+    #contacts-container{
+        padding: 0 16px;
+    }
+
     #contacts{
         flex-direction: column;
         gap: 16px;
