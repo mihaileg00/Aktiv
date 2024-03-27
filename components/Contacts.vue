@@ -144,7 +144,7 @@ export default {
 .contact{
     display: flex;
     gap: 16px;
-    align-items: center;
+    align-items: flex-start;
     align-self: center;
 }   
 

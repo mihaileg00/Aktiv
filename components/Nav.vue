@@ -9,7 +9,7 @@
                 <div class="icon-container-small">
                     <img src="/logo.svg" class="icon" alt="Aktiv logo" />
                 </div>
-                <img src="/name.svg" alt="Aktiv logo" />
+                <img class="logo-text" src="/name.svg" alt="Aktiv logo" />
             </Nuxt-link>
             <div class="nav-middle">
                 <Nuxt-link @click="scrollToTop" class="link display-3 color-primary" to="/">Начало</Nuxt-link>
@@ -88,6 +88,8 @@ export default {
 <style scoped>
 /* Your component's styles go here */
 
+
+
 #nav-container {
     position: fixed;
     top: 0;
@@ -117,9 +119,13 @@ nav {
     display: none;
 }
 
+.logo-text{
+}
+
 .nav-left{
     display: flex;
     align-items: center;
+    gap: 6px;
 }
 
 .nav-middle{

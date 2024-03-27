@@ -8,13 +8,13 @@
                     </p>
                     <div class="small-separator-f mobile-hidden"></div>
                     <div class="footer-content2">
-                        <p class="display-3 align-right-mobile">
+                        <a href="https://www.termsofservicegenerator.net/live.php?token=G7YQ7VXO8pyNpizDBMdTG2AvnycnYvSU" class="display-3" target="_blank">
                             Условия за ползване
-                        </p>
+                        </a>
                         <div class="small-separator-f"></div>
-                        <p class="display-3 ">
+                        <a href="https://www.termsfeed.com/live/d6d1ef3a-6a2d-447c-b22a-c9a3f73d6ef6" class="display-3" target="_blank">
                             Политика за поверителност
-                        </p>
+                        </a>
                     </div>
                 </div>
             </footer>

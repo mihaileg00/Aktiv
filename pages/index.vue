@@ -47,7 +47,7 @@
                 </div>
             </section>
         <ServicesHome  />
-            <section id="companies">
+            <section class="hidden" id="companies">
                 <h4 class="display-3 semi-bold color-dark">
                     Някои от нашите клиенти
                 </h4>

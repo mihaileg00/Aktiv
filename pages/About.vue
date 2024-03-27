@@ -48,7 +48,7 @@
                         </div>
                 </div>
             </section>
-            <section id="firmi"> 
+            <section id="firmi" > 
                     <p class="paragraph-medium color-secondary align-right">Работим с фирми от различни индустрии и размери</p>
                     <h2 class="display-7 extra-bold color-primary align-left">Фирми с които работим</h2>
                 <div class="spacer-56"></div>
@@ -100,7 +100,7 @@
             </div>  
         </section>
         <section id="team-container">
-            <div id="team">
+            <div  id="team">
                 <div class="images" :style="{transform: `translateX(${-currentImage*368}px)`}">
                    <div class="image-container" v-for="(image, index) in images" :key="index">
                        <img :src="image" alt="placeholder" />
@@ -122,10 +122,9 @@
                         </div>
                         <div @click="currentImage += 1" :class=' currentImage != images.length - 1 ? "button-default bg-dark" : "button-default bg-light pointer-events-none"'>
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.8269 2.82129L15.2999 9.0001L8.8269 15.1789" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M15.2999 9L2.69995 9" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
+                            <path d="M8.8269 2.82129L15.2999 9.0001L8.8269 15.1789" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.2999 9L2.69995 9" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                     </div>
                </div>
@@ -247,6 +246,7 @@ export default {
 
 #firmi {
     display: flex;
+    display:none;
     flex-direction: column;
     width: 100%;
     max-width: var(--max-width-medium);
@@ -280,6 +280,7 @@ export default {
     padding: var(--section-padding);
     margin-bottom: 40px;
     display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     width: 100%;

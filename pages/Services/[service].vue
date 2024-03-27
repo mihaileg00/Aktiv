@@ -40,7 +40,8 @@
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div>
                             <div>
-                                <p class="paragraph-medium color-secondary">Научете повече</p>
+                                <p class="color-secondary paragraph-medium">Още въпроси?</p>
+                                <Nuxt-link to="/#contacts-container" class="learn-more">Попитайте тук</Nuxt-link>
                             </div>
                         </li>
                     </ul>
@@ -65,9 +66,6 @@
 
 <style scoped>
 
-main {
-margin-top: 80px;
-}
 
 #hero {
 position: relative;
