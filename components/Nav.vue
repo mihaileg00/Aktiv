@@ -5,15 +5,14 @@
             <div @click="menuOn = !menuOn" id="hamburger-mobile">
                 <img src="/Menu.svg" class="icon" alt="Hamburger menu" />
             </div>
-            <div class="nav-left">
+            <Nuxt-link to="/" @click="scrollToTop" class="nav-left">
                 <div class="icon-container-small">
                     <img src="/logo.svg" class="icon" alt="Aktiv logo" />
                 </div>
                 <img src="/name.svg" alt="Aktiv logo" />
-            </div>
+            </Nuxt-link>
             <div class="nav-middle">
-                <p class="link display-3 color-primary" @click="scrollToTop" v-if="$route.path === '/'">Начало</p>
-                <Nuxt-link v-else class="link display-3 color-primary" to="/">Начало</Nuxt-link>
+                <Nuxt-link @click="scrollToTop" class="link display-3 color-primary" to="/">Начало</Nuxt-link>
                 <div id="services-link">
                     <div class="services-text">
                         <p class="display-3 display-3 color-primary">Услуги</p>
@@ -23,15 +22,13 @@
                     </div>
                     <div id="services-option" >
                         <div class="service-option" v-for="(route, index) in routes" :key="index">
-                        <p @click="scrollToTop" v-if="$route.path === `/Services/${route.route}`">{{ route.name }}</p>
-                        <Nuxt-link class="link" v-else :to='`/Services/${route.route}`'>
+                        <Nuxt-link @click="scrollToTop" class="link" :to='`/Services/${route.route}`'>
                             <div>{{ route.name }}</div>
                         </Nuxt-link>
                         </div>
                     </div>
                 </div>
-                <p class="link display-3 color-primary" @click="scrollToTop" v-if="$route.path === '/About'">За нас</p>
-                <Nuxt-link v-else class="link display-3 color-primary" to="/About">За нас</Nuxt-link>
+                <Nuxt-link  @click="scrollToTop" class="link display-3 color-primary" to="/About">За нас</Nuxt-link>
             </div>
             <div class="nav-right">
                 <Button v-if="$route.path === '/'" buttonText="Свържете се с нас" arrow isScrollButton sectionId="contacts-container"/>

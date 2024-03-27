@@ -76,7 +76,7 @@
                     <label class="display-2 semi-bold color-primary" for="message">Съобщение</label>
                     <textarea class="color-secondary display-2 shadow-02" placeholder="Съобщение" id="message" rows="3" v-model="message" required></textarea>
                 </div>
-                <div class="button-default bg-blue color-light" @click="sendEmail" type="submit">Изпрати съобщение</div>
+                <div class="button button-default button-dark" @click="sendEmail" type="submit"><p>Изпрати съобщение</p></div>
             </form>
         </div>
     </div>

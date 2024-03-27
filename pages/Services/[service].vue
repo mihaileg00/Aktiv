@@ -35,7 +35,14 @@
                             </div> 
                             <p class="paragraph-medium color-secondary">{{ service }}</p>
                         </li>
-                        <li class="service-bullet" v-if="serviceData.description.bullets.length%2 == 1"><p class="paragraph-medium color-secondary">Kurwa</p></li>
+                        <li class="service-bullet" v-if="serviceData.description.bullets.length%2 == 1">
+                            <div class="bullet-icon">
+                                <img src="/icons/Email.svg" alt="Bullet Icon">
+                            </div>
+                            <div>
+                                <p class="paragraph-medium color-secondary">Научете повече</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 </div>
