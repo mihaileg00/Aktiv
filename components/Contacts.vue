@@ -1,5 +1,5 @@
 <template>
-        <div id="contacts-container" >
+        <div class="animate-on-scroll" id="contacts-container" >
         <h1 class="display-9 extra-bold color-primary display-8-mobile">Свържете се с нас!</h1>
         <div class="spacer-24"></div>
         <p class="color-secondary paragraph-medium">
@@ -132,6 +132,10 @@ export default {
     max-width: var(--max-width-medium);
     margin-bottom: 40px;
     padding: 0 var(--padding-side);
+}
+
+#contacts-container.activeAnimation{
+    animation: fadeIn 1s ease;
 }
 
 #contacts{

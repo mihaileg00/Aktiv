@@ -1,7 +1,7 @@
 <template>
     <main class="home">
             <section id="hero">
-                <div id="hero-content" class="shadow-02">
+                <div id="hero-content" class="shadow-02 animate-on-scroll">
                     <h1 class="display-9 color-primary align-left extra-bold align-center-mobile display-7-mobile">Счетоводна къща<br/> "АКТИВ”</h1>
                     <div class="spacer-24"></div>
                     <p class="color-secondary paragraph-medium align-center-mobile">
@@ -13,11 +13,11 @@
                     <Button buttonText="Услуги" isScrollButton sectionId="serviceContainer" light />
                 </div>
                 </div>
-                <div id='hero-image-container'>
+                <div id='hero-image-container' class="animate-on-scroll">
                     <img id="hero-image" src="/hero.png" alt="Hero Image" />
                 </div>
             </section>
-            <section id="statistics">
+            <section id="statistics" class="animate-on-scroll">
                 <h2 class="display-7 color-primary">Числа с които се гордеем</h2>
                 <div class="spacer-32"></div>
                 <div id="statistics-content" class="shadow-02">
@@ -112,6 +112,37 @@ const acceptCookies = () => {
   allConsentGranted();
 };
 
+// Add intersection observer to animate elements on scroll
+
+
+
+onMounted(() =>{
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log(entry.target);
+            entry.target.classList.add('activeAnimation');
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+
+    console.log(elements);
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+    
+
+})
+
+// Add intersection observer to the statistics section
+
+
+
 // Expose functions to the template
 defineExpose({
   scrollToElement,
@@ -120,6 +151,7 @@ defineExpose({
 </script>
 
 <style scoped>
+
 
 #hero{
     position: relative;
@@ -144,6 +176,13 @@ defineExpose({
     border-radius: 8px;
     width: 55%;
     background-color: var(--main-bg-color);
+    opacity: 0;
+    
+}
+
+#hero-content.activeAnimation{
+    animation: fadeInLeft 1s ease-out forwards;
+    animation-delay: 500ms;
 }
 
 #hero-buttons{
@@ -160,6 +199,10 @@ defineExpose({
     bottom: 0;
 }
 
+#hero-image-container.activeAnimation{
+    animation: fadeInRight 1s forwards;
+}
+
 #hero-image{
     width: 100%;
     height: 100%;
@@ -171,6 +214,10 @@ defineExpose({
     max-width: var(--max-width-medium);
     text-align: center;
     padding: 0 var(--padding-side);
+}
+
+#statistics.activeAnimation{
+    animation: fadeIn 1s;
 }
 
 #statistics-content{

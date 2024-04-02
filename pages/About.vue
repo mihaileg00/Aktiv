@@ -5,8 +5,8 @@
                 <div class="spacer-24"></div>
                 <p class="paragraph-medium color-secondary">Вашето партньорство към успеха. Нашата счетоводна къща предлага комплексни решения,<br/> проектирани да отговорят на всички вашите счетоводни и данъчни изисквания.</p>
                 <div class="spacer-48"></div>
-                <div id="section-1" class="shadow-02">
-                    <div id="section-1-image-container">
+                <div id="section-1" class="shadow-02 animate-on-scroll">
+                    <div id="section-1-image-container" class="animate-on-scroll">
                         <img src="/photos/photo1.jpg" alt="placeholder" />	
                     </div>
                     <div id="section-1-text-container">
@@ -151,14 +151,27 @@
     padding: 32px 56px 32px 0px;
     border: 1px solid var(--neutral-400);
     border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+#section-1.activeAnimation {
+    animation: fadeIn 1s forwards;
 }
 
 #section-1-image-container {
     width: 50%;
+
+}
+
+#section-1-image-container.activeAnimation {
+    animation: slideInLeft 1s forwards;
+    animation-delay: 500ms;
 }
 
 #section-1-image-container img {
-    border-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -433,4 +446,29 @@ const data = {
         "/dogs/dog6.jpg",
     ]
 }
+
+onMounted(() =>{
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      console.log(entry.target);
+        entry.target.classList.add('activeAnimation');
+    }
+  });
+}, {
+  threshold: 0.5
+});
+
+const elements = document.querySelectorAll('.animate-on-scroll');
+
+console.log(elements);
+elements.forEach((element) => {
+  observer.observe(element);
+});
+
+
+})
+
+
 </script>

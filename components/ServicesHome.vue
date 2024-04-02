@@ -1,30 +1,31 @@
 <template>
-    <section id="serviceContainer">
-        <div id="services">
-        <h2 class="color-primary display-7 extra-bold">Услуги</h2>
+    <section  id="serviceContainer">
+        <div class="animate-on-scroll" id="services">
+        <h2 class="color-primary display-7 extra-bold z-index-5">Услуги</h2>
         <div class="spacer-24"></div>
-        <p class="color-secondary paragraph-medium align-center">
+        <p class="color-secondary paragraph-medium align-center z-index-5">
             Предлагаме широк спектър от счетоводни, данъчни и консултантски услуги,<br/> осигуряващи най-доброто решение за вашия бизнес.
         </p>
         <div class="spacer-32"></div>
         <div id="services-content">
             <div id="home-services-navigation">
-                <div v-for="service in services" :key="service.index" @click="currentSlide = service.index"  class="service shadow-02" :class="currentSlide === service.index ? 'service-active' : ''">
+                <button v-for="service, index in services" :key="index" @click="changeSlide(index)"  class="service shadow-02" :class="index === newSlide ? '' : ''">
                     <div class="service-icon">
                         <img :src="service.icon" alt="Service Icon" />
                     </div>
                     <p class="display-2 color-secondary">{{ service.title }}</p>
-                </div>
+                </button>
             </div>
-                <div id="service-container" class="shadow-02">
+            <div id="service-container"> 
+                <div v-for="service, index in services" :key="index"   class="servicebox shadow-02 animate__animated" :class="index == newSlide ? 'newSlide': (index == currentSlide ? 'currentSlide animate__rotateOutUpRight z-index-4' : 'hidden')">
                         <div class="service-content">
                             <div>
-                            <h3 class="display-5 color-primary">{{ services[currentSlide].title }}</h3>
+                            <h3 class="display-5 color-primary">{{ service.title }}</h3>
                             <div class="spacer-16"></div>
-                            <p class="color-secondary paragraph-medium">{{ services[currentSlide].description }}</p>
+                            <p class="color-secondary paragraph-medium">{{ service.description }}</p>
                             <div class="spacer-32"></div>
                             </div>
-                            <Nuxt-link v-if="services[currentSlide].link" :to="services[currentSlide].link" class="link service-link">
+                            <Nuxt-link v-if="service.link" :to="service.link" class="link service-link">
                                 <p class="learn-more">Научи повече</p> 
                                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
@@ -37,10 +38,11 @@
                             </div>
                         </div>
                         <div class="service-image-container">
-                            <img class="service-image" :src="services[currentSlide].img" alt="Service Image" />
+                            <img class="service-image" :src="service.img" alt="Service Image" />
                         </div>
                 </div>
             </div>
+        </div>
         </div>
         <div id="services-mobile">
             <h2 class="display-7 color-primary extra-bold">Услуги</h2>
@@ -82,7 +84,6 @@ export default {
                     icon: "/icons/Time.svg",
                     img: "/photos/photo1.webp",
                     link: "/Services/subscription-services",
-                    index: 0
                 },
                 {
                     title: "Годишно счетоводно приключване",
@@ -90,7 +91,6 @@ export default {
                     icon: "/icons/Gear.svg",
                     img: "/photos/photo2.webp",
                     link: "/Services/annual-closure",
-                    index: 1
                 },
                 {
                     title: "Обработка на заплати/ТРЗ услуги",
@@ -98,7 +98,6 @@ export default {
                     icon: "/icons/User.svg",
                     img: "/photos/photo3.webp",
                     link: "/Services/hr-services",
-                    index: 2
                 },
                 {
                     title: "Тримесечно Обслужване",
@@ -106,18 +105,17 @@ export default {
                     icon: "/icons/Time.svg",
                     img: "/photos/photo3.webp",
                     link: "/Services/quarterly-service",
-                    index: 3
                 },
                 {
                     title: "Допълнителни услуги",
                     description: "Независимо дали се нуждаете от специализирани финансови отчети, индивидуални данъчни консултации, или други еднократни счетоводни услуги, нашият екип е готов да отговори на вашите нужди с професионализъм и персонализиран подход.",
                     icon: "/icons/Search.svg",
                     img: "/photos/photo4.webp",
-                    index: 4
                 }
                 ]
-                        ,
-                    currentSlide: 0
+                ,
+                    currentSlide: 0,
+                    newSlide: 0
                 }
     },
     // Your component's options go here
@@ -132,7 +130,12 @@ export default {
           top: offset,
           behavior: 'smooth'
         });
-    }
+    },
+        changeSlide(index) {
+            const oldSlide = this.newSlide;
+            this.newSlide = index;
+            this.currentSlide = oldSlide;
+        }
         
     }
 }
@@ -140,13 +143,25 @@ export default {
 
 <style scoped>
 /* Your component's styles go here */
+
+#serviceContainer{
+    width: 100%;
+    display: flex;
+    max-width: var(--max-width-medium);
+    padding: 0 var(--padding-side);
+    overflow: hidden;
+}
+
 #services{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: var(--max-width-medium);
-    padding: 0 var(--padding-side);
+}
+
+#services.activeAnimation{
+    animation: fadeIn 1s;
 }
 
 #services-mobile{
@@ -156,6 +171,7 @@ export default {
 #services-content{
     display: flex;
     gap: 40px;
+    width: 100%;
 }
 
 #home-services-navigation{
@@ -169,16 +185,49 @@ export default {
 .service{
     display: flex;
     padding: 6px 14px 6px 7px;
-    border: 1px solid var(--neutral-300);
     transition: all 0.2s ease;
     border-radius: 6px;
+    border: none;
     gap: 10px;
+    background: white;
     align-items: center;
-    -webkit-transition : border 500ms ease-out;
-    -moz-transition : border 500ms ease-out;
-    -o-transition : border 500ms ease-out;
-    transition : border 500ms ease-out;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
 }
+
+.service:hover {
+  transform: scale(1.05);
+  background-color: #e0e0e0;
+}
+
+.service:active {
+  transform: scale(0.95);
+  background-color: #d0d0d0;
+}
+
+.service:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translate(0, -50%);
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #555;
+  color: #fff;
+  font-size: 12px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  margin-left: 10px;
+}
+
+.service:hover::after {
+  opacity: 1;
+}
+
 
 .service-icon{
     width: 32px;
@@ -191,19 +240,37 @@ export default {
     object-fit: contain;
 }
 
-.service-active{
-    border: 1px solid var(--secondary-color);
-}
 
 #service-container{
+    position: relative;
+    height: 368px;
+    width: 75%;
+}
+
+.servicebox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     padding: 20px 20px 20px 40px;
     height: 368px;
-    width: 75%;
     gap: 40px;
     border: 1px solid var(--neutral-300);
     border-radius: 8px;
+    background: var(--main-bg-color);
 }
+
+.sercivebox.currentSlide{
+    z-index: 4;
+    animation: fadeOut 0.5s ease-in forwards;
+}
+
+.servicebox.hidden{
+    display: none;
+}
+
 .service-content{
     display: flex;
     flex-direction: column;

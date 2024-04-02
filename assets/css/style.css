@@ -33,6 +33,16 @@
     user-select: none;
   }
 
+
+  .animate-on-scroll{
+    visibility: hidden;
+}
+
+.activeAnimation{
+  animation-fill-mode: forwards;
+  visibility: visible;
+}
+
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -248,6 +258,36 @@
   .icon-container-really-small{
     width: 32px;
     height: 32px;
+  }
+
+  .z-index-1{
+    position: relative;
+    z-index: 1;
+  }
+
+  .z-index-2{
+    position: relative;
+    z-index: 2;
+  }
+
+  .z-index-3{
+    position: relative;
+    z-index: 3;
+  }
+
+  .z-index-4{
+    position: relative;
+    z-index: 4;
+  }
+
+  .z-index-5{
+    position: relative;
+    z-index: 5;
+  }
+
+  .z-index-6{
+    position: relative;
+    z-index: 6;
   }
 
   /* image that will fit the container */
