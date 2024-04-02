@@ -77,28 +77,46 @@
     </main>
 </template>
 
-<script>
-    import { allConsentGranted } from '../js/cookies.js';
-export default {
-    name: 'HomePage',
-    methods:{ 
-        scrollToElement(refName) {
-            console.log(this.$refs)
-      // Get a reference to the element you want to scroll to
-      const element = document.getElementById(refName);
-      
-      const offset = element.offsetTop - 110;
-      // Scroll to the element
-      window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
+
+<script setup>
+import { allConsentGranted } from '../js/cookies.js';
+import { definePageMeta } from '#imports';
+
+// Set the page meta using definePageMeta
+useHead({
+  title: 'Актив ООД - Счетоводни Услуги | Данъци, Одит и ТРЗ',
+  meta: [
+    {
+      name: 'description',
+      content: 'Актив ООД предлага професионални счетоводни услуги, включително данъчно консултиране и одит в Сандански. С над 21 години опит и посветеност на индивидуален подход, ние подкрепяме фирми от всички размери за тяхната финансова успех.'
     },
-        acceptCookies(){
-            allConsentGranted();
-        }
+    {
+      name: 'keywords',
+      content: 'счетоводство Сандански, данъци, одит, ТРЗ, заплати, счетоводно приключване, Актив ООД, счетоводни услуги Сандански, данъчни консултации Сандански'
     }
-}
+  ]
+});
+
+// Function to scroll to an element
+const scrollToElement = (refName) => {
+  const element = document.getElementById(refName);
+  const offset = element.offsetTop - 110;
+  window.scrollTo({
+    top: offset,
+    behavior: 'smooth'
+  });
+};
+
+// Function to handle cookie consent
+const acceptCookies = () => {
+  allConsentGranted();
+};
+
+// Expose functions to the template
+defineExpose({
+  scrollToElement,
+  acceptCookies
+});
 </script>
 
 <style scoped>
@@ -107,7 +125,10 @@ export default {
     position: relative;
     width: 100%;
     max-width: var(--max-width-medium);
-    padding: 48px 32px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    padding-left: var(--padding-side);
+    padding-right: var(--padding-side);
     display: flex;
     justify-content: flex-end;
 }
@@ -135,7 +156,7 @@ export default {
     height: 100%;
     position: absolute;
     top: 0;
-    left: 32px;
+    left: var(--padding-side);
     bottom: 0;
 }
 
@@ -149,7 +170,7 @@ export default {
     width: 100%;
     max-width: var(--max-width-medium);
     text-align: center;
-    padding: 0 32px;
+    padding: 0 var(--padding-side);
 }
 
 #statistics-content{
@@ -157,8 +178,8 @@ export default {
     justify-content: space-between;
     border: 1px solid var(--neutral-400);
     border-radius: 8px;
-    padding: 40px 66px;
-    gap: 66px;
+    padding: 40px 64px;
+    gap: 64px;
 }
 
 .separator-stat{

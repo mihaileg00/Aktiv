@@ -120,6 +120,7 @@ nav {
 }
 
 .logo-text{
+    height: 20px;
 }
 
 .nav-left{

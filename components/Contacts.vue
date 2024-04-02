@@ -23,7 +23,7 @@
                 </div>
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Телефон</p>
-                    <p class="display-2 semi-bold color-primary">+359 888 888 888</p>
+                    <p class="display-2 semi-bold color-primary">(+359)88 516 4849</p>
                 </div>
             </div>
             <div class="separator-contacts-small"></div>
@@ -131,7 +131,7 @@ export default {
     width: 100%;
     max-width: var(--max-width-medium);
     margin-bottom: 40px;
-    padding: 0 32px;
+    padding: 0 var(--padding-side);
 }
 
 #contacts{

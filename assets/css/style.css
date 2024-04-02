@@ -21,7 +21,9 @@
     --shadow: rgba(25, 33, 61, 0.08);
     --max-width-medium: 1280px;
     --max-width-small: 1004px;
-    --section-padding: 0px 32px;
+    --section-padding: 0px 64px;
+    --padding-topbottom: 0px;
+    --padding-side: 64px;
   }
 
 
@@ -482,6 +484,8 @@
     :root{
       --max-width-medium: 100%;
       --max-width-small: 100%;
+      --section-padding: 0px 16px;
+      --padding-side: 16px;
     }
 
     main{

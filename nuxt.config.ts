@@ -19,7 +19,8 @@ export default defineNuxtConfig({
       },
     }],
     'nuxt-gtag',
-    '@zadigetvoltaire/nuxt-gtm'
+    '@zadigetvoltaire/nuxt-gtm',
+    '@nuxtjs/sitemap'
   ],
   gtag: {
     id: process.env.GA_ID,
@@ -61,4 +62,7 @@ export default defineNuxtConfig({
       // Add more routes as needed
     ],
   },
+  sitemap: {
+    path: '/sitemap.xml', // Specify the path where the sitemap file will be generated within the public directory
+  }
 })

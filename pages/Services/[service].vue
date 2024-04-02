@@ -18,7 +18,7 @@
                         <div class="spacer-24"></div>
                         <p class="paragraph-large color-secondary">{{ serviceData.description.text }}</p>
                 </div>
-                <div class="spacer-32"></div>
+                <div class="spacer-32 mobile-hidden"></div>
                 <div id="description-content" class="shadow-mobile-02">
                     <ul class="services-half shadow-02 shadow-mobile-none" >
                         <li class="service-bullet" v-for="service in serviceData.description.bullets.slice(0, Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
@@ -81,7 +81,7 @@ justify-content: flex-end;
 .image-container {
     position: absolute;
     top: 0;
-    left: 32px;
+    left: 64px;
     bottom: 0;
     width: 80%;
 }
@@ -140,11 +140,10 @@ max-width: 500px;
 
 #call-to-action{
     position: relative;
-    width: calc(100% - 64px);
-    max-width: 1216px;
+    width: calc(100% - 128px);
+    max-width: calc(var(--max-width-medium) - 128px);
+    margin-top: 40px;
     padding: 100px 80px 68px 80px;
-    margin-left: 32px;
-    margin-right: 32px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-color: var(--secondary-color);
@@ -206,7 +205,9 @@ max-width: 500px;
 
     #call-to-action{
         padding: 36px 20px;
+        margin-top: 0px;
         width: 100%;
+        max-width: none;
         border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     }
@@ -239,5 +240,26 @@ definePageMeta({
 
 const { service, path } = useRoute().params
 const serviceData = currentSercives[service]
+
+
+useHead(() => {
+    return {
+        title: serviceData.seo.title,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: serviceData.seo.metaDescription,
+            },
+            {
+                hid: 'keywords',
+                name: 'keywords',
+                content: serviceData.seo.keywords,
+            },
+        ],
+    }
+})
+
+
 </script>
 

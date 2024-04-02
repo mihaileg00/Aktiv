@@ -10,10 +10,10 @@
                         <img src="/photos/photo1.jpg" alt="placeholder" />	
                     </div>
                     <div id="section-1-text-container">
-                        <div class="logo-container">
-                            <img src="/icons/Business.svg" alt="Aktiv logo" />
+                        <div class="icon-container-medium mobile-hidden">
+                            <img class="icon" src="/icons/Business.svg" alt="Aktiv logo" />
                         </div>
-                        <div class="spacer-24"></div>
+                        <div class="spacer-24 mobile-hidden"></div>
                         <h2 class="display-5 extra-bold color-primary">“АКТИВ”</h2>
                         <div class="spacer-16"></div>
                         <p class="paragraph-large color-secondary">
@@ -25,10 +25,10 @@
                 <div id="sections-container">
                     <div id="section-2" class="shadow-02">
                         <div id="section-2-text-container">
-                            <div class="icon-container-medium">
+                            <div class="icon-container-medium mobile-hidden">
                                 <img class="icon" src="/icons/Smile.svg"/>
                             </div>
-                            <div class="spacer-24"></div>
+                            <div class="spacer-24 mobile-hidden"></div>
                             <h2 class="display-5 extra-bold color-primary">Мисия</h2>
                             <div class="spacer-16"></div>
                             <p class="paragraph-large color-secondary">
@@ -43,7 +43,7 @@
                             <h2 class="display-5 extra-bold color-primary">Защо нас?</h2>
                             <div class="spacer-16"></div>
                             <p class="paragraph-large color-secondary">
-                                `Ние ще вършим цялата работа с данъчната служба вместо Вас - ще подаваме необходимите данъчни декларации, ще се грижим за всички законови и данъчни изисквания свързани с Вашата фирма. Ще Ви консултираме как най-добре да се справите с данъчните си задължения.
+                                Ние ще вършим цялата работа с данъчната служба вместо Вас - ще подаваме необходимите данъчни декларации, ще се грижим за всички законови и данъчни изисквания свързани с Вашата фирма. Ще Ви консултираме как най-добре да се справите с данъчните си задължения.
                             </p>
                         </div>
                 </div>
@@ -101,8 +101,8 @@
         </section>
         <section id="team-container">
             <div  id="team">
-                <div class="images" :style="{transform: `translateX(${-currentImage*368}px)`}">
-                   <div class="image-container" v-for="(image, index) in images" :key="index">
+                <div class="images" :style="{transform: `translateX(${-data.currentImage*368}px)`}">
+                   <div class="image-container" v-for="(image, index) in data.images" :key="index">
                        <img :src="image" alt="placeholder" />
                    </div>
                </div>
@@ -114,16 +114,16 @@
                         <p class="paragraph-medium color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit <br/>phasellus mollis sit aliquam sit nullam.</p>
                     </div>
                     <div id="image-nav">
-                        <div @click="currentImage += -1" :class=' currentImage != 0 ? "button-default bg-dark" : "button-default bg-light pointer-events-none"'>
+                        <div @click="data.currentImage += -1" :class=' data.currentImage != 0 ? "button-default bg-dark" : "button-default bg-light pointer-events-none"'>
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.72314 15.179L2.25007 9.00011L8.72315 2.82126" :stroke="currentImage != 0 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2.25 9L15.75 9" :stroke="currentImage != 0 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.72314 15.179L2.25007 9.00011L8.72315 2.82126" :stroke="data.currentImage != 0 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.25 9L15.75 9" :stroke="data.currentImage != 0 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <div @click="currentImage += 1" :class=' currentImage != images.length - 1 ? "button-default bg-dark" : "button-default bg-light pointer-events-none"'>
+                        <div @click="data.currentImage += 1" :class=' data.currentImage != data.images.length - 1 ? "button-default bg-dark" : "button-default bg-light pointer-events-none"'>
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.8269 2.82129L15.2999 9.0001L8.8269 15.1789" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M15.2999 9L2.69995 9" :stroke="currentImage != images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.8269 2.82129L15.2999 9.0001L8.8269 15.1789" :stroke="data.currentImage != data.images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.2999 9L2.69995 9" :stroke="data.currentImage != data.images.length - 1 ? 'white' :'#4C5186'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
                     </div>
@@ -132,26 +132,6 @@
         </section>
     </main>
 </template>
-
-<script>
-export default {
-    name: 'About',
-    // Slider logic:
-    data() {
-        return {
-            currentImage: 0,
-            images  : [
-            "/dogs/dog1.jpg",
-            "/dogs/dog2.jpg",
-            "/dogs/dog3.jpg",
-            "/dogs/dog4.jpg",
-            "/dogs/dog5.jpg",
-            "/dogs/dog6.jpg",
-            ]
-        }
-    },
-}
-</script>
 
 <style scoped>
 /* Add your custom styles here */
@@ -202,6 +182,7 @@ export default {
     display: flex;
     gap: 36px;
     padding-top: 32px;
+    height: 330px;
     border: 1px solid var(--neutral-400);
     border-radius: 8px;
     margin-bottom: 32px;
@@ -210,6 +191,7 @@ export default {
 
 #section-2-text-container {
     text-align: left;
+    width: 55%;
     padding: 0px 0px 32px 32px;
 }
 
@@ -217,8 +199,8 @@ export default {
     border-radius: 8px;
     display: flex;
     align-self: flex-end;
+    width: 45%;
     height: 100%;
-    width: 50%;
     min-width: 200px;
 }
 
@@ -226,7 +208,6 @@ export default {
     border-bottom-right-radius: 8px;
     border-top-left-radius: 20px;
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
@@ -424,3 +405,32 @@ export default {
 }
 
 </style>
+
+
+<script setup lang="ts">
+useHead({
+  title: 'За нас | Актив ООД - Вашият надежден счетоводен партньор',
+  meta: [
+    {
+      name: 'description',
+      content: 'Научете повече за Актив ООД, водеща счетоводна къща в Сандански, предлагаща професионални счетоводни, данъчни и осигурителни услуги. Открийте как нашата мисия и опит допринасят за успеха на вашия бизнес.'
+    },
+    {
+      name: 'keywords',
+      content: 'счетоводство Сандански, данъчни услуги, осигурително консултиране, професионални счетоводни услуги, Актив ООД, за нас, надежден партньор'
+    }
+  ]
+});
+
+const data = {
+    currentImage: 0,
+    images  : [
+        "/dogs/dog1.jpg",
+        "/dogs/dog2.jpg",
+        "/dogs/dog3.jpg",
+        "/dogs/dog4.jpg",
+        "/dogs/dog5.jpg",
+        "/dogs/dog6.jpg",
+    ]
+}
+</script>
