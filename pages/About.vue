@@ -1,9 +1,9 @@
 <template>
     <main>
             <section id="hero">
-                <h1 class="display-9 extra-bold display-7-mobile color-primary">За нас</h1>
+                <h1 class="display-9 extra-bold display-7-mobile color-primary">АКТИВ</h1>
                 <div class="spacer-24"></div>
-                <p class="paragraph-medium color-secondary">Lorem ipsum dolor sit amet consectetur adipiscing eli <br/>mattis sit phasellus mollis sit aliquam sit nullam.</p>
+                <p class="paragraph-medium color-secondary">Вашето партньорство към успеха. Нашата счетоводна къща предлага комплексни решения,<br/> проектирани да отговорят на всички вашите счетоводни и данъчни изисквания.</p>
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02">
                     <div id="section-1-image-container">
@@ -14,10 +14,10 @@
                             <img class="icon" src="/icons/Business.svg" alt="Aktiv logo" />
                         </div>
                         <div class="spacer-24 mobile-hidden"></div>
-                        <h2 class="display-5 extra-bold color-primary">“АКТИВ”</h2>
+                        <h2 class="display-5 extra-bold color-primary">За нас</h2>
                         <div class="spacer-16"></div>
                         <p class="paragraph-large color-secondary">
-                            ООД е счетоводна къща, регистрирана съгласно българското законодателство, предлага професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.Нашата цел е да бъдем модерна структура, адекватна на растящите пазарни изисквания, която обхваща всички аспекти и потребности на бизнеса в сферата на финансите.
+                            Ваш надежден счетоводен партньор. "АКТИВ" е счетоводна къща, утвърдена в бранша, която предоставя професионални услуги, насочени към подобряване на финансовата структура и ефективност на вашата дейност. Нашата цел е да предложим модерни и ефикасни счетоводни решения, които отговарят на специфичните нужди на всеки клиент, като същевременно гарантираме съответствие със законовите изисквания.
                         </p>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                             <h2 class="display-5 extra-bold color-primary">Мисия</h2>
                             <div class="spacer-16"></div>
                             <p class="paragraph-large color-secondary">
-                                Предлаганите от нас счетоводните услуги осигуряват всичко, от което фирмата Ви се нуждае за да работи в съответствие с данъчното и осигурителното законодателство.
+                                Успехът ви е наш приоритет. Нашата мисия е да подкрепяме вашата дейност с качествени счетоводни услуги, осигуряващи спокойствие и стабилност.
                             </p>
                         </div>
                         <div id="section-2-image-container">
@@ -43,10 +43,10 @@
                             <h2 class="display-5 extra-bold color-primary">Защо нас?</h2>
                             <div class="spacer-16"></div>
                             <p class="paragraph-large color-secondary">
-                                Ние ще вършим цялата работа с данъчната служба вместо Вас - ще подаваме необходимите данъчни декларации, ще се грижим за всички законови и данъчни изисквания свързани с Вашата фирма. Ще Ви консултираме как най-добре да се справите с данъчните си задължения.
-                            </p>
-                        </div>
-                </div>
+                                Доверете ни се за успеха на вашата фирма. Избирайки "АКТИВ", вие получавате повече от счетоводни услуги - вие намирате партньор, готов да поеме всички вашите данъчни и счетоводни задачи. Вашето спокойствие и фокус върху растежа са наша главна цел. "Постижаме успеха заедно" - нашето обещание за съвместна работа към вашите цели.                        </p>
+                            
+                            </div>
+                            </div>
             </section>
             <section id="firmi" > 
                     <p class="paragraph-medium color-secondary align-right">Работим с фирми от различни индустрии и размери</p>
@@ -96,7 +96,7 @@
                 <h3 class="display-7 extra-bold color-light">
                     Свържете се с нас днес и започнете да създавате по-стабилна и успешна финансова бъдеще.
                 </h3>
-                <Button buttonText="Свържете се с нас" light arrow/>
+                <Button buttonText="Свържете се с нас" to="/#contacts-container" light arrow/>
             </div>  
         </section>
         <section id="team-container">

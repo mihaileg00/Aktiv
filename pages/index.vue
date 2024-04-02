@@ -26,7 +26,7 @@
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Години Опит в Бизнеса</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary" style="max-width: 400px;">Над 21 години опит в счетоводството и финансите, потвърждавайки ни като утвърден партньор за нашите клиенти</p>
+                        <p class="color-secondary" style="max-width: 400px;">Повече от две десетилетия като доверен партньор в счетоводството и финансите.</p>
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
@@ -34,7 +34,7 @@
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Доволни Клиенти</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary" style="max-width: 400px;">Осигуряваме услуги на над 1000 доволни клиенти, подчертавайки нашата способност да отговаряме на техните нужди</p>
+                        <p class="color-secondary" style="max-width: 400px;">Над 100 доволни клиенти, подчертаващи нашата отдаденост на техните нужди.</p>
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
@@ -42,7 +42,7 @@
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Удовлетворение</h4>
                         <div class="spacer-24"></div>
-                        <p class="color-secondary" style="max-width: 400px;">Гордеем се със 100% клиентско удовлетворение и сме посветени на предоставяне на висококачествено обслужване за всеки клиент</p>
+                        <p class="color-secondary" style="max-width: 400px;">Перфектно удовлетворение с ангажимент към висококачествено обслужване.</p>
                     </div>
                 </div>
             </section>

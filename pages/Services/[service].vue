@@ -40,8 +40,8 @@
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div>
                             <div>
-                                <p class="color-secondary paragraph-medium">Още въпроси?</p>
-                                <Nuxt-link to="/#contacts-container" class="learn-more">Попитайте тук</Nuxt-link>
+                                <p class="color-secondary paragraph-medium">Не намерихте това, което търсите?</p>
+                                <Nuxt-link to="/#contacts-container" class="learn-more">Свържете се с нас за решение!</Nuxt-link>
                             </div>
                         </li>
                     </ul>
