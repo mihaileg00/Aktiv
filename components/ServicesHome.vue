@@ -149,7 +149,6 @@ export default {
     display: flex;
     max-width: var(--max-width-medium);
     padding: 0 var(--padding-side);
-    overflow: hidden;
 }
 
 #services{
