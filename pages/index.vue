@@ -79,9 +79,6 @@
 
 
 <script setup>
-import { allConsentGranted } from '../js/cookies.js';
-import { definePageMeta } from '#imports';
-
 // Set the page meta using definePageMeta
 useHead({
   title: 'Актив ООД - Счетоводни Услуги | Данъци, Одит и ТРЗ',
@@ -108,9 +105,6 @@ const scrollToElement = (refName) => {
 };
 
 // Function to handle cookie consent
-const acceptCookies = () => {
-  allConsentGranted();
-};
 
 // Add intersection observer to animate elements on scroll
 
@@ -161,7 +155,6 @@ onMounted(() =>{
 // Expose functions to the template
 defineExpose({
   scrollToElement,
-  acceptCookies,
     numbers,
     numbersMax
 });

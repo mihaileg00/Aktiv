@@ -3,7 +3,8 @@
             <section id="hero">
                 <h1 class="display-9 extra-bold display-7-mobile color-primary">АКТИВ</h1>
                 <div class="spacer-24"></div>
-                <p class="paragraph-medium color-secondary">Вашето партньорство към успеха. Нашата счетоводна къща предлага комплексни решения,<br/> проектирани да отговорят на всички вашите счетоводни и данъчни изисквания.</p>
+                <p class="paragraph-medium color-secondary" style="max-width: 420px;">
+                    Ваш мост към успеха. Ефективни счетоводни и данъчни решения за вашия бизнес.</p>
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02 animate-on-scroll">
                     <div id="section-1-image-container" class="animate-on-scroll">
@@ -20,6 +21,7 @@
                             Ваш надежден счетоводен партньор. "АКТИВ" е счетоводна къща, утвърдена в бранша, която предоставя професионални услуги, насочени към подобряване на финансовата структура и ефективност на вашата дейност. Нашата цел е да предложим модерни и ефикасни счетоводни решения, които отговарят на специфичните нужди на всеки клиент, като същевременно гарантираме съответствие със законовите изисквания.
                         </p>
                     </div>
+                    
                 </div>
                 <div class="spacer-24"></div>
                 <div id="sections-container">
@@ -141,6 +143,9 @@
     width: 100%;
     max-width: var(--max-width-medium);
     padding: var(--section-padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #section-1 {
@@ -362,15 +367,18 @@
         padding: 32px;
         width: 100%;
         margin-bottom: 0px;
+        height: auto;
     }
 
     #section-2-image-container {
         width: 100%;
         height: 300px;
+        display: none;
     }
 
     #section-2-text-container {
         padding: 0px;
+        width: 100%;
     }   
 
     #section-2-image-container img {

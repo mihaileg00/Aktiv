@@ -52,8 +52,8 @@
             </p>
             <div class="spacer-32"></div>
             <div id="services-content-mobile">
-            <div id="service-mobile" v-for="service in services" :key="service.index" >
-                <h4 class="display-9 color-primary semi-bold" >0{{ service.index + 1 }}</h4>
+            <div id="service-mobile" v-for="service, index in services" :key="index" >
+                <h4 class="display-9 color-primary semi-bold" >0{{ index + 1 }}</h4>
                 <div class="spacer-24"></div>
                 <h3 class="display-5 color-primary extra-bold">{{ service.title }}</h3>
                 <div class="spacer-16"></div>
