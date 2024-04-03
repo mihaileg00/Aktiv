@@ -22,7 +22,7 @@
                 <div class="spacer-32"></div>
                 <div id="statistics-content" class="shadow-02">
                     <div class="statistic">
-                        <h3 class="display-8 color-primary semi-bold line-height-1">+21</h3>
+                        <h3 class="display-8 color-primary semi-bold line-height-1">+{{ numbers[0] }}</h3>
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Години Опит в Бизнеса</h4>
                         <div class="spacer-24"></div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
-                        <h3 class="display-8 color-primary semi-bold line-height-1">+100</h3>
+                        <h3 class="display-8 color-primary semi-bold line-height-1">+{{ numbers[1] }}</h3>
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Доволни Клиенти</h4>
                         <div class="spacer-24"></div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="separator-stat"></div>
                     <div class="statistic">
-                        <h3 class="display-8 color-primary semi-bold line-height-1">100%</h3>
+                        <h3 class="display-8 color-primary semi-bold line-height-1">{{ numbers[2] }}%</h3>
                         <div class="spacer-16"></div>
                         <h4 class="display-4 semi-bold color-primary line-height-1">Удовлетворение</h4>
                         <div class="spacer-24"></div>
@@ -114,15 +114,32 @@ const acceptCookies = () => {
 
 // Add intersection observer to animate elements on scroll
 
-
+const numbers = ref([0, 0, 0]);
+const numbersMax = [21, 100, 100];
 
 onMounted(() =>{
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log(entry.target);
             entry.target.classList.add('activeAnimation');
+            if(entry.target.id === 'statistics' && numbers.value != [21, 100, 100]){
+                console.log('statistics');
+                // add animation to increment statistics numbers
+                numbers.value.forEach((number, index) => {
+                    let i = 0;
+                    const interval = setInterval(() => {
+                        if((i/100)*numbersMax[index] < numbersMax[index]){
+                            i++;
+                            numbers.value[index] = Math.round((i / 100) * numbersMax[index]);
+                        } else {
+                            clearInterval(interval);
+                            observer.unobserve(entry.target);
+                        }
+                    }, 15);
+                });
+
+            }
         }
       });
     }, {
@@ -130,8 +147,6 @@ onMounted(() =>{
     });
 
     const elements = document.querySelectorAll('.animate-on-scroll');
-
-    console.log(elements);
     elements.forEach((element) => {
       observer.observe(element);
     });
@@ -146,7 +161,9 @@ onMounted(() =>{
 // Expose functions to the template
 defineExpose({
   scrollToElement,
-  acceptCookies
+  acceptCookies,
+    numbers,
+    numbersMax
 });
 </script>
 
@@ -200,7 +217,7 @@ defineExpose({
 }
 
 #hero-image-container.activeAnimation{
-    animation: fadeInRight 1s forwards;
+    animation: fadeInRight 1s forwards ease-in;
 }
 
 #hero-image{
@@ -217,7 +234,11 @@ defineExpose({
 }
 
 #statistics.activeAnimation{
-    animation: fadeIn 1s;
+    animation: fadeIn 2s ease-out forwards;
+}
+
+#statistics.activeAnimation *{
+    animation: fadeIn 2s ease-out forwards;
 }
 
 #statistics-content{

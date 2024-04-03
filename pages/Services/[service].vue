@@ -1,10 +1,10 @@
 <template>
     <main>
             <div id="hero">
-                <div class="image-container">
+                <div class="image-container animate-on-scroll">
                     <img :src="serviceData.hero.image" alt="Hero Image">
                 </div>
-                <div id="hero-content" class="shadow-02 shadow-mobile-none">
+                <div id="hero-content" class="shadow-02 shadow-mobile-none animate-on-scroll">
                     <h1 class="display-7 extra-bold align-center-mobile color-primary">{{serviceData.hero.title}}</h1>
                     <div class="spacer-24"></div>
                     <p class="paragraph-medium align-center-mobile color-secondary">{{serviceData.hero.description}}</p>
@@ -80,11 +80,17 @@ justify-content: flex-end;
 
 .image-container {
     position: absolute;
+    opacity: 0;
     top: 0;
     left: 64px;
     bottom: 0;
     width: 80%;
 }
+
+.image-container.activeAnimation{
+    animation: fadeInRight 1s forwards ease-in;
+}
+
 
 #hero img {
     width: 100%;
@@ -93,6 +99,7 @@ justify-content: flex-end;
 }
 
 #hero-content {
+opacity: 0;
 position: relative;
 display: flex;
 flex-direction: column;
@@ -103,9 +110,12 @@ border: 1px solid var(--neutral-400);
 border-radius: 8px;
 width: 45%;
 max-width: 500px;
-
 }
 
+#hero-content.activeAnimation{
+    animation: fadeInLeft 1s ease-out forwards;
+    animation-delay: 500ms;
+}
 #description{
     width: 100%;
     max-width: var(--max-width-medium);
@@ -258,6 +268,31 @@ useHead(() => {
             },
         ],
     }
+})
+
+
+
+const numbers = ref([0, 0, 0]);
+const numbersMax = [21, 100, 100];
+
+onMounted(() =>{
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('activeAnimation');
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+    
+
 })
 
 
