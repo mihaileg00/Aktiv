@@ -1,11 +1,11 @@
 <template>
-    <transition name="fade">
-      <div v-if="!cookieConsent" class="cookie-consent">
+    <transition  name="fade">
+      <div v-if="cookieConsent === undefined" class="cookie-consent">
         <div class="content">
           <p>Този уебсайт използва бисквитки, за да ви осигури най-доброто преживяване.</p>
           <div class="buttons">
-            <button @click="grantAllConsents" class="btn accept-all">Приемам Всички</button>
-            <button @click="grantAdStorageOnly" class="btn accept-ads">Приемам само за реклами</button>
+            <Button @click="grantAllConsents" buttonText="Приемам Всички"/>
+            <Button @click="grantAdStorageOnly" light buttonText="Приемам само за реклами"/>
           </div>
         </div>
       </div>
@@ -13,27 +13,30 @@
   </template>
   
   <script setup>
-  
+  import { allConsentGranted, consentGrantedAdStorage } from '~/js/cookies';
+
   const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 });
-  
+
+  console.log(cookieConsent);
+
+
   function grantAllConsents() {
-    const { gtag } = useGtag()
-    gtag('consent', 'update', {
-      ad_user_data: 'granted',
-      ad_personalization: 'granted',
-      ad_storage: 'granted',
-      analytics_storage: 'granted'
-    })
-    cookieConsent.value = true; // This will automatically update the cookie
+    allConsentGranted();
+    cookieConsent.value = true;
   }
   
   function grantAdStorageOnly() {
-    const { gtag } = useGtag()
-    gtag('consent', 'update', {
-      ad_storage: 'granted'
-    })
-    cookieConsent.value = true; // This will automatically update the cookie
+    consentGrantedAdStorage();
+    cookieConsent.value = false;
+
   }
+
+  function removeConsents() {
+    cookieConsent.value = false;
+  }
+
+  //expose the cookieConsent to the parent component
+  defineExpose({ cookieConsent });
   </script>
   
   <style scoped>
@@ -58,36 +61,12 @@
   
   .buttons {
     margin-top: 12px;
+    display: flex;
+    gap: 12px;
   }
   
-  .btn {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 10px 20px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    border: none;
-    transition: background-color 0.3s;
-  }
-  
-  .accept-all {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .accept-all:hover {
-    background-color: #45a045;
-  }
-  
-  .accept-ads {
-    background-color: #f1c40f;
-    color: white;
-  }
-  
-  .accept-ads:hover {
-    background-color: #dab10e;
-  }
+
+
   
   p {
     margin: 0;

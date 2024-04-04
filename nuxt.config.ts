@@ -19,25 +19,8 @@ export default defineNuxtConfig({
       },
     }],
     'nuxt-gtag',
-    '@zadigetvoltaire/nuxt-gtm',
     '@nuxtjs/sitemap'
   ],
-  gtag: {
-    id: process.env.GA_ID,
-    initCommands: [
-      // Setup up consent mode
-      ['consent', 'default', {
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        ad_storage: 'denied',
-        analytics_storage: 'denied',
-        wait_for_update: 500,
-      }]
-    ]
-  },
-  gtm:{
-    id: process.env.GTM_ID,	
-  },
   app: {
     head: {
       titleTemplate: (titleChunk) => {
@@ -61,6 +44,19 @@ export default defineNuxtConfig({
       '/Services/quarterly-service',
       // Add more routes as needed
     ],
+  },
+  gtag: {
+    id: process.env.GA_ID,
+    initCommands: [
+      // Setup up consent mode
+      ['consent', 'default', {
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      }]
+    ]
   },
   sitemap: {
     path: '/sitemap.xml', // Specify the path where the sitemap file will be generated within the public directory

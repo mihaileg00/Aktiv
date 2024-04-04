@@ -76,13 +76,20 @@
                     <label class="display-2 semi-bold color-primary" for="message">Съобщение</label>
                     <textarea class="color-secondary display-2 shadow-02" placeholder="Съобщение" id="message" rows="3" v-model="message" required></textarea>
                 </div>
-                <div class="button button-default button-dark" @click="sendEmail" type="submit"><p>Изпрати съобщение</p></div>
+                <Button buttonText="Изпрати съобщение" @click="sendEmail" type="submit"/>
             </form>
+        </div>
+        <div v-if="alert" id="alert">
+            <h3 class="display-2 color-primary">Благодарим ви за вашето запитване!</h3>
+            <Button buttonText="Затвори" @click="alert = false"/>
         </div>
     </div>
 </template>
 
 <script>
+// Your script setup goes here
+
+
 export default {
     name: 'Contacts',
     data() {
@@ -93,12 +100,15 @@ export default {
             phone: '',
             company: '',
             message: '',
+            alert: false
         };
+
     },
+
     methods: {
         // Your methods go here
         sendEmail() {
-
+            
             const messageFull = `
                 Name: ${this.name}\n
                 Email: ${this.email}\n
@@ -111,12 +121,27 @@ export default {
                 from: process.env.SMTP_USER,
                 subject: 'Contact Form Submission',
                 html: messageFull
-            })
+            }).then(() => {
+                this.alert = true;
+                const {gtag} = useGtag();
+
+                gtag('event', 'form_submit');
+                // Clear the form
+                this.name = '';
+                this.email = '';
+                this.phone = '';
+                this.company = '';
+                this.message = '';
+                // Show a success message
+            }).catch((error) => {
+                console.error('Error sending email: ', error);
+            });
         }
     },
     mounted() {
         // Code to run when the component is mounted goes here
     },
+    // Your component-specific properties go h
 };
 </script>
 
@@ -225,6 +250,16 @@ textarea{
     border: 1px solid var(--neutral-300);
     border-radius: 6px;
 }
+
+#alert{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+    gap: 24px;
+}
+
 
 @media screen and (max-width: 768px) {
 

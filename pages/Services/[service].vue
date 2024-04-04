@@ -1,10 +1,10 @@
 <template>
     <main>
             <div id="hero">
-                <div class="image-container animate-on-scroll">
+                <div class="image-container animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
                     <img :src="serviceData.hero.image" alt="Hero Image">
                 </div>
-                <div id="hero-content" class="shadow-02 shadow-mobile-none animate-on-scroll">
+                <div id="hero-content" class="shadow-02 shadow-mobile-none animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
                     <h1 class="display-7 extra-bold align-center-mobile color-primary">{{serviceData.hero.title}}</h1>
                     <div class="spacer-24"></div>
                     <p class="paragraph-medium align-center-mobile color-secondary">{{serviceData.hero.description}}</p>
@@ -12,7 +12,7 @@
                     <Button buttonText="Свържете се с нас"  link="/#contacts-container" arrow />
                     </div>
             </div>
-            <div id="description">
+            <div id="description" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
                 <div id="description-header" class="mobile-hidden">
                         <h2 class="display-8 extra-bold color-primary">{{serviceData.description.title}}</h2>
                         <div class="spacer-24"></div>
@@ -47,7 +47,7 @@
                     </ul>
                 </div>
                 </div>
-            <div id="call-to-action">
+            <div id="call-to-action" class="animate__animated" :class="elements[2].observed ? elements[2].animationClasses:'opacity-0' ">
                 <div id="cta-content">
                     <h3 class="display-7 extra-bold color-light">
                         Искате да научите повече за нашите услуги?
@@ -87,10 +87,6 @@ justify-content: flex-end;
     width: 80%;
 }
 
-.image-container.activeAnimation{
-    animation: fadeInRight 1s forwards ease-in;
-}
-
 
 #hero img {
     width: 100%;
@@ -110,12 +106,9 @@ border: 1px solid var(--neutral-400);
 border-radius: 8px;
 width: 45%;
 max-width: 500px;
+animation-delay: 500ms;
 }
 
-#hero-content.activeAnimation{
-    animation: fadeInLeft 1s ease-out forwards;
-    animation-delay: 500ms;
-}
 #description{
     width: 100%;
     max-width: var(--max-width-medium);
@@ -272,28 +265,39 @@ useHead(() => {
 
 
 
-const numbers = ref([0, 0, 0]);
-const numbersMax = [21, 100, 100];
 
-onMounted(() =>{
+    const elements = reactive([
+  { id: 'hero', observed: false, animationClasses: 'animate__fadeInLeft', extra: { imageAnimation: 'animate__fadeInRight animate__faster'}},
+  { id: 'description', observed: false, animationClasses: 'animate__fadeInUp' },
+  { id: 'call-to-action', observed: false, animationClasses: 'animate__fadeInUp'}
+  // Add as many elements as needed
+]);
+let observer;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('activeAnimation');
-        }
-      });
-    }, {
-      threshold: 0.5
+onMounted(() => {
+  if (typeof IntersectionObserver === 'undefined') return;
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        console.log(entry.target.id)
+      const element = elements.find(el => el.id === entry.target.id);
+      if (element && element.observed == false) {
+        element.observed = entry.isIntersecting;
+      }
     });
+  }, { threshold: 0.4 });
 
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((element) => {
-      observer.observe(element);
-    });
-    
+  elements.forEach(element => {
+    const el = document.getElementById(element.id);
+    if (el) observer.observe(el);
+  });
+});
 
-})
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 
 
 </script>

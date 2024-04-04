@@ -18,7 +18,6 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "nuxt-gtag": "^2.0.5"
   }
 }

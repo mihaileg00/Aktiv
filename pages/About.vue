@@ -6,11 +6,11 @@
                 <p class="paragraph-medium color-secondary" style="max-width: 420px;">
                     Ваш мост към успеха. Ефективни счетоводни и данъчни решения за вашия бизнес.</p>
                 <div class="spacer-48"></div>
-                <div id="section-1" class="shadow-02 animate-on-scroll">
-                    <div id="section-1-image-container" class="animate-on-scroll">
+                <div id="section-1" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
+                    <div id="section-1-image-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
                         <img src="/photos/photo1.jpg" alt="placeholder" />	
                     </div>
-                    <div id="section-1-text-container">
+                    <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
                         <div class="icon-container-medium mobile-hidden">
                             <img class="icon" src="/icons/Business.svg" alt="Aktiv logo" />
                         </div>
@@ -24,7 +24,7 @@
                     
                 </div>
                 <div class="spacer-24"></div>
-                <div id="sections-container">
+                <div id="sections-container" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
                     <div id="section-2" class="shadow-02">
                         <div id="section-2-text-container">
                             <div class="icon-container-medium mobile-hidden">
@@ -94,8 +94,8 @@
                 </div>
             </section>
         <section class="section-container bg-dark">
-            <div id="call-to-action" class="bg-dark">
-                <h3 class="display-7 extra-bold color-light">
+            <div id="call-to-action" class=" animate__animated" :class="elements[2].observed ? elements[2].animationClasses:'opacity-0' ">
+                <h3  class="display-7 extra-bold color-light">
                     Свържете се с нас днес и започнете да създавате по-стабилна и успешна финансова бъдеще.
                 </h3>
                 <Button buttonText="Свържете се с нас" to="/#contacts-container" light arrow/>
@@ -157,22 +157,12 @@
     border: 1px solid var(--neutral-400);
     border-radius: 8px;
     overflow: hidden;
-    opacity: 0;
-}
-
-#section-1.activeAnimation {
-    animation: fadeIn 1s forwards;
 }
 
 #section-1-image-container {
     width: 50%;
-
 }
 
-#section-1-image-container.activeAnimation {
-    animation: slideInLeft 1s forwards;
-    animation-delay: 500ms;
-}
 
 #section-1-image-container img {
     border-top-right-radius: 8px;
@@ -202,7 +192,7 @@
     padding-top: 32px;
     height: 330px;
     border: 1px solid var(--neutral-400);
-    border-radius: 8px;
+    border-bottom-right-radius: 8px;
     margin-bottom: 32px;
     width: 55%;
 }
@@ -359,10 +349,12 @@
         flex-direction: column;
         gap: 24px;
         border: none;
+        overflow-x: hidden;
     }
 
     #section-2 {
         flex-direction: column;
+        border-radius: 8px;
         gap: 40px;
         padding: 32px;
         width: 100%;
@@ -428,7 +420,7 @@
 </style>
 
 
-<script setup lang="ts">
+<script setup>
 useHead({
   title: 'За нас | Актив ООД - Вашият надежден счетоводен партньор',
   meta: [
@@ -443,7 +435,13 @@ useHead({
   ]
 });
 
+
 const data = {
+    animatedElements: [
+        {id: 'section-1', observed: false},
+        {id: 'sections-container', observed: false},
+        {id: 'call-to-action', observed: false},
+    ],
     currentImage: 0,
     images  : [
         "/dogs/dog1.jpg",
@@ -455,28 +453,39 @@ const data = {
     ]
 }
 
-onMounted(() =>{
+const elements = reactive([
+  { id: 'section-1', observed: false, animationClasses: 'animate__fadeIn', extra: { imageAnimation: 'animate__slideInLeft animate__faster animate__delay-1s', textAnimation: 'animate__fadeIn animate__faster animate__delay-1s'}},
+  { id: 'sections-container', observed: false, animationClasses: 'animate__fadeIn' },
+  { id: 'call-to-action', observed: false, animationClasses: 'animate__fadeIn' },
+  // Add as many elements as needed
+]);
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      console.log(entry.target);
-        entry.target.classList.add('activeAnimation');
-    }
+let observer;
+
+onMounted(() => {
+  if (typeof IntersectionObserver === 'undefined') return;
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        console.log(entry.target.id)
+      const element = elements.find(el => el.id === entry.target.id);
+      if (element && element.observed == false) {
+        element.observed = entry.isIntersecting;
+      }
+    });
+  }, { threshold: 0.4 });
+
+  elements.forEach(element => {
+    const el = document.getElementById(element.id);
+    if (el) observer.observe(el);
   });
-}, {
-  threshold: 0.5
 });
 
-const elements = document.querySelectorAll('.animate-on-scroll');
-
-console.log(elements);
-elements.forEach((element) => {
-  observer.observe(element);
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect();
+  }
 });
-
-
-})
 
 
 </script>
