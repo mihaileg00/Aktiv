@@ -15,26 +15,19 @@
   <script setup>
   import { allConsentGranted, consentGrantedAdStorage } from '~/js/cookies';
 
-  const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 });
+  const cookieConsent = useCookie('cookie_consent');
 
 
   function grantAllConsents() {
     allConsentGranted();
-    cookieConsent.value = true;
+    cookieConsent.value = 'all';
   }
   
   function grantAdStorageOnly() {
     consentGrantedAdStorage();
-    cookieConsent.value = false;
-
+    cookieConsent.value = 'ad_storage';
   }
 
-  function removeConsents() {
-    cookieConsent.value = false;
-  }
-
-  //expose the cookieConsent to the parent component
-  defineExpose({ cookieConsent });
   </script>
   
   <style scoped>
