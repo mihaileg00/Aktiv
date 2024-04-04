@@ -17,8 +17,6 @@
 
   const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 });
 
-  console.log(cookieConsent);
-
 
   function grantAllConsents() {
     allConsentGranted();

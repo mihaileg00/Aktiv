@@ -118,7 +118,6 @@ onMounted(() =>{
         if (entry.isIntersecting) {
             entry.target.classList.add('activeAnimation');
             if(entry.target.id === 'statistics' && numbers.value != [21, 100, 100]){
-                console.log('statistics');
                 // add animation to increment statistics numbers
                 numbers.value.forEach((number, index) => {
                     let i = 0;

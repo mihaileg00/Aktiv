@@ -279,7 +279,7 @@ onMounted(() => {
 
   observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        console.log(entry.target.id)
+
       const element = elements.find(el => el.id === entry.target.id);
       if (element && element.observed == false) {
         element.observed = entry.isIntersecting;
