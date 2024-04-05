@@ -50,7 +50,7 @@
                             </div>
                             </div>
             </section>
-            <section id="firmi" > 
+            <!-- <section id="firmi" > 
                     <p class="paragraph-medium color-secondary align-right">Работим с фирми от различни индустрии и размери</p>
                     <h2 class="display-7 extra-bold color-primary align-left">Фирми с които работим</h2>
                 <div class="spacer-56"></div>
@@ -92,7 +92,7 @@
                         <img src="/logos/Logo-11.png" alt="logo" />
                     </div> 
                 </div>
-            </section>
+            </section> -->
         <section class="section-container bg-dark">
             <div id="call-to-action" class=" animate__animated" :class="elements[2].observed ? elements[2].animationClasses:'opacity-0' ">
                 <h3  class="display-7 extra-bold color-light">
@@ -101,7 +101,7 @@
                 <Button buttonText="Свържете се с нас" to="/#contacts-container" light arrow/>
             </div>  
         </section>
-        <section id="team-container">
+        <!-- <section id="team-container">
             <div  id="team">
                 <div class="images" :style="{transform: `translateX(${-data.currentImage*368}px)`}">
                    <div class="image-container" v-for="(image, index) in data.images" :key="index">
@@ -131,7 +131,7 @@
                     </div>
                </div>
             </div>
-        </section>
+        </section> -->
     </main>
 </template>
 
@@ -443,14 +443,14 @@ const data = {
         {id: 'call-to-action', observed: false},
     ],
     currentImage: 0,
-    images  : [
-        "/dogs/dog1.jpg",
-        "/dogs/dog2.jpg",
-        "/dogs/dog3.jpg",
-        "/dogs/dog4.jpg",
-        "/dogs/dog5.jpg",
-        "/dogs/dog6.jpg",
-    ]
+    // images  : [
+    //     "/dogs/dog1.jpg",
+    //     "/dogs/dog2.jpg",
+    //     "/dogs/dog3.jpg",
+    //     "/dogs/dog4.jpg",
+    //     "/dogs/dog5.jpg",
+    //     "/dogs/dog6.jpg",
+    // ]
 }
 
 const elements = reactive([

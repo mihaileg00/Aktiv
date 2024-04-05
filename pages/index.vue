@@ -47,7 +47,7 @@
                 </div>
             </section>
         <ServicesHome  />
-            <section class="hidden" id="companies">
+            <!-- <section class="hidden" id="companies">
                 <h4 class="display-3 semi-bold color-dark">
                     Някои от нашите клиенти
                 </h4>
@@ -72,7 +72,7 @@
                         <img src="/logos/Logo-6.png" alt="Company Logo" />
                     </div>
                 </div>
-            </section>
+            </section> -->
         <Contacts />
     </main>
 </template>

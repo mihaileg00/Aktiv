@@ -1,8 +1,8 @@
 <template>
     <div>
+        <Cookies />
         <Nav/>
         <slot />
         <Footer />
-        <Cookies />
     </div>
 </template>
