@@ -1,7 +1,7 @@
 <template>
     <main class="home">
             <section id="hero">
-                <div id="hero-content" class="shadow-02 animate-on-scroll">
+                <div id="hero-content" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
                     <h1 class="display-9 color-primary align-left extra-bold align-center-mobile display-7-mobile">Счетоводна къща<br/> "АКТИВ”</h1>
                     <div class="spacer-24"></div>
                     <p class="color-secondary paragraph-medium align-center-mobile">
@@ -13,11 +13,11 @@
                     <Button buttonText="Услуги" isScrollButton sectionId="serviceContainer" light />
                 </div>
                 </div>
-                <div id='hero-image-container' class="animate-on-scroll">
+                <div id='hero-image-container' class="animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
                     <img id="hero-image" src="/hero.png" alt="Hero Image" />
                 </div>
             </section>
-            <section id="statistics" class="animate-on-scroll">
+            <section id="statistics" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
                 <h2 class="display-7 color-primary">Числа с които се гордеем</h2>
                 <div class="spacer-32"></div>
                 <div id="statistics-content" class="shadow-02">
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </section>
-        <ServicesHome  />
+        <ServicesHome class="animate__animated" :class="elements[2].observed ? elements[2].animationClasses:'opacity-0' " />
             <!-- <section class="hidden" id="companies">
                 <h4 class="display-3 semi-bold color-dark">
                     Някои от нашите клиенти
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </section> -->
-        <Contacts />
+        <Contacts class="animate__animated" :class="elements[3].observed ? elements[3].animationClasses:'opacity-0' " />
     </main>
 </template>
 
@@ -111,52 +111,59 @@ const scrollToElement = (refName) => {
 const numbers = ref([0, 0, 0]);
 const numbersMax = [21, 100, 100];
 
-onMounted(() =>{
+const elements = reactive([
+  { id: 'hero-content', observed: false,animationClasses: 'animate__fadeInLeft', extra: { imageAnimation: 'animate__fadeInRight animate__faster'}},
+  { id: 'statistics', observed: false, animationClasses: 'animate__fadeIn' },
+  { id: 'serviceContainer', observed: false, animationClasses: 'animate__fadeIn' },
+  { id : 'contacts-container', observed: false, animationClasses: 'animate__fadeIn'},
+  // Add as many elements as needed
+]);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('activeAnimation');
-            if(entry.target.id === 'statistics' && numbers.value != [21, 100, 100]){
-                // add animation to increment statistics numbers
-                numbers.value.forEach((number, index) => {
-                    let i = 0;
-                    const interval = setInterval(() => {
-                        if((i/100)*numbersMax[index] < numbersMax[index]){
-                            i++;
-                            numbers.value[index] = Math.round((i / 100) * numbersMax[index]);
-                        } else {
-                            clearInterval(interval);
-                            observer.unobserve(entry.target);
-                        }
-                    }, 15);
-                });
+let observer;
 
+onMounted(() => {
+  if (typeof IntersectionObserver === 'undefined') return;
+
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const element = elements.find(el => el.id === entry.target.id);
+      if (element && element.observed == false) {
+        element.observed = entry.isIntersecting;
+        if(entry.target.id === 'statistics' && numbers.value != [21, 100, 100]){
+    // add animation to increment statistics numbers
+    numbers.value.forEach((number, index) => {
+        let i = 0;
+        const interval = setInterval(() => {
+            if((i/100)*numbersMax[index] < numbersMax[index]){
+                i++;
+                numbers.value[index] = Math.round((i / 100) * numbersMax[index]);
+            } else {
+                clearInterval(interval);
+                observer.unobserve(entry.target);
             }
-        }
-      });
-    }, {
-      threshold: 0.5
+        }, 15);
     });
 
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((element) => {
-      observer.observe(element);
+}
+      }
     });
-    
+  }, { threshold: 0.5 });
 
-})
+  elements.forEach(element => {
+    const el = document.getElementById(element.id);
+    if (el) observer.observe(el);
+  });
+});
+
+onBeforeUnmount(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+});
 
 // Add intersection observer to the statistics section
 
 
-
-// Expose functions to the template
-defineExpose({
-  scrollToElement,
-    numbers,
-    numbersMax
-});
 </script>
 
 <style scoped>
@@ -166,8 +173,8 @@ defineExpose({
     position: relative;
     width: 100%;
     max-width: var(--max-width-medium);
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     padding-left: var(--padding-side);
     padding-right: var(--padding-side);
     display: flex;
@@ -184,15 +191,9 @@ defineExpose({
     border: 1px solid var(--neutral-400);
     border-radius: 8px;
     width: 55%;
-    background-color: var(--main-bg-color);
-    opacity: 0;
-    
+    background-color: var(--main-bg-color);    
 }
 
-#hero-content.activeAnimation{
-    animation: fadeInLeft 1s ease-out forwards;
-    animation-delay: 500ms;
-}
 
 #hero-buttons{
     display: flex;
@@ -206,10 +207,6 @@ defineExpose({
     top: 0;
     left: var(--padding-side);
     bottom: 0;
-}
-
-#hero-image-container.activeAnimation{
-    animation: fadeInRight 1s forwards ease-in;
 }
 
 #hero-image{

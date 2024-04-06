@@ -1,6 +1,6 @@
 <template>
     <section  id="serviceContainer">
-        <div class="animate-on-scroll" id="services">
+        <div id="services">
         <h2 class="color-primary display-7 extra-bold z-index-5">Услуги</h2>
         <div class="spacer-24"></div>
         <p class="color-secondary paragraph-medium align-center z-index-5">
@@ -11,21 +11,21 @@
             <div id="home-services-navigation">
                 <button v-for="service, index in services" :key="index" @click="changeSlide(index)"  class="service shadow-02" :class="index === newSlide ? '' : ''">
                     <div class="service-icon">
-                        <img :src="service.icon" alt="Service Icon" />
+                        <img :src="service.summary.icon" alt="Service Icon" />
                     </div>
-                    <p class="display-2 color-secondary">{{ service.title }}</p>
+                    <p class="display-2 color-secondary">{{ service.summary.name }}</p>
                 </button>
             </div>
             <div id="service-container"> 
                 <div v-for="service, index in services" :key="index"   class="servicebox shadow-02 animate__animated" :class="index == newSlide ? 'newSlide': (index == currentSlide ? 'currentSlide animate__rotateOutUpRight z-index-4' : 'hidden')">
                         <div class="service-content">
                             <div>
-                            <h3 class="display-5 color-primary">{{ service.title }}</h3>
+                            <h3 class="display-5 color-primary">{{ service.summary.name }}</h3>
                             <div class="spacer-16"></div>
-                            <p class="color-secondary paragraph-medium">{{ service.description }}</p>
+                            <p class="color-secondary paragraph-medium">{{ service.summary.description }}</p>
                             <div class="spacer-32"></div>
                             </div>
-                            <Nuxt-link v-if="service.link" :to="service.link" class="link service-link">
+                            <Nuxt-link v-if="service.summary.link" :to="service.summary.link" class="link service-link">
                                 <p class="learn-more">Научи повече</p> 
                                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="service-image-container">
-                            <img class="service-image" :src="service.img" alt="Service Image" />
+                            <img class="service-image" :src="service.summary.img" alt="Service Image" />
                         </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             <div id="service-mobile" v-for="service, index in services" :key="index" >
                 <h4 class="display-9 color-primary semi-bold" >0{{ index + 1 }}</h4>
                 <div class="spacer-24"></div>
-                <h3 class="display-5 color-primary extra-bold">{{ service.title }}</h3>
+                <h3 class="display-5 color-primary extra-bold">{{ service.name }}</h3>
                 <div class="spacer-16"></div>
                 <p class="color-secondary paragraph-default">{{ service.description }}</p>
                 <div class="spacer-32"></div>
@@ -72,56 +72,13 @@
     </section>
 </template>
 
-<script>
-export default {
-    name: 'ServicesHome',
-    data() {
-        return {
-            services: [
-                {
-                    title: "Абонаментно обслужване",
-                    description: "Използвайте нашите абонаментни счетоводни и данъчни услуги за безпроблемно управление на финансите, докато се съсредоточите изцяло върху разширяването и растежа на вашето предприятие. Открийте гъвкавостта на планове, специално проектирани за нуждите на вашата фирма.",
-                    icon: "/icons/Time.svg",
-                    img: "/photos/photo1.webp",
-                    link: "/Services/subscription-services",
-                },
-                {
-                    title: "Годишно счетоводно приключване",
-                    description: "Нашите услуги за годишно приключване са тук, за да гарантират, че вашата фирма завършва фискалната година с точни и законово съобразени финансови отчети. Възползвайте се от нашата експертност за спокойствие в края на всяка година.",
-                    icon: "/icons/Gear.svg",
-                    img: "/photos/photo2.webp",
-                    link: "/Services/annual-closure",
-                },
-                {
-                    title: "Обработка на заплати/ТРЗ услуги",
-                    description: "Нашият екип предлага всеобхватна подкрепа в областта на трудовите и застрахователните въпроси, помагайки ви да управлявате заплатите и социалните приноси ефективно. Ние сме тук, за да улесним вашия административен товар и да оптимизираме вашите операции в ТРЗ.",
-                    icon: "/icons/User.svg",
-                    img: "/photos/photo3.webp",
-                    link: "/Services/hr-services",
-                },
-                {
-                    title: "Тримесечно Обслужване",
-                    description: "Нашето тримесечно счетоводно обслужване е идеално за предприятия, търсещи гъвкавост и надеждност, без да се налага постоянно внимание. Осигурете си спокойствие и съответствие със законовите изисквания с нашите персонализирани счетоводни решения.",
-                    icon: "/icons/Time.svg",
-                    img: "/photos/photo3.webp",
-                    link: "/Services/quarterly-service",
-                },
-                {
-                    title: "Допълнителни услуги",
-                    description: "Независимо дали се нуждаете от специализирани финансови отчети, индивидуални данъчни консултации, или други еднократни счетоводни услуги, нашият екип е готов да отговори на вашите нужди с професионализъм и персонализиран подход.",
-                    icon: "/icons/Search.svg",
-                    img: "/photos/photo4.webp",
-                }
-                ]
-                ,
-                    currentSlide: 0,
-                    newSlide: 0
-                }
-    },
-    // Your component's options go here
-    methods: {
-        // Your component's methods go here
-        scrollToElement(elementID) {
+<script setup>
+
+    const currentSlide = ref(0);
+    const newSlide = ref(0);
+
+
+    const scrollToElement = (elementID) => {
       const element = document.getElementById(elementID);
       
       const offset = element.offsetTop - 110;
@@ -130,16 +87,30 @@ export default {
           top: offset,
           behavior: 'smooth'
         });
-    },
-        changeSlide(index) {
-            const oldSlide = this.newSlide;
-            this.newSlide = index;
-            this.currentSlide = oldSlide;
-        }
-        
     }
-}
+
+    const {data} = await useFetch('/api/service', {
+        transform: (service) => {
+            return service.map((service) => ({
+                    id: service.id,
+                    summary: service.summary,
+            }))
+        }
+    })
+
+    const services = toRaw(data.value)
+
+
+    const changeSlide = (index) => {
+            const oldSlide = newSlide.value;
+            newSlide.value = index;
+            currentSlide.value = oldSlide;
+        }
+
+
 </script>
+
+
 
 <style scoped>
 /* Your component's styles go here */
@@ -157,10 +128,6 @@ export default {
     align-items: center;
     width: 100%;
     max-width: var(--max-width-medium);
-}
-
-#services.activeAnimation{
-    animation: fadeIn 1s;
 }
 
 #services-mobile{

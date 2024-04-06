@@ -22,7 +22,7 @@
                     </div>
                     <div id="services-option" >
                         <div class="service-option" v-for="(route, index) in routes" :key="index">
-                        <Nuxt-link @click="scrollToTop" class="link" :to='`/Services/${route.route}`'>
+                        <Nuxt-link @click="scrollToTop" class="link" :to='`/Services/${route.id}`'>
                             <div>{{ route.name }}</div>
                         </Nuxt-link>
                         </div>
@@ -48,7 +48,7 @@
                     </svg>
                 </div>
                 <div id="services-option-mobile" v-if="serviceOn" >
-                    <Nuxt-link class="service-option-mobile link" v-for="(route, index) in routes" :key="index" @click="menuOn = false" :to="`/Services/${route.route}`">
+                    <Nuxt-link class="service-option-mobile link" v-for="(route, index) in routes" :key="index" @click="menuOn = false" :to="`/Services/${route.id}`">
                         <p class="service-option">{{ route.name }}</p>
                     </Nuxt-link>
                 </div>
@@ -60,28 +60,27 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Nav',
-    data() {
-        return {
-            // Your component's data goes here
-            menuOn: false,
-            serviceOn: false,
-            routes: useAppConfig().services
-        }
-    },
-    methods: {
-        // Your component's methods go here
-        scrollToTop () {
-            window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        }
-    }
-    // Your component's logic goes here
+
+<script setup>
+
+const menuOn = ref(false);
+const serviceOn = ref(false);
+
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
+
+const {data} = await useFetch('/api/service', {
+    query: {
+        type: 'nav'
+    }
+})
+
+const routes = toRaw(data.value);
+
 
 </script>
 

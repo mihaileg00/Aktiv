@@ -2,26 +2,26 @@
     <main>
             <div id="hero">
                 <div class="image-container animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
-                    <img :src="serviceData.hero.image" alt="Hero Image">
+                    <img :src="text.hero.image" alt="Hero Image">
                 </div>
                 <div id="hero-content" class="shadow-02 shadow-mobile-none animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
-                    <h1 class="display-7 extra-bold align-center-mobile color-primary">{{serviceData.hero.title}}</h1>
+                    <h1 class="display-7 extra-bold align-center-mobile color-primary">{{text.hero.title}}</h1>
                     <div class="spacer-24"></div>
-                    <p class="paragraph-medium align-center-mobile color-secondary">{{serviceData.hero.description}}</p>
+                    <p class="paragraph-medium align-center-mobile color-secondary">{{text.hero.description}}</p>
                     <div class="spacer-32"></div>
                     <Button buttonText="Свържете се с нас"  link="/#contacts-container" arrow />
                     </div>
             </div>
             <div id="description" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
                 <div id="description-header" class="mobile-hidden">
-                        <h2 class="display-8 extra-bold color-primary">{{serviceData.description.title}}</h2>
+                        <h2 class="display-8 extra-bold color-primary">{{text.description.title}}</h2>
                         <div class="spacer-24"></div>
-                        <p class="paragraph-large color-secondary">{{ serviceData.description.text }}</p>
+                        <p class="paragraph-large color-secondary">{{ text.description.text }}</p>
                 </div>
                 <div class="spacer-32 mobile-hidden"></div>
                 <div id="description-content" class="shadow-mobile-02">
                     <ul class="services-half shadow-02 shadow-mobile-none" >
-                        <li class="service-bullet" v-for="service in serviceData.description.bullets.slice(0, Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
+                        <li class="service-bullet" v-for="service in text.description.bullets.slice(0, Math.ceil(text.description.bullets.length / 2))" :key="service">
                             <div class="bullet-icon">
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div>
@@ -29,13 +29,13 @@
                         </li>
                     </ul>
                     <ul class="services-half shadow-02 shadow-mobile-none" >
-                        <li class="service-bullet" v-for="service in serviceData.description.bullets.slice(Math.ceil(serviceData.description.bullets.length / 2))" :key="service">
+                        <li class="service-bullet" v-for="service in text.description.bullets.slice(Math.ceil(text.description.bullets.length / 2))" :key="service">
                             <div class="bullet-icon">
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div> 
                             <p class="paragraph-medium color-secondary">{{ service }}</p>
                         </li>
-                        <li class="service-bullet" v-if="serviceData.description.bullets.length%2 == 1">
+                        <li class="service-bullet" v-if="text.description.bullets.length%2 == 1">
                             <div class="bullet-icon">
                                 <img src="/icons/Email.svg" alt="Bullet Icon">
                             </div>
@@ -235,36 +235,37 @@ animation-delay: 500ms;
 
 
 <script setup>
-import currentSercives from '~/js/currentServices.js'
 
 definePageMeta({
     middleware: 'services',
 })
 
 const { service, path } = useRoute().params
-const serviceData = currentSercives[service]
+const  {data} = await useFetch(`/api/service`, {
+    query: { "id" : service, type: 'service'}
+})
+
+const {text , seo}= toRaw(data.value)
+
 
 
 useHead(() => {
     return {
-        title: serviceData.seo.title,
+        title: seo.title,
         meta: [
             {
                 hid: 'description',
                 name: 'description',
-                content: serviceData.seo.metaDescription,
+                content: seo.metaDescription,
             },
             {
                 hid: 'keywords',
                 name: 'keywords',
-                content: serviceData.seo.keywords,
+                content: seo.keywords,
             },
         ],
     }
 })
-
-
-
 
     const elements = reactive([
   { id: 'hero', observed: false, animationClasses: 'animate__fadeInLeft', extra: { imageAnimation: 'animate__fadeInRight animate__faster'}},
@@ -275,6 +276,8 @@ useHead(() => {
 let observer;
 
 onMounted(() => {
+
+
   if (typeof IntersectionObserver === 'undefined') return;
 
   observer = new IntersectionObserver((entries) => {
