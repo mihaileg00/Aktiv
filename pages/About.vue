@@ -8,7 +8,7 @@
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
                     <div id="section-1-image-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
-                        <img src="/photos/photo1.jpg" alt="placeholder" />	
+                        <img src="/photos/calculator.webp" alt="placeholder" />	
                     </div>
                     <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
                         <div class="icon-container-medium mobile-hidden">
@@ -38,7 +38,7 @@
                             </p>
                         </div>
                         <div id="section-2-image-container">
-                            <img class="hero-image" src="/photos/photo2.jpg" alt="placeholder" />
+                            <img class="hero-image" src="/photos/calculator2.webp" alt="placeholder" />
                         </div>
                     </div>
                     <div id="section-3" class="shadow-02">
