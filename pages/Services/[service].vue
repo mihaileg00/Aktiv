@@ -2,7 +2,7 @@
     <main>
             <div id="hero">
                 <div class="image-container animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
-                    <img :src="text.hero.image" alt="Hero Image">
+                    <img :src="text.hero.image.src" :alt="text.hero.image.alt">
                 </div>
                 <div id="hero-content" class="shadow-02 shadow-mobile-none animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
                     <h1 class="display-7 extra-bold align-center-mobile color-primary">{{text.hero.title}}</h1>
@@ -106,7 +106,6 @@ border: 1px solid var(--neutral-400);
 border-radius: 8px;
 width: 45%;
 max-width: 500px;
-animation-delay: 500ms;
 }
 
 #description{
@@ -268,7 +267,7 @@ useHead(() => {
 })
 
     const elements = reactive([
-  { id: 'hero', observed: false, animationClasses: 'animate__fadeInLeft', extra: { imageAnimation: 'animate__fadeInRight animate__faster'}},
+  { id: 'hero', observed: false, animationClasses: 'animate__fadeInLeft animate__delay-500ms', extra: { imageAnimation: 'animate__fadeInRight animate__faster'}},
   { id: 'description', observed: false, animationClasses: 'animate__fadeInUp' },
   { id: 'call-to-action', observed: false, animationClasses: 'animate__fadeInUp'}
   // Add as many elements as needed

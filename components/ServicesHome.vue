@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="service-image-container">
-                            <img class="service-image" :src="service.summary.img" alt="Service Image" />
+                            <img class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
                         </div>
                 </div>
             </div>

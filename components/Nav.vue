@@ -154,7 +154,6 @@ const { data } = await useFetch("/api/service", {
 
 const routes = toRaw(data.value);
 
-console.log(routes);
 </script>
 
 <style scoped>

@@ -166,10 +166,12 @@ const elements = reactive([
   {
     id: "hero-content",
     observed: false,
-    animationClasses: "animate__fadeInLeft",
+    animationClasses: "animate__fadeInLeft animate__delay-500ms",
     extra: { imageAnimation: "animate__fadeInRight animate__faster" },
   },
-  { id: "statistics", observed: false, animationClasses: "animate__fadeIn" },
+  { id: "statistics",
+    observed: false,
+    animationClasses: "animate__fadeIn" },
   {
     id: "serviceContainer",
     observed: false,
@@ -178,7 +180,7 @@ const elements = reactive([
   {
     id: "contacts-container",
     observed: false,
-    animationClasses: "animate__fadeIn",
+    animationClasses: "animate__fadeInUp",
   },
   // Add as many elements as needed
 ]);
@@ -199,25 +201,21 @@ onMounted(() => {
             numbers.value != [21, 100, 100]
           ) {
             // add animation to increment statistics numbers
-            numbers.value.forEach((number, index) => {
-              let i = 0;
-              const interval = setInterval(() => {
-                if ((i / 100) * numbersMax[index] < numbersMax[index]) {
-                  i++;
-                  numbers.value[index] = Math.round(
-                    (i / 100) * numbersMax[index]
-                  );
-                } else {
-                  clearInterval(interval);
-                  observer.unobserve(entry.target);
-                }
-              }, 15);
-            });
+            let i = 0;
+            const interval = setInterval(() => {
+              if (i < 100) {
+                i++;
+                numbers.value = numbersMax.map((max) => Math.round((i / 100) * max));
+              } else {
+                clearInterval(interval);
+              }
+            }, 15);
+
           }
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.2 }
   );
 
   elements.forEach((element) => {
