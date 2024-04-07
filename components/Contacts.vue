@@ -9,7 +9,7 @@
         <div id="contacts">
             <div class="contact">
                 <div class="contact-icon">
-                <img src="/icons/Email.svg" alt="email" />
+                <img src="/icons/Email.svg" class="icon" alt="email-icon" />
                 </div>
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Имейл:</p>
@@ -19,7 +19,7 @@
             <div class="separator-contacts-small"></div>
             <div class="contact">
                 <div class="contact-icon">
-                    <img src="/icons/Phone.svg" alt="phone" />
+                    <img src="/icons/Phone.svg" class="icon" alt="phone-icon" />
                 </div>
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Телефон</p>
@@ -29,7 +29,7 @@
             <div class="separator-contacts-small"></div>
             <div class="contact">
                 <div class="contact-icon">
-                    <img src="/icons/Location.svg" alt="location" />
+                    <img src="/icons/Location.svg" class="icon" alt="location-icon" />
                 </div>
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Адрес:</p>
