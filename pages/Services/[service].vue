@@ -58,7 +58,7 @@
                     <Button buttonText="Свържете се с нас" light  link="/#contacts-container" arrow />
                 </div>
                 <div id="cta-image-container">
-                    <img id="cta-image" src="/hero.png" alt="Call to Action Image">
+                    <img id="cta-image" src="/hero.webp" alt="Call to Action Image">
                 </div>
             </div>
     </main>
