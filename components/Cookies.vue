@@ -5,8 +5,12 @@
           <h3 class="display-7 display-5-mobile color-primary extra-bold">Бисквитки</h3>
           <p class="display-2 color-dark">Този уебсайт използва бисквитки, за да ви осигури най-доброто преживяване.</p>
           <div class="buttons">
-            <Button @click="grantAllConsents" buttonText="Приемам Всички"/>
-            <Button @click="grantAdStorageOnly" light buttonText="Приемам само за реклами"/>
+            <div @click="grantAllConsents" class="button button-dark color-light button-default">
+              <p>Приемам Всички</p>
+            </div>
+            <div @click="grantAdStorageOnly" class="button button-light color-primary button-default">
+              <p>Приемам само за реклами</p>
+            </div>
           </div>
         </div>
       </div>
