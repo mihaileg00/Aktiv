@@ -12,7 +12,7 @@
                     </div>
                     <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
                         <div class="icon-container-medium mobile-hidden">
-                            <img class="icon" src="/icons/Business.svg" alt="Aktiv logo" />
+                            <img class="icon" src="/icons/Business.svg" alt="icon-buisness" />
                         </div>
                         <div class="spacer-24 mobile-hidden"></div>
                         <h2 class="display-5 extra-bold color-primary">За нас</h2>
@@ -28,7 +28,7 @@
                     <div id="section-2" class="shadow-02">
                         <div id="section-2-text-container">
                             <div class="icon-container-medium mobile-hidden">
-                                <img class="icon" src="/icons/Smile.svg"/>
+                                <img class="icon" src="/icons/Smile.svg" alt="icon-smile"/>
                             </div>
                             <div class="spacer-24 mobile-hidden"></div>
                             <h2 class="display-5 extra-bold color-primary">Мисия</h2>

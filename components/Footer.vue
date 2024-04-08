@@ -1,7 +1,7 @@
 <template>
     <div id="footer-container">
             <footer>
-                <h5 class="display-3  regular">Copyright © 2003 АКТИВ ЕООД</h5>
+                <h3 class="display-3  regular">Copyright © 2003 АКТИВ ЕООД</h3>
                 <div class="footer-content">
                     <p class="display-3">
                         Всички права запазени
