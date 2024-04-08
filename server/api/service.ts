@@ -60,8 +60,8 @@ const services =[
         "title": "Годишно Приключване на Сметки",
         "description": "Завършете финансовата година с яснота и точност чрез нашите услуги за годишно приключване.",
         "image": {
-          "src":"/photos/bigimage1.webp",
-          "alt": "bigimage1"
+          "src":"/photos/about3.webp",
+          "alt": "Woman in accounting office"
         }
       },
       "description": {
@@ -98,8 +98,8 @@ const services =[
         "title": "Управление на Човешките Ресурси и Заплати",
         "description": "Максимизирайте ефективността на вашите HR и заплатни процеси с нашата професионална подкрепа.",
         "image": {
-          "src":"/photos/bigimage1.webp",
-          "alt": "bigimage1"
+          "src":"/photos/about4.webp",
+          "alt": "Woman in accounting office"
         }
       },
       "description": {
