@@ -62,14 +62,6 @@
       </div>
       <div class="nav-right">
         <Button
-          v-if="$route.path === '/'"
-          buttonText="Свържете се с нас"
-          arrow
-          isScrollButton
-          sectionId="contacts-container"
-        />
-        <Button
-          v-else
           buttonText="Свържете се с нас"
           arrow
           link="/#contacts-container"
@@ -89,9 +81,9 @@
       <div class="separation-line-nav"></div>
       <div
         class="mobile-menu-item link"
-        :class="$route.path === '/Services' ? 'mobile-menu-item-active' : ''"
+        :class="serviceOn ? 'mobile-menu-service-active' : ''"
         to="/Services"
-        @click="serviceOn = !serviceOn"
+        @click="serviceOn = (!serviceOn ? true : false)"
       >
         <p class="display-3">Услуги</p>
         <svg
@@ -110,9 +102,10 @@
           />
         </svg>
       </div>
-      <div id="services-option-mobile" v-if="serviceOn">
+      <div id="services-option-mobile" :class="serviceOn ? 'services-open':'services-close'">
         <Nuxt-link
           class="service-option-mobile link"
+          :class="$route.path === `/Services/${route.id}` ? 'service-option-mobile-active' : ''"
           v-for="(route, index) in routes"
           :key="index"
           @click="openNav(false)"
@@ -130,6 +123,7 @@
       >
         <p class="display-3">За нас</p>
       </Nuxt-link>
+      <div class="separation-line-nav"></div>
     </div>
   </div>
 </template>
@@ -137,8 +131,7 @@
 
 <script setup>
 const menuOn = ref(null);
-const serviceOn = ref(false);
-
+const serviceOn = ref(null);
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -149,15 +142,19 @@ const scrollToTop = () => {
 // Function you want to run when `menuOn` changes
 const openNav = (actionE) => {
   if (actionE) {
-    document.body.classList.add('overflow-hidden');
     menuOn.value = 'animate__slideInLeft';
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+  // A function to prevent scrolling:
+  window.onscroll = () => {
+    window.scrollTo(scrollLeft, scrollTop);
+  };
   } else {
-    document.body.classList.remove('overflow-hidden');
     menuOn.value = 'animate__slideOutLeft';
+    window.onscroll = null;
   }
 };
-
-
 
 const { data } = await useFetch("/api/service", {
   query: {
@@ -298,7 +295,7 @@ nav {
   .separation-line-nav {
     width: 100%;
     height: 1px;
-    background-color: var(--secondary-color);
+    background-color: var(--neutral-400);
   }
 
   .mobile-menu-item {
@@ -323,26 +320,54 @@ nav {
     font-weight: 800;
   }
 
+  .mobile-menu-service-active {
+    background-color: var(--neutral-500);
+    color: var(--main-bg-color);
+  }
+
+  .mobile-menu-service-active path {
+    stroke: var(--main-bg-color);
+  }
+
   .mobile-menu-item-active path {
     stroke: var(--main-bg-color);
   }
 
   #services-option-mobile {
-    padding: 16px;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 0px;
+    overflow: hidden;
   }
 
+  .services-open{
+    display: block;
+    animation: popIn 0.5s ease-in-out forwards;
+  }
+
+  .services-close{
+    display: block;
+    animation: popOut 0.5s ease-in-out forwards;
+  }
+  
+
   .service-option-mobile {
-    padding: 20px 0px;
-    border-radius: 8px;
+    height: 52px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--secondary-text-color);
     transition: all 0.2s;
   }
 
   .service-option-mobile-active {
-    background-color: var(--neutral-400);
-    font-weight: 600;
-    color: var(--primary-text-color);
+    background-color: var(--neutral-200);
+    color: var(--neutral-600);
   }
 }
 </style>
