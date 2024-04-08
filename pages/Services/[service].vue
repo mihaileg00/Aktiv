@@ -226,6 +226,7 @@ max-width: 500px;
         position: static;
         width: 100%;
         border-radius: 8px;
+        height: 300px;
     }
 
 }

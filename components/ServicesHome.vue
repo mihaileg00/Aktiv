@@ -25,7 +25,7 @@
                             <p class="color-secondary paragraph-medium">{{ service.summary.description }}</p>
                             <div class="spacer-32"></div>
                             </div>
-                            <Nuxt-link v-if="service.summary.link" :to="service.summary.link" class="link service-link">
+                            <Nuxt-link v-if="service.summary.link" :to='`/Services/${service.id}`' class="link service-link">
                                 <p class="learn-more">Научи повече</p> 
                                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
@@ -55,11 +55,11 @@
             <div id="service-mobile" v-for="service, index in services" :key="index" >
                 <h4 class="display-9 color-primary semi-bold" >0{{ index + 1 }}</h4>
                 <div class="spacer-24"></div>
-                <h3 class="display-5 color-primary extra-bold">{{ service.name }}</h3>
+                <h3 class="display-5 color-primary extra-bold">{{ service.summary.name }}</h3>
                 <div class="spacer-16"></div>
-                <p class="color-secondary paragraph-default">{{ service.description }}</p>
+                <p class="color-secondary paragraph-default">{{ service.summary.description }}</p>
                 <div class="spacer-32"></div>
-                <Nuxt-link v-if="service.link" :to="service.link" class="link service-link">
+                <Nuxt-link :to='`/Services/${service.id}`' class="link service-link">
                                 <p class="learn-more">Научи повече</p> 
                                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649" stroke="#6D758F" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
@@ -71,46 +71,6 @@
         </div>
     </section>
 </template>
-
-<script setup>
-
-    const currentSlide = ref(0);
-    const newSlide = ref(0);
-
-
-    const scrollToElement = (elementID) => {
-      const element = document.getElementById(elementID);
-      
-      const offset = element.offsetTop - 110;
-      // Scroll to the element
-      window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
-    }
-
-    const {data} = await useFetch('/api/service', {
-        transform: (service) => {
-            return service.map((service) => ({
-                    id: service.id,
-                    summary: service.summary,
-            }))
-        }
-    })
-
-    const services = toRaw(data.value)
-
-
-    const changeSlide = (index) => {
-            const oldSlide = newSlide.value;
-            newSlide.value = index;
-            currentSlide.value = oldSlide;
-        }
-
-
-</script>
-
-
 
 <style scoped>
 /* Your component's styles go here */
@@ -276,8 +236,8 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        max-width: var(--max-width-small);
-        padding: 0 16px;
+        max-width: none;
+        padding: 0px;
     }
 
     #services-content-mobile{
@@ -296,3 +256,42 @@
 }
 
 </style>
+
+
+<script setup>
+
+    const currentSlide = ref(0);
+    const newSlide = ref(0);
+
+
+    const scrollToElement = (elementID) => {
+      const element = document.getElementById(elementID);
+      
+      const offset = element.offsetTop - 110;
+      // Scroll to the element
+      window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+    }
+
+    const {data} = await useFetch('/api/service', {
+        transform: (service) => {
+            return service.map((service) => ({
+                    id: service.id,
+                    summary: service.summary,
+            }))
+        }
+    })
+
+    const services = toRaw(data.value)
+
+
+    const changeSlide = (index) => {
+            const oldSlide = newSlide.value;
+            newSlide.value = index;
+            currentSlide.value = oldSlide;
+        }
+
+
+</script>

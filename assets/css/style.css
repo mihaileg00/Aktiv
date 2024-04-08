@@ -34,15 +34,6 @@
   }
 
 
-  .animate-on-scroll{
-    visibility: hidden;
-}
-
-.activeAnimation{
-  animation-fill-mode: forwards;
-  visibility: visible;
-}
-
   body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -520,6 +511,7 @@
     display: none;
   }
 
+
   .opacity-0{
     opacity: 0;
   }
@@ -549,6 +541,10 @@
 
     .mobile-hidden{
       display: none;
+    }
+
+    .mobile-flex{
+      display: flex;
     }
 
     .section-container{

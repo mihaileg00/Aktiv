@@ -2,7 +2,7 @@
   <div id="nav-container">
     <nav>
       <!-- Your navigation content goes here -->
-      <div @click="menuOn = !menuOn" id="hamburger-mobile">
+      <div @click="() =>{if(menuOn == 'animate__slideInLeft'){openNav(false)} else openNav(true)}" id="hamburger-mobile">
         <img src="/Menu.svg" class="icon" alt="Hamburger menu" />
       </div>
       <Nuxt-link to="/" @click="scrollToTop" class="nav-left">
@@ -76,10 +76,10 @@
         />
       </div>
     </nav>
-    <div v-if="menuOn" id="mobile-menu">
+    <div id="mobile-menu" :class="`hidden animate__animated ${menuOn}`">
       <div class="separation-line-nav"></div>
       <Nuxt-link
-        @click="menuOn = false"
+        @click="openNav(false)"
         class="mobile-menu-item link"
         :class="$route.path === '/' ? 'mobile-menu-item-active' : ''"
         to="/"
@@ -115,7 +115,7 @@
           class="service-option-mobile link"
           v-for="(route, index) in routes"
           :key="index"
-          @click="menuOn = false"
+          @click="openNav(false)"
           :to="`/Services/${route.id}`"
         >
           <p class="service-option">{{ route.name }}</p>
@@ -123,7 +123,7 @@
       </div>
       <div class="separation-line-nav"></div>
       <Nuxt-link
-        @click="menuOn = false"
+        @click="openNav(false)"
         class="mobile-menu-item link"
         :class="$route.path === '/About' ? 'mobile-menu-item-active' : ''"
         to="/About"
@@ -136,7 +136,7 @@
 
 
 <script setup>
-const menuOn = ref(false);
+const menuOn = ref(null);
 const serviceOn = ref(false);
 
 const scrollToTop = () => {
@@ -145,6 +145,19 @@ const scrollToTop = () => {
     behavior: "smooth",
   });
 };
+
+// Function you want to run when `menuOn` changes
+const openNav = (actionE) => {
+  if (actionE) {
+    document.body.classList.add('overflow-hidden');
+    menuOn.value = 'animate__slideInLeft';
+  } else {
+    document.body.classList.remove('overflow-hidden');
+    menuOn.value = 'animate__slideOutLeft';
+  }
+};
+
+
 
 const { data } = await useFetch("/api/service", {
   query: {
@@ -178,10 +191,6 @@ nav {
   height: 88px;
   max-width: var(--max-width-medium);
   padding: var(--section-padding);
-}
-
-#mobile-menu {
-  display: none;
 }
 
 #hamburger-mobile {
@@ -249,7 +258,6 @@ nav {
 
 @media screen and (max-width: 768px) {
   #nav-container {
-    flex-direction: column;
   }
 
   nav {
@@ -274,13 +282,17 @@ nav {
   }
 
   #mobile-menu {
+    position: absolute;
+    top: 100%;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-    position: relative;
+    height: calc( 100vh - 70px);
     left: 0;
     z-index: 1000;
+    background-color: var(--main-bg-color);
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
 
   .separation-line-nav {
