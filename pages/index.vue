@@ -42,7 +42,7 @@
           elements[0].observed ? elements[0].extra.imageAnimation : 'opacity-0'
         "
       >
-        <img id="hero-image" src="/hero.webp" alt="Hero Image" />
+        <img id="hero-image" src="/photos/large/photo8.webp" alt="Hero Image" />
       </div>
     </section>
     <section

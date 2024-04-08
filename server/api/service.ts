@@ -8,7 +8,7 @@ const services =[
       "description": "Използвайте нашите абонаментни счетоводни и данъчни услуги за безпроблемно управление на финансите, докато се съсредоточите изцяло върху разширяването и растежа на вашето предприятие. Открийте гъвкавостта на планове, специално проектирани за нуждите на вашата фирма.",
       "icon": "/icons/Time.svg",
       "image": {
-       "src":  "/photos/calculator.webp",
+       "src":  "/photos/medium/photo1.webp",
         "alt": "calculator"
       },
       "link": "/Services/subscription-services"
@@ -18,7 +18,7 @@ const services =[
         "title": "Абонаментно Обслужване за Вашия Бизнес",
         "description": "Оптимизирайте вашите счетоводни и финансови процеси с нашите персонализирани абонаментни услуги.",
         "image": {
-          "src":"/photos/bigimage1.webp",
+          "src":"/photos/large/photo1.webp",
           "alt": "bigimage1"
         }
       },
@@ -50,8 +50,8 @@ const services =[
       "description": "Нашите услуги за годишно приключване са тук, за да гарантират, че вашата фирма завършва фискалната година с точни и законово съобразени финансови отчети. Възползвайте се от нашата експертност за спокойствие в края на всяка година.",
       "icon": "/icons/Gear.svg",
       "image": {
-        "src":  "/photos/documentssign2.webp",
-         "alt": "calculator"
+        "src":  "/photos/medium/photo2.webp",
+         "alt": "Woman in accounting office"
        },
       "link": "/Services/annual-closure"
     },
@@ -60,7 +60,7 @@ const services =[
         "title": "Годишно Приключване на Сметки",
         "description": "Завършете финансовата година с яснота и точност чрез нашите услуги за годишно приключване.",
         "image": {
-          "src":"/photos/about3.webp",
+          "src":"/photos/large/photo2.webp",
           "alt": "Woman in accounting office"
         }
       },
@@ -88,7 +88,7 @@ const services =[
       "description": "Нашият екип предлага всеобхватна подкрепа в областта на трудовите и застрахователните въпроси, помагайки ви да управлявате заплатите и социалните приноси ефективно. Ние сме тук, за да улесним вашия административен товар и да оптимизираме вашите операции в ТРЗ.",
       "icon": "/icons/User.svg",
       "image": {
-        "src":  "/photos/calculator2.webp",
+        "src":  "/photos/medium/photo4.webp",
          "alt": "calculator"
        },
       "link": "/Services/hr-services"
@@ -98,7 +98,7 @@ const services =[
         "title": "Управление на Човешките Ресурси и Заплати",
         "description": "Максимизирайте ефективността на вашите HR и заплатни процеси с нашата професионална подкрепа.",
         "image": {
-          "src":"/photos/about4.webp",
+          "src":"/photos/large/photo4.webp",
           "alt": "Woman in accounting office"
         }
       },
@@ -126,7 +126,7 @@ const services =[
       "description": "Нашето тримесечно счетоводно обслужване е идеално за предприятия, търсещи гъвкавост и надеждност, без да се налага постоянно внимание. Осигурете си спокойствие и съответствие със законовите изисквания с нашите персонализирани счетоводни решения.",
       "icon": "/icons/Time.svg",
       "image": {
-        "src":  "/photos/calculator.webp",
+        "src":  "/photos/medium/photo3.webp",
          "alt": "calculator"
        },
       "link": "/Services/quarterly-service"
@@ -136,7 +136,7 @@ const services =[
         "title": "Тримесечно Счетоводно Обслужване",
         "description": "Идеално за бизнеси с по-малък обем на операции, нашите тримесечни пакети предлагат гъвкаво и цялостно обслужване.",
         "image": {
-          "src":"/photos/bigimage1.webp",
+          "src":"/photos/large/photo3.webp",
           "alt": "bigimage1"
         }
       },

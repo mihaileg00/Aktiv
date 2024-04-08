@@ -58,7 +58,7 @@
                     <Button buttonText="Свържете се с нас" light  link="/#contacts-container" arrow />
                 </div>
                 <div id="cta-image-container">
-                    <img id="cta-image" src="/hero.webp" alt="Call to Action Image">
+                    <img id="cta-image" src="/photos/medium/photo9.webp" alt="Call to Action Image">
                 </div>
             </div>
     </main>
@@ -166,6 +166,12 @@ max-width: 500px;
     overflow: hidden;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+}
+
+#cta-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 768px){
