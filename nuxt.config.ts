@@ -61,6 +61,11 @@ export default defineNuxtConfig({
       }]
     ]
   },
+  site: {
+    name: 'АКТИВ Сандански',
+    description: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.',
+    url: 'https://aktiv.bg',
+  },
   sitemap: {
     path: '/sitemap.xml', // Specify the path where the sitemap file will be generated within the public directory
   }

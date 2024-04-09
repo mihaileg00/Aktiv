@@ -12,7 +12,7 @@
           class="display-9 color-primary align-left extra-bold align-center-mobile display-7-mobile"
         >
           Счетоводна къща<br />
-          "АКТИВ”
+          АКТИВ
         </h1>
         <div class="spacer-24"></div>
         <p class="color-secondary paragraph-medium align-center-mobile">
