@@ -48,16 +48,18 @@
             <h2 class="display-7 color-primary extra-bold">Услуги</h2>
             <div class="spacer-24"></div>
             <p class="paragraph-medium color-dark align-center">
-                Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam neque ultrices.
+                Предлагаме широк спектър от счетоводни, данъчни и консултантски услуги, осигуряващи най-доброто решение за вашия бизнес.
             </p>
-            <div class="spacer-32"></div>
+            <div class="spacer-48"></div>
             <div id="services-content-mobile">
             <div id="service-mobile" v-for="service, index in services" :key="index" >
-                <h4 class="display-9 color-primary semi-bold" >0{{ index + 1 }}</h4>
+                <div class="service-image-container">
+                    <img class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
+                </div>
                 <div class="spacer-24"></div>
                 <h3 class="display-5 color-primary extra-bold">{{ service.summary.name }}</h3>
-                <div class="spacer-16"></div>
-                <p class="color-secondary paragraph-default">{{ service.summary.description }}</p>
+                <div class="spacer-24"></div>
+                <p class="color-secondary paragraph-medium">{{ service.summary.descriptionShort }}</p>
                 <div class="spacer-32"></div>
                 <Nuxt-link :to='`/Services/${service.id}`' class="link service-link">
                                 <p class="learn-more">Научи повече</p> 
@@ -249,8 +251,15 @@
     #service-mobile{
         display: flex;
         flex-direction: column;
-        padding: 40px 24px;
-        border: 1px solid var(--neutral-400);
+        padding: 0px;
+    }
+
+    .service-image-container{
+        width: 100%;
+        aspect-ratio: 10/7;
+    }
+
+    .service-image{
         border-radius: 8px;
     }
 }

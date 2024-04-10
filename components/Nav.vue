@@ -81,7 +81,7 @@
       <div class="separation-line-nav"></div>
       <div
         class="mobile-menu-item link"
-        :class="serviceOn ? 'mobile-menu-service-active' : ''"
+        :class="$route.path.startsWith('/Services') ? 'mobile-menu-item-active' : ''"
         to="/Services"
         @click="serviceOn = (!serviceOn ? true : false)"
       >
@@ -92,6 +92,8 @@
           viewBox="0 0 21 21"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          class="services-arrow"
+          :class="serviceOn ? 'rotate-180' : 'rotate-0'"
         >
           <path
             d="M16 13.0954L10.5 7.17236L5 13.0954"
@@ -368,6 +370,18 @@ nav {
   .service-option-mobile-active {
     background-color: var(--neutral-200);
     color: var(--neutral-600);
+  }
+
+  .services-arrow{
+    transition: all 0.3s;
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  .rotate-0 {
+    transform: rotate(0deg);
   }
 }
 </style>

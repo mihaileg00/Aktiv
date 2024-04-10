@@ -294,7 +294,7 @@ onMounted(() => {
         element.observed = entry.isIntersecting;
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.3 });
 
   elements.forEach(element => {
     const el = document.getElementById(element.id);

@@ -326,12 +326,13 @@ onBeforeUnmount(() => {
     justify-content: center;
     align-items: flex-start;
     padding: 0px;
-    height: 732px;
+    height: 1000px;
+    max-height: calc(100vh - 90px);
   }
 
   #hero-image-container {
     width: 100%;
-    height: 548px;
+    height: 70%;
     top: auto;
     left: 0;
     bottom: 0;
@@ -360,7 +361,7 @@ onBeforeUnmount(() => {
   #statistics-content {
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: 32px;
     padding: 32px;
   }
 
