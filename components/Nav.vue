@@ -2,15 +2,11 @@
   <div id="nav-container">
     <nav>
       <!-- Your navigation content goes here -->
-      <div @click="() =>{if(menuOn == 'animate__slideInLeft'){openNav(false)} else openNav(true)}" id="hamburger-mobile">
-        <img src="/Menu.svg" class="icon" alt="Hamburger menu" />
-      </div>
+        <NuxtImg src="/Menu.svg" height="24px" width="24px"  alt="Hamburger menu" @click="() =>{if(menuOn == 'animate__slideInLeft'){openNav(false)} else openNav(true)}" id="hamburger-mobile" />
       <Nuxt-link to="/" @click="scrollToTop" class="nav-left link">
-        <div class="icon-container-small">
-          <img src="/logo.svg" class="icon" alt="Aktiv logo" />
-        </div>
+          <NuxtImg src="/logo.svg" width="48px" height="48px" alt="Aktiv logo" />
         <div>
-          <img class="logo-text" src="/name.svg" alt="Aktiv logo" />
+          <NuxtImg class="logo-text" width="115px" height="20px" src="/name.svg" alt="Aktiv logo" />
           <p class="logo-small-text">Постигаме успеха заедно</p>
         </div>
       </Nuxt-link>

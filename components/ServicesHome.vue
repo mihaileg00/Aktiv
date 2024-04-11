@@ -35,9 +35,7 @@
                                 <p @click="scrollToElement('contacts-container')" class="learn-more">Попитайте тук</p>
                             </div>
                         </div>
-                        <div class="service-image-container">
-                            <img class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
-                        </div>
+                            <NuxtImg width="100%" height="100%" class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
                 </div>
             </div>
         </div>
@@ -51,9 +49,7 @@
             <div class="spacer-48"></div>
             <div id="services-content-mobile">
             <div id="service-mobile" v-for="service, index in services" :key="index" >
-                <div class="service-image-container">
-                    <img class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
-                </div>
+                <NuxtImg width="100%" height="100%" class="service-image" :src="service.summary.image.src" :alt="service.summary.image.alt" />
                 <div class="spacer-24"></div>
                 <h3 class="display-5 color-primary extra-bold">{{ service.summary.name }}</h3>
                 <div class="spacer-24"></div>
@@ -205,17 +201,8 @@
     justify-content: space-between;
 }
 
-.service-image-container{
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .service-image{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 50%;
     border-radius: 8px;
 }
 
@@ -252,14 +239,10 @@
         flex-direction: column;
         padding: 0px;
     }
-
-    .service-image-container{
-        width: 100%;
-        aspect-ratio: 10/7;
-    }
-
     .service-image{
         border-radius: 8px;
+        width: 100%;
+        aspect-ratio: 10/7;
     }
 }
 

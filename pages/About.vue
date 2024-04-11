@@ -7,13 +7,9 @@
                     Ваш мост към успеха. Ефективни счетоводни и данъчни решения за вашия бизнес.</p>
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
-                    <div id="section-1-image-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.imageAnimation:'opacity-0' ">
-                        <img src="/photos/medium/photo7.webp" alt="placeholder" />	
-                    </div>
+                    <NuxtImg src="/photos/medium/photo7.webp" id="section-1-image" class="animate__animated" fit="cover" width="100%" height="100%"  alt="placeholder" :class="elements[0].observed ? elements[0].extra.imageAnimation :'opacity-0'" />	
                     <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
-                        <div class="icon-container-medium mobile-hidden">
-                            <img class="icon" src="/icons/light/Business.svg" alt="icon-buisness" />
-                        </div>
+                        <NuxtImg height="64px" width="64px" src="/icons/light/Business.svg" class="mobile-hidden" alt="icon-buisness" />
                         <div class="spacer-24 mobile-hidden"></div>
                         <h2 class="display-5 extra-bold color-primary">За нас</h2>
                         <div class="spacer-16"></div>
@@ -27,9 +23,7 @@
                 <div id="sections-container" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
                     <div id="section-2" class="shadow-02">
                         <div id="section-2-text-container">
-                            <div class="icon-container-medium mobile-hidden">
-                                <img class="icon" src="/icons/light/Smile.svg" alt="icon-smile"/>
-                            </div>
+                                <NuxtImg width="64px" height="64px" src="/icons/light/Smile.svg" class="mobile-hidden" alt="icon-smile"/>
                             <div class="spacer-24 mobile-hidden"></div>
                             <h2 class="display-5 extra-bold color-primary">Мисия</h2>
                             <div class="spacer-16"></div>
@@ -37,9 +31,7 @@
                                 Успехът ви е наш приоритет. Нашата мисия е да подкрепяме вашата дейност с качествени счетоводни услуги, осигуряващи спокойствие и стабилност.
                             </p>
                         </div>
-                        <div id="section-2-image-container">
-                            <img class="hero-image" src="/photos/medium/photo9.webp" alt="placeholder" />
-                        </div>
+                            <NuxtImg id="section-2-image" width="100%" height="100%" class="hero-image" src="/photos/medium/photo9.webp" alt="placeholder" />
                     </div>
                     <div id="section-3" class="shadow-02">
                             <h2 class="display-5 extra-bold color-primary">Защо нас?</h2>
@@ -159,17 +151,11 @@
     overflow: hidden;
 }
 
-#section-1-image-container {
-    width: 50%;
-}
-
-
-#section-1-image-container img {
+#section-1-image {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 50%;
+    height: 400px;
 }
 
 #section-1-text-container {
@@ -203,20 +189,12 @@
     padding: 0px 0px 32px 32px;
 }
 
-#section-2-image-container {
-    border-radius: 8px;
-    display: flex;
-    align-self: flex-end;
+#section-2-image{
     width: 45%;
     height: 100%;
     min-width: 200px;
-}
-
-#section-2-image-container img {
     border-bottom-right-radius: 8px;
     border-top-left-radius: 20px;
-    width: 100%;
-    object-fit: cover;
 }
 
 #section-3 {
@@ -362,7 +340,7 @@
         height: auto;
     }
 
-    #section-2-image-container {
+    #section-2-image {
         width: 100%;
         height: 300px;
         display: none;
