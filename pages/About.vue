@@ -1,14 +1,14 @@
 <template>
     <main>
             <section id="hero">
-                <h1 class="display-9 extra-bold display-7-mobile color-primary">АКТИВ</h1>
-                <div class="spacer-24"></div>
-                <p class="paragraph-medium color-secondary" style="max-width: 420px;">
+                <h1 class="display-9 extra-bold display-7-mobile color-primary mobile-hidden">АКТИВ</h1>
+                <div class="spacer-24 mobile-hidden"></div>
+                <p class="paragraph-medium color-secondary mobile-hidden" style="max-width: 420px;">
                     Ваш мост към успеха. Ефективни счетоводни и данъчни решения за вашия бизнес.</p>
-                <div class="spacer-48"></div>
+                <div class="spacer-48 mobile-hidden"></div>
                 <div id="section-1" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
                     <NuxtImg src="/photos/large/photo8.webp" id="section-1-image" class="animate__animated" fit="cover" width="100%" height="100%"  alt="placeholder" :class="elements[0].observed ? elements[0].extra.imageAnimation :'opacity-0'" />	
-                    <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
+                    <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimation:'opacity-0' ">
                         <NuxtImg height="64px" width="64px" src="/icons/light/Business.svg" class="mobile-hidden" alt="icon-buisness" />
                         <div class="spacer-24 mobile-hidden"></div>
                         <h2 class="display-5 extra-bold color-primary">За нас</h2>
@@ -20,10 +20,10 @@
                     
                 </div>
                 <div class="spacer-24"></div>
-                <div id="sections-container" class="animate__animated" :class="elements[1].observed ? elements[1].animationClasses:'opacity-0' ">
+                <div id="sections-container" >
                     <div id="section-2" class="shadow-02">
-                        <div id="section-2-text-container">
-                                <NuxtImg width="64px" height="64px" src="/icons/light/Smile.svg" class="mobile-hidden" alt="icon-smile"/>
+                        <div  id="section-2-text-container" class="animate__animated" :class="elements[1].observed ? elements[1].extra.textAnimation:'opacity-0' ">
+                            <NuxtImg width="64px" height="64px" src="/icons/light/Smile.svg" class="mobile-hidden" alt="icon-smile" />
                             <div class="spacer-24 mobile-hidden"></div>
                             <h2 class="display-5 extra-bold color-primary">Мисия</h2>
                             <div class="spacer-16"></div>
@@ -31,16 +31,17 @@
                                 Успехът ви е наш приоритет. Нашата мисия е да подкрепяме вашата дейност с качествени счетоводни услуги, осигуряващи спокойствие и стабилност.
                             </p>
                         </div>
-                            <NuxtImg id="section-2-image" width="100%" height="100%" class="hero-image" src="/photos/medium/photo9.webp" alt="placeholder" />
+                            <NuxtImg id="section-2-image" width="100%" height="100%" class="hero-image animate__animated" :class="elements[1].observed ? elements[1].extra.imageAnimation :'opacity-0'" src="/photos/medium/photo9.webp" alt="placeholder" />
                     </div>
                     <div id="section-3" class="shadow-02">
+                        <div class="animate__animated" :class="elements[1].observed ? elements[1].extra.textAnimation:'opacity-0' ">
                             <h2 class="display-5 extra-bold color-primary">Защо нас?</h2>
                             <div class="spacer-16"></div>
                             <p class="paragraph-large color-secondary">
                                 Доверете ни се за успеха на вашата фирма. Избирайки "АКТИВ", вие получавате повече от счетоводни услуги - вие намирате партньор, готов да поеме всички вашите данъчни и счетоводни задачи. Вашето спокойствие и фокус върху растежа са наша главна цел. "Постижаме успеха заедно" - нашето обещание за съвместна работа към вашите цели.                        </p>
-                            
+                        </div>   
                             </div>
-                            </div>
+                        </div>
             </section>
             <!-- <section id="firmi" > 
                     <p class="paragraph-medium color-secondary align-right">Работим с фирми от различни индустрии и размери</p>
@@ -169,7 +170,6 @@
     position: relative;
     width: 100%;
     gap: 22px;
-    border: 1px solid var(--neutral-400);
 }
 
 #section-2 {
@@ -178,9 +178,10 @@
     padding-top: 32px;
     height: 330px;
     border: 1px solid var(--neutral-400);
-    border-bottom-right-radius: 8px;
+    border-radius: 8px;
     margin-bottom: 32px;
     width: 55%;
+    overflow: hidden;
 }
 
 #section-2-text-container {
@@ -311,10 +312,11 @@
         height: auto;   
     }
 
-    #section-1-image-container {
+    #section-1-image {
         width: 100%;
         height: 300px;
         order: 2;
+        border-radius: 8px;
     }
 
     #section-1-text-container {
@@ -433,8 +435,8 @@ const data = {
 }
 
 const elements = reactive([
-  { id: 'section-1', observed: false, animationClasses: 'animate__fadeIn', extra: { imageAnimation: 'animate__slideInLeft animate__faster animate__delay-1s', textAnimation: 'animate__fadeIn animate__faster animate__delay-1s'}},
-  { id: 'sections-container', observed: false, animationClasses: 'animate__fadeIn' },
+  { id: 'section-1', observed: false, animationClasses: 'animate__fadeIn', extra: { imageAnimation: 'animate__slideInLeft animate_slow', textAnimation: 'animate__fadeIn  animate__delay-500ms'}},
+  { id: 'sections-container', observed: false, animationClasses: 'animate__fadeIn', extra: { imageAnimation: 'animate__slideInRight animate_slow', textAnimation: 'animate__fadeIn animate__delay-500ms'}},
   { id: 'call-to-action', observed: false, animationClasses: 'animate__fadeIn' },
   // Add as many elements as needed
 ]);

@@ -11,7 +11,7 @@
                 <NuxtImg src="/icons/dark/Email.svg" width="48px" height="48px" alt="email-icon" />
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Имейл:</p>
-                    <p class="display-2 semi-bold color-primary">mail@aktivbg.com</p>
+                    <p class="display-2 semi-bold color-primary">contact@aktiv.bg</p>
                 </div>
             </div>
             <div class="separator-contacts-small"></div>
