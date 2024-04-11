@@ -25,7 +25,7 @@
                             <p class="paragraph-medium color-secondary">{{ service.text }}</p>
                         </li>
                         <li class="service-bullet shadow-02">
-                                <NuxtImg  src="/icons/light/Location.svg" width="48px" height="48px" alt="Bullet Icon" />
+                                <NuxtImg  src="/icons/light/Email.svg" width="48px" height="48px" alt="Bullet Icon" />
                             <div>
                                 <p class="color-secondary paragraph-medium">Не намерихте това, което търсите?</p>
                                 <Nuxt-link to="/#contacts-container" class="learn-more">Свържете се с нас за решение!</Nuxt-link>
