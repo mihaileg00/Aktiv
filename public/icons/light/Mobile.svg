@@ -1,0 +1,27 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.769231" y="0.769322" width="46.4615" height="46.4615" rx="3.23077" fill="#F1F3F7" stroke="#4C5186" stroke-width="1.53846"/>
+<mask id="mask0_5088_52424" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="46" height="46">
+<rect x="1.68082" y="1.84976" width="44.6131" height="44.6024" rx="4" fill="#E3EFFF"/>
+</mask>
+<g mask="url(#mask0_5088_52424)">
+<line x1="32.8206" y1="0.000152565" x2="32.8206" y2="50.0482" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="41.1282" y1="0.000152565" x2="41.1282" y2="50.0482" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="24.5129" y1="0.000152565" x2="24.5129" y2="50.0482" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="7.89746" y1="0.000152565" x2="7.89747" y2="50.0482" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="16.2052" y1="0.000152565" x2="16.2052" y2="50.0482" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="-1.02402" y1="16.2036" x2="49.0241" y2="16.2036" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="-1.02402" y1="7.8959" x2="49.0241" y2="7.8959" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="-1.02402" y1="24.5113" x2="49.0241" y2="24.5113" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="-1.02402" y1="41.1267" x2="49.0241" y2="41.1267" stroke="#B4B9C9" stroke-width="1.02564"/>
+<line x1="-1.02402" y1="32.8191" x2="49.0241" y2="32.8191" stroke="#B4B9C9" stroke-width="1.02564"/>
+<rect x="1.41193" y="1.53473" width="45.0024" height="44.9916" rx="4" fill="url(#paint0_radial_5088_52424)"/>
+</g>
+<path d="M28.707 34.5001H19.2929C17.6932 34.5001 16.3963 33.2033 16.3963 31.6035V16.3966C16.3963 14.7969 17.6932 13.5001 19.2929 13.5001H28.707C30.3068 13.5001 31.6036 14.7969 31.6036 16.3966V31.6035C31.6036 33.2033 30.3068 34.5001 28.707 34.5001Z" fill="white" stroke="#4C5186" stroke-width="1.23077" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.6375 30.8794H24.3616" stroke="#B4B9C9" stroke-width="2.94828" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<radialGradient id="paint0_radial_5088_52424" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(23.9131 24.0305) rotate(90) scale(22.4958 22.5012)">
+<stop stop-color="#F6FAFD" stop-opacity="0.28"/>
+<stop offset="1" stop-color="#F6FAFD"/>
+</radialGradient>
+</defs>
+</svg>

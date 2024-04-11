@@ -10,10 +10,8 @@
         <div id="services-content">
             <div id="home-services-navigation">
                 <button v-for="service, index in services" :key="index" @click="changeSlide(index)"  class="service shadow-02" :class="index === newSlide ? '' : ''">
-                    <div class="service-icon">
-                        <img :src="service.summary.icon" alt="Service Icon" />
-                    </div>
-                    <p class="display-2 color-secondary">{{ service.summary.name }}</p>
+                        <NuxtImg width="32px" height="32px" :src="`/icons/light/${service.summary.iconName}.svg`" :alt="`${service.summary.iconName} Icon`" />
+                        <p class="display-2 color-secondary">{{ service.summary.name }}</p>
                 </button>
             </div>
             <div id="service-container"> 
@@ -122,6 +120,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    text-align: left;
 }
 
 .service:hover {

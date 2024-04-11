@@ -2,25 +2,21 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['animate.css/animate.min.css','~/assets/css/style.css'],
-  modules: [
-    ['nuxt-mail', {
-      message: {
-        to: process.env.SMTP_USER,
-        name: 'website'
-      },
-      smtp: {
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_HOST,
-        secure: true,
-        auth:{
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        }
-      },
-    }],
-    'nuxt-gtag',
-    '@nuxtjs/sitemap'
-  ],
+  modules: [['nuxt-mail', {
+    message: {
+      to: process.env.SMTP_USER,
+      name: 'website'
+    },
+    smtp: {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_HOST,
+      secure: true,
+      auth:{
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      }
+    },
+  }], 'nuxt-gtag', '@nuxtjs/sitemap', "@nuxt/image"],
   app: {
     head: {
       titleTemplate: (titleChunk) => {

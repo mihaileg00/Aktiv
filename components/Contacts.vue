@@ -8,9 +8,7 @@
         <div class="spacer-32"></div>
         <div id="contacts">
             <div class="contact">
-                <div class="contact-icon">
-                <img src="/icons/Email.svg" class="icon" alt="email-icon" />
-                </div>
+                <NuxtImg src="/icons/dark/Email.svg" width="48px" height="48px" alt="email-icon" />
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Имейл:</p>
                     <p class="display-2 semi-bold color-primary">mail@aktivbg.com</p>
@@ -18,9 +16,7 @@
             </div>
             <div class="separator-contacts-small"></div>
             <div class="contact">
-                <div class="contact-icon">
-                    <img src="/icons/Phone.svg" class="icon" alt="phone-icon" />
-                </div>
+                    <NuxtImg src="/icons/light/Phone.svg" width="48px" height="48px" alt="phone-icon" />
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Телефон</p>
                     <p class="display-2 semi-bold color-primary">(+359)88 516 4849</p>
@@ -28,9 +24,7 @@
             </div>
             <div class="separator-contacts-small"></div>
             <div class="contact">
-                <div class="contact-icon">
-                    <img src="/icons/Location.svg" class="icon" alt="location-icon" />
-                </div>
+                    <NuxtImg src="/icons/light/Location.svg" width="48px" height="48px"  alt="location-icon" />
                 <div class="contact-text">
                     <p class="display-2 color-secondary">Адрес:</p>
                     <p class="display-2 semi-bold color-primary">Stanke Dimitrov 7,<br/>Sandanski</p>

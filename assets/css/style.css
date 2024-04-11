@@ -69,6 +69,15 @@
     cursor: pointer;
 }
 
+.logo-small-text{
+  color: var(--secondary-color);;
+  letter-spacing: 10%;
+  font-size: 7px;
+  line-height: 7px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
   .color-blue{
     color: var(--primary-color);
   }

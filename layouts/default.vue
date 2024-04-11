@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Cookies />
+        <!-- <Cookies /> -->
         <Nav/>
         <slot />
         <Footer />
