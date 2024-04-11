@@ -7,7 +7,7 @@
                     Ваш мост към успеха. Ефективни счетоводни и данъчни решения за вашия бизнес.</p>
                 <div class="spacer-48"></div>
                 <div id="section-1" class="shadow-02 animate__animated" :class="elements[0].observed ? elements[0].animationClasses:'opacity-0' ">
-                    <NuxtImg src="/photos/medium/photo7.webp" id="section-1-image" class="animate__animated" fit="cover" width="100%" height="100%"  alt="placeholder" :class="elements[0].observed ? elements[0].extra.imageAnimation :'opacity-0'" />	
+                    <NuxtImg src="/photos/large/photo8.webp" id="section-1-image" class="animate__animated" fit="cover" width="100%" height="100%"  alt="placeholder" :class="elements[0].observed ? elements[0].extra.imageAnimation :'opacity-0'" />	
                     <div id="section-1-text-container"  class="animate__animated" :class="elements[0].observed ? elements[0].extra.textAnimatino:'opacity-0' ">
                         <NuxtImg height="64px" width="64px" src="/icons/light/Business.svg" class="mobile-hidden" alt="icon-buisness" />
                         <div class="spacer-24 mobile-hidden"></div>
