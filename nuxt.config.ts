@@ -17,10 +17,10 @@ export default defineNuxtConfig({
         pass: process.env.SMTP_PASS,
       }
     },
-  }], 'nuxt-gtag', '@nuxtjs/sitemap', "@nuxt/image"],
+  }], 'nuxt-gtag', "@nuxt/image", '@nuxtjs/seo'],
   app: {
     head: {
-      titleTemplate: (titleChunk) => {
+      titleTemplate: (titleChunk : String) => {
         // If the titleChunk exists, use it; otherwise, use the default title
         return titleChunk ? `${titleChunk} - АКТИВ Сандански` : 'АКТИВ - счетоводни услуги, данъчни консултации, фирмени услуги';
       },
@@ -59,11 +59,13 @@ export default defineNuxtConfig({
     ]
   },
   site: {
+    url: 'https://aktiv.bg',
     name: 'АКТИВ Сандански',
     description: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.',
-    url: 'https://aktiv.bg',
+    dafaultLocale: 'bg',
   },
-  sitemap: {
-    path: '/sitemap.xml', // Specify the path where the sitemap file will be generated within the public directory
+  seo: {
+    automaticDefaults: false,
+    redirectToCanonicalSiteUrl: true
   }
 })

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@nuxt/image": "^1.5.0",
-    "@nuxtjs/sitemap": "^5.1.2",
+    "@nuxtjs/seo": "^2.0.0-rc.10",
     "animate.css": "^4.1.1",
     "nuxt": "^3.10.3",
     "nuxt-mail": "^4.0.3",
