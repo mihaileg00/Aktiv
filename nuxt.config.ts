@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  target: 'static',
   css: ['animate.css/animate.min.css','~/assets/css/style.css'],
   modules: [['nuxt-mail', {
     message: {
@@ -20,7 +18,7 @@ export default defineNuxtConfig({
   }], 'nuxt-gtag', "@nuxt/image", '@nuxtjs/seo'],
   app: {
     head: {
-      titleTemplate: (titleChunk : String) => {
+      titleTemplate: (titleChunk) => {
         // If the titleChunk exists, use it; otherwise, use the default title
         return titleChunk ? `${titleChunk} - АКТИВ Сандански` : 'АКТИВ - счетоводни услуги, данъчни консултации, фирмени услуги';
       },

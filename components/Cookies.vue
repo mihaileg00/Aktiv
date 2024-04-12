@@ -1,39 +1,21 @@
 <template>
-    <transition  name="fade">
-      <div v-if="cookieConsent === undefined" class="cookie-consent shadow-02">
+      <div v-if="cookieConsent == undefined" class="cookie-consent shadow-02">
         <div class="content">
           <h3 class="display-7 display-5-mobile color-primary extra-bold">Бисквитки</h3>
           <p class="display-2 color-dark">Този уебсайт използва бисквитки, за да ви осигури най-доброто преживяване.</p>
           <div class="buttons">
-            <div @click="grantAllConsents" class="button button-dark color-light button-default">
+            <div @click="grantAllConsents()" class="button button-dark color-light button-default">
               <p>Приемам Всички</p>
             </div>
-            <div @click="grantAdStorageOnly" class="button button-light color-primary button-default">
+            <div @click="grantAdStorageOnly()" class="button button-light color-primary button-default">
               <p>Приемам само за реклами</p>
             </div>
           </div>
         </div>
       </div>
-    </transition>
   </template>
   
-  <script setup>
-  import { allConsentGranted, consentGrantedAdStorage } from '~/js/cookies';
-
-  const cookieConsent = useCookie('cookie_consent');
-
-
-  function grantAllConsents() {
-    allConsentGranted();
-    cookieConsent.value = 'all';
-  }
-  
-  function grantAdStorageOnly() {
-    consentGrantedAdStorage();
-    cookieConsent.value = 'ad_storage';
-  }
-
-  </script>
+ 
   
   <style scoped>
   .cookie-consent {
@@ -91,3 +73,32 @@
     }
   }
   </style>
+
+<script setup>
+
+
+const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 })
+
+const grantAllConsents = () =>{
+  const { gtag } = useGtag()
+    gtag('consent', 'update', {
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      ad_storage: 'granted',
+      analytics_storage: 'granted'
+    })
+    cookieConsent.value = 'all'
+}
+
+const grantAdStorageOnly = () => {
+  const { gtag } = useGtag()
+    gtag('consent', 'update', {
+      ad_storage: 'granted'
+    })
+    cookieConsent.value = 'ad_storage'
+}
+
+
+
+
+</script>

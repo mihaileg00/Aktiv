@@ -1,17 +1,23 @@
-import { allConsentGranted, consentGrantedAdStorage } from "~/js/cookies"
+
 
 export default defineNuxtPlugin((nuxtApp) => {
 
-    const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 })
+    const cookieConsent = useCookie('cookie_consent')
 
-
+    const { gtag, initialize } = useGtag()
     //switch case for cookie consent
     switch (cookieConsent.value) {
         case 'all':
-            allConsentGranted()
+            gtag('consent', 'update', {
+                ad_storage: 'granted',
+                analytics_storage: 'granted'
+              })
             break
         case 'ad_storage':
-            consentGrantedAdStorage()
+            gtag('consent', 'update', {
+              ad_storage: 'granted'
+            })
+            initialize()
             break
         default:
             break
