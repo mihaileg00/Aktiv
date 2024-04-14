@@ -77,24 +77,30 @@
 <script setup>
 
 
-const cookieConsent = useCookie('cookie_consent', { path: '/', maxAge: 60 * 60 * 24 * 30 })
+const cookieConsent = useCookie('cookie_consent', { 
+  path: '/',
+  maxAge: 60 * 60 * 24 * 30, 
+  secure: true,
+})
 
 const grantAllConsents = () =>{
-  const { gtag } = useGtag()
+  const { gtag, initialize } = useGtag()
     gtag('consent', 'update', {
       ad_user_data: 'granted',
       ad_personalization: 'granted',
       ad_storage: 'granted',
       analytics_storage: 'granted'
     })
+    initialize()
     cookieConsent.value = 'all'
 }
 
 const grantAdStorageOnly = () => {
-  const { gtag } = useGtag()
+  const { gtag, initialize } = useGtag()
     gtag('consent', 'update', {
       ad_storage: 'granted'
     })
+    initialize()
     cookieConsent.value = 'ad_storage'
 }
 

@@ -45,6 +45,7 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: process.env.GA_ID,
+    enabled: false,
     initCommands: [
       // Setup up consent mode
       ['consent', 'default', {
@@ -54,7 +55,10 @@ export default defineNuxtConfig({
         analytics_storage: 'denied',
         wait_for_update: 500,
       }]
-    ]
+    ],
+    config:{
+      
+    }
   },
   site: {
     url: 'https://aktiv.bg',

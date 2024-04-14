@@ -254,6 +254,12 @@ useHead(() => {
                 content: seo.keywords,
             },
         ],
+        link: [
+            {
+            rel: 'canonical',
+            href: 'https://aktiv.bg/Services/' + service,
+            },
+        ],
     }
 })
 
