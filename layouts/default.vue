@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <!-- <Cookies /> -->
-        <Nav/>
-        <slot />
-        <Footer />
-    </div>
+  <div>
+    <!-- <Cookies /> -->
+    <Nav />
+    <slot />
+    <Footer />
+  </div>
 </template>

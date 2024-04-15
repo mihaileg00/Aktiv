@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: ['animate.css/animate.min.css','~/assets/css/style.css'],
+  css: ['animate.css/animate.min.css', '~/assets/css/style.css'],
   modules: [['nuxt-mail', {
     message: {
       to: process.env.SMTP_USER,
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_HOST,
       secure: true,
-      auth:{
+      auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       }
@@ -56,8 +56,8 @@ export default defineNuxtConfig({
         wait_for_update: 500,
       }]
     ],
-    config:{
-      
+    config: {
+
     }
   },
   site: {

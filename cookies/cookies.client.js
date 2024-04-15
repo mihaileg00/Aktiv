@@ -1,9 +1,9 @@
 
 // export default defineNuxtPlugin((nuxtApp) => {
 
-//     const cookieConsent = useCookie('cookie_consent',  { 
+//     const cookieConsent = useCookie('cookie_consent',  {
 //   path: '/',
-//   maxAge: 60 * 60 * 24 * 30, 
+//   maxAge: 60 * 60 * 24 * 30,
 //   secure: true,
 // })
 

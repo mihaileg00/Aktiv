@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware( to => {
+export default defineNuxtRouteMiddleware(to => {
 
     const services = [
         { route: 'subscription-services' },
@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware( to => {
         { route: 'quarterly-service' }
     ]
 
-    if(!services.some(service => service.route === to.params.service)) {
+    if (!services.some(service => service.route === to.params.service)) {
         return navigateTo('/')
     }
 

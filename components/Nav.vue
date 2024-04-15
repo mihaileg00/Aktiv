@@ -2,11 +2,30 @@
   <div id="nav-container">
     <nav>
       <!-- Your navigation content goes here -->
-        <NuxtImg src="/Menu.svg" height="24px" width="24px"  alt="Hamburger menu" @click="() =>{if(menuOn == 'animate__slideInLeft'){openNav(false)} else openNav(true)}" id="hamburger-mobile" />
+      <NuxtImg
+        src="/Menu.svg"
+        height="24px"
+        width="24px"
+        alt="Hamburger menu"
+        @click="
+          () => {
+            if (menuOn == 'animate__slideInLeft') {
+              openNav(false);
+            } else openNav(true);
+          }
+        "
+        id="hamburger-mobile"
+      />
       <Nuxt-link to="/" @click="scrollToTop" class="nav-left link">
-          <NuxtImg src="/logo.svg" width="48px" height="48px" alt="Aktiv logo" />
+        <NuxtImg src="/logo.svg" width="48px" height="48px" alt="Aktiv logo" />
         <div>
-          <NuxtImg class="logo-text" width="115px" height="20px" src="/name.svg" alt="Aktiv logo" />
+          <NuxtImg
+            class="logo-text"
+            width="115px"
+            height="20px"
+            src="/name.svg"
+            alt="Aktiv logo"
+          />
           <p class="logo-small-text">Постигаме успеха заедно</p>
         </div>
       </Nuxt-link>
@@ -80,9 +99,11 @@
       <div class="separation-line-nav"></div>
       <div
         class="mobile-menu-item link"
-        :class="$route.path.startsWith('/Services') ? 'mobile-menu-item-active' : ''"
+        :class="
+          $route.path.startsWith('/Services') ? 'mobile-menu-item-active' : ''
+        "
         to="/Services"
-        @click="serviceOn = (!serviceOn ? true : false)"
+        @click="serviceOn = !serviceOn ? true : false"
       >
         <p class="display-3">Услуги</p>
         <svg
@@ -103,10 +124,17 @@
           />
         </svg>
       </div>
-      <div id="services-option-mobile" :class="serviceOn ? 'services-open':'services-close'">
+      <div
+        id="services-option-mobile"
+        :class="serviceOn ? 'services-open' : 'services-close'"
+      >
         <Nuxt-link
           class="service-option-mobile link"
-          :class="$route.path === `/Services/${route.id}` ? 'service-option-mobile-active' : ''"
+          :class="
+            $route.path === `/Services/${route.id}`
+              ? 'service-option-mobile-active'
+              : ''
+          "
           v-for="(route, index) in routes"
           :key="index"
           @click="openNav(false)"
@@ -143,16 +171,17 @@ const scrollToTop = () => {
 // Function you want to run when `menuOn` changes
 const openNav = (actionE) => {
   if (actionE) {
-    menuOn.value = 'animate__slideInLeft';
+    menuOn.value = "animate__slideInLeft";
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
 
-  // A function to prevent scrolling:
-  window.onscroll = () => {
-    window.scrollTo(scrollLeft, scrollTop);
-  };
+    // A function to prevent scrolling:
+    window.onscroll = () => {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
   } else {
-    menuOn.value = 'animate__slideOutLeft';
+    menuOn.value = "animate__slideOutLeft";
     window.onscroll = null;
   }
 };
@@ -164,7 +193,6 @@ const { data } = await useFetch("/api/service", {
 });
 
 const routes = toRaw(data.value);
-
 </script>
 
 <style scoped>
@@ -286,7 +314,7 @@ nav {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc( 100vh - 70px);
+    height: calc(100vh - 70px);
     left: 0;
     z-index: 1000;
     background-color: var(--main-bg-color);
@@ -346,16 +374,15 @@ nav {
     overflow: hidden;
   }
 
-  .services-open{
+  .services-open {
     display: block;
     animation: popIn 0.5s ease-in-out forwards;
   }
 
-  .services-close{
+  .services-close {
     display: block;
     animation: popOut 0.5s ease-in-out forwards;
   }
-  
 
   .service-option-mobile {
     height: 52px;
@@ -372,7 +399,7 @@ nav {
     color: var(--neutral-600);
   }
 
-  .services-arrow{
+  .services-arrow {
     transition: all 0.3s;
   }
 

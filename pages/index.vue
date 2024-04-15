@@ -169,9 +169,7 @@ const elements = reactive([
     animationClasses: "animate__fadeInLeft animate__delay-500ms",
     extra: { imageAnimation: "animate__fadeInRight animate__faster" },
   },
-  { id: "statistics",
-    observed: false,
-    animationClasses: "animate__fadeIn" },
+  { id: "statistics", observed: false, animationClasses: "animate__fadeIn" },
   {
     id: "serviceContainer",
     observed: false,
@@ -205,12 +203,13 @@ onMounted(() => {
             const interval = setInterval(() => {
               if (i < 100) {
                 i++;
-                numbers.value = numbersMax.map((max) => Math.round((i / 100) * max));
+                numbers.value = numbersMax.map((max) =>
+                  Math.round((i / 100) * max)
+                );
               } else {
                 clearInterval(interval);
               }
             }, 15);
-
           }
         }
       });
