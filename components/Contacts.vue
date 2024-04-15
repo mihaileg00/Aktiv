@@ -63,7 +63,7 @@
           width="100%"
           height="100%"
           title="location"
-          src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=AIzaSyBX7Z2Gch0y9wkKPlQMt-B5fP35W5xFMTY"
+          src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=api-B5fP35W5xFMTY"
         />
       </div>
       <form id="form" class="shadow-mobile-02">

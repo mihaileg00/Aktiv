@@ -89,6 +89,7 @@
         </div>
       </div>
     </section>
+    <RealEstateHome/>
     <ServicesHome
       class="animate__animated"
       :class="elements[2].observed ? elements[2].animationClasses : 'opacity-0'"
