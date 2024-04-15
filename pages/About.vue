@@ -266,7 +266,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  gap: 22px;
+  gap: 24px;
 }
 
 #section-2 {
@@ -296,7 +296,6 @@
 }
 
 #section-3 {
-  position: absolute;
   top: 0;
   right: 0;
   padding: 56px 36px;
@@ -304,7 +303,6 @@
   border-radius: 8px;
   text-align: left;
   height: 105%;
-  z-index: 2;
   background-color: var(--main-bg-color);
   width: 43%;
 }
