@@ -1,8 +1,8 @@
 <template>
   <div id="contacts-container">
-    <h1 class="display-9 extra-bold color-primary display-8-mobile">
+    <h2 class="display-9 extra-bold color-primary display-8-mobile">
       Свържете се с нас!
-    </h1>
+    </h2>
     <div class="spacer-24"></div>
     <p class="color-secondary paragraph-medium">
       Моля, не се колебайте да се свържете с нас чрез предоставената<br />

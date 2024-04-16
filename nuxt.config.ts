@@ -25,7 +25,6 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.' }
       ],
       htmlAttrs: {
         lang: 'bg'
