@@ -32,6 +32,11 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
+  runtimeConfig: {
+    public: {
+      mapsApiKey: process.env.MAPS_API_KEY
+    }
+  },
   generate: {
     routes: [
       // Add routes for dynamic content (e.g., services)
@@ -44,7 +49,6 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: process.env.GA_ID,
-    enabled: false,
     initCommands: [
       // Setup up consent mode
       ['consent', 'default', {

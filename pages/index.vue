@@ -255,9 +255,6 @@ onBeforeUnmount(() => {
   display: relative;
   z-index: 2;
   padding: 62px 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   border: 1px solid var(--neutral-400);
   border-radius: 8px;
   width: 55%;
@@ -306,10 +303,6 @@ onBeforeUnmount(() => {
 }
 
 .statistic {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0px;
   text-align: center;
 }
 

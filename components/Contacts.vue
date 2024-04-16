@@ -63,7 +63,7 @@
           width="100%"
           height="100%"
           title="location"
-          src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=api-B5fP35W5xFMTY"
+          :src="`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=${mapsApiKey}`"
         />
       </div>
       <form id="form" class="shadow-mobile-02">
@@ -200,6 +200,7 @@ export default {
       company: "",
       message: "",
       alert: false,
+      mapsApiKey: this.$config.public.mapsApiKey,
     };
   },
 
@@ -237,10 +238,7 @@ export default {
           console.error("Error sending email: ", error);
         });
     },
-  },
-  mounted() {
-    // Code to run when the component is mounted goes here
-  },
+  }
   // Your component-specific properties go h
 };
 </script>
