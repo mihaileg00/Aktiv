@@ -42,9 +42,9 @@
           >
             <div class="service-content">
               <div>
-                <h3 class="display-5 color-primary">
+                <h2 class="display-5 color-primary">
                   {{ service.summary.name }}
-                </h3>
+                </h2>
                 <div class="spacer-16"></div>
                 <p class="color-secondary paragraph-medium">
                   {{ service.summary.description }}

@@ -50,11 +50,11 @@
       class="animate__animated"
       :class="elements[1].observed ? elements[1].animationClasses : 'opacity-0'"
     >
-      <h2 class="display-7 color-primary">Числа с които се гордеем</h2>
+      <h3 class="display-7 color-primary">Числа с които се гордеем</h3>
       <div class="spacer-32"></div>
       <div id="statistics-content" class="shadow-02">
         <div class="statistic">
-          <h3 class="display-8 color-primary semi-bold">+{{ numbers[0] }}</h3>
+          <h4 class="display-8 color-primary semi-bold">+{{ numbers[0] }}</h4>
           <div class="spacer-16"></div>
           <h4 class="display-4 semi-bold color-primary">
             Години Опит в Бизнеса
@@ -67,7 +67,7 @@
         </div>
         <div class="separator-stat"></div>
         <div class="statistic">
-          <h3 class="display-8 color-primary semi-bold">+{{ numbers[1] }}</h3>
+          <h4 class="display-8 color-primary semi-bold">+{{ numbers[1] }}</h4>
           <div class="spacer-16"></div>
           <h4 class="display-4 semi-bold color-primary">Доволни Клиенти</h4>
           <div class="spacer-24"></div>
@@ -78,7 +78,7 @@
         </div>
         <div class="separator-stat"></div>
         <div class="statistic">
-          <h3 class="display-8 color-primary semi-bold">{{ numbers[2] }}%</h3>
+          <h4 class="display-8 color-primary semi-bold">{{ numbers[2] }}%</h4>
           <div class="spacer-16"></div>
           <h4 class="display-4 semi-bold color-primary">Удовлетворение</h4>
           <div class="spacer-24"></div>
@@ -130,17 +130,17 @@
 <script setup>
 // Set the page meta using definePageMeta
 useHead({
-  title: "Актив ООД - Счетоводни Услуги | Данъци, Одит и ТРЗ",
+  title: "Счетоводни услуги - Актив Сандански | aktiv.bg",
   meta: [
     {
       name: "description",
       content:
-        "Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство. С над 21 години опит и посветеност на индивидуален подход, ние подкрепяме фирми от всички размери за тяхната финансова успех.",
+        "Актив Сандански предлага професионални счетоводни услуги за бизнеси от всички сфери. Счетоводство, данъци, одит, ТРЗ, заплати и други услуги.",
     },
     {
       name: "keywords",
       content:
-        "счетоводство Сандански, данъци, одит, ТРЗ, заплати, счетоводно приключване, Актив ООД, счетоводни услуги Сандански, данъчни консултации Сандански",
+        "Актив, счетоводни услуги, услуги Сандански, данъци, одит, ТРЗ, заплати, счетоводно приключване, данъчни консултации Сандански",
     },
   ],
   link: [
