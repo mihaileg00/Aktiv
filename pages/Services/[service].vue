@@ -290,29 +290,7 @@ const { data } = await useFetch(`/api/service`, {
 
 const { text, seo } = toRaw(data.value);
 
-useHead(() => {
-  return {
-    title: seo.title,
-    meta: [
-      {
-        hid: "description",
-        name: "description",
-        content: seo.metaDescription,
-      },
-      {
-        hid: "keywords",
-        name: "keywords",
-        content: seo.keywords,
-      },
-    ],
-    link: [
-      {
-        rel: "canonical",
-        href: "https://aktiv.bg/Services/" + service,
-      },
-    ],
-  };
-});
+useHead(seo);
 
 const elements = reactive([
   {

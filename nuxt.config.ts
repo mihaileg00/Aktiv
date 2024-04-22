@@ -18,14 +18,6 @@ export default defineNuxtConfig({
   }], 'nuxt-gtag', "@nuxt/image", '@nuxtjs/seo'],
   app: {
     head: {
-      titleTemplate: (titleChunk) => {
-        // If the titleChunk exists, use it; otherwise, use the default title
-        return titleChunk ? `${titleChunk} - АКТИВ Сандански` : 'АКТИВ - счетоводни услуги, данъчни консултации, фирмени услуги';
-      },
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ],
       htmlAttrs: {
         lang: 'bg'
       },
@@ -59,18 +51,16 @@ export default defineNuxtConfig({
         wait_for_update: 500,
       }]
     ],
-    config: {
-
-    }
   },
   site: {
     url: 'https://aktiv.bg',
-    name: 'АКТИВ Сандански',
+    name: 'Актив Сандански | aktiv.bg',
     description: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.',
     dafaultLocale: 'bg',
+    locales: ['bg'],
   },
   seo: {
-    automaticDefaults: false,
-    redirectToCanonicalSiteUrl: true
+    redirectToCanonicalSiteUrl: true,
+    fallbackTitle: false,
   }
 })
