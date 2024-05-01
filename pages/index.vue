@@ -80,11 +80,10 @@
         <div class="statistic">
           <h4 class="display-8 color-primary semi-bold">{{ numbers[2] }}%</h4>
           <div class="spacer-16"></div>
-          <h4 class="display-4 semi-bold color-primary">Удовлетворение</h4>
+          <h4 class="display-4 semi-bold color-primary">Ангажираност</h4>
           <div class="spacer-24"></div>
           <p class="color-secondary" style="max-width: 400px">
-            Перфектно удовлетворение с ангажимент към висококачествено
-            обслужване.
+            Решаването на вашите проблеми е наша първа и най-важна грижа.
           </p>
         </div>
       </div>
