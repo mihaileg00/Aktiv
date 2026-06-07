@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2026-06-07',
   css: ['animate.css/animate.min.css', '~/assets/css/style.css'],
   modules: [['nuxt-mail', {
     message: {
@@ -8,7 +9,7 @@ export default defineNuxtConfig({
     },
     smtp: {
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
       secure: true,
       auth: {
         user: process.env.SMTP_USER,
@@ -29,15 +30,17 @@ export default defineNuxtConfig({
       mapsApiKey: process.env.MAPS_API_KEY
     }
   },
-  generate: {
-    routes: [
-      // Add routes for dynamic content (e.g., services)
-      '/Services/subscription-services',
-      '/Services/annual-closure',
-      '/Services/hr-services',
-      '/Services/quarterly-service',
-      // Add more routes as needed
-    ],
+  nitro: {
+    prerender: {
+      routes: [
+        // Add routes for dynamic content (e.g., services)
+        '/Services/subscription-services',
+        '/Services/annual-closure',
+        '/Services/hr-services',
+        '/Services/quarterly-service',
+        // Add more routes as needed
+      ],
+    },
   },
   gtag: {
     id: process.env.GA_ID,
@@ -56,11 +59,16 @@ export default defineNuxtConfig({
     url: 'https://aktiv.bg',
     name: 'Актив Сандански | aktiv.bg',
     description: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.',
-    dafaultLocale: 'bg',
+    defaultLocale: 'bg',
     locales: ['bg'],
   },
   seo: {
     redirectToCanonicalSiteUrl: true,
     fallbackTitle: false,
-  }
+  },
+  // og-image ships transitively with @nuxtjs/seo but this site generates no OG
+  // images (no defineOgImage / ogImage usage anywhere). og-image v6 hard-errors
+  // at build when enabled without a renderer dep (@takumi-rs/core / satori), so
+  // disable it explicitly.
+  ogImage: { enabled: false },
 })
