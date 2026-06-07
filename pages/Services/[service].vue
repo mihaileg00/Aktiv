@@ -1,289 +1,131 @@
 <template>
-  <main>
-    <div id="hero">
-      <div
-        id="hero-content"
-        class="shadow-02 shadow-mobile-none animate__animated"
-        :class="
-          elements[0].observed ? elements[0].animationClasses : 'opacity-0'
-        "
-      >
-        <h1 class="display-7 extra-bold align-center-mobile color-primary">
-          {{ text.hero.title }}
-        </h1>
-        <div class="spacer-24"></div>
-        <p class="paragraph-medium align-center-mobile color-secondary">
-          {{ text.hero.description }}
-        </p>
-        <div class="spacer-32"></div>
-        <Button
-          buttonText="Свържете се с нас"
-          link="/#contacts-container"
-          arrow
-        />
+  <main class="service-page">
+    <section
+      id="hero"
+      class="svc-hero animate__animated"
+      :class="elements[0].observed ? elements[0].animationClasses : 'opacity-0'"
+    >
+      <div class="grid-overlay" aria-hidden="true"></div>
+      <div class="svc-hero-inner">
+        <div class="svc-hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-line" aria-hidden="true"></span>
+            Услуга · Актив Сандански
+          </div>
+
+          <h1 class="svc-hero-title">{{ text.hero.title }}</h1>
+
+          <p class="svc-hero-sub">{{ text.hero.description }}</p>
+
+          <div class="svc-hero-cta">
+            <Button
+              buttonText="Свържете се с нас"
+              link="/#contacts-container"
+              arrow
+              large
+            />
+            <Button
+              buttonText="Всички услуги"
+              link="/#serviceContainer"
+              light
+              large
+            />
+          </div>
+        </div>
+
+        <div class="svc-hero-media">
+          <div class="svc-hero-media-inner">
+            <NuxtImg
+              :src="text.hero.image.src"
+              :alt="text.hero.image.alt"
+              width="640"
+              height="760"
+              fit="cover"
+            />
+          </div>
+        </div>
       </div>
-      <div
-        class="image-container animate__animated"
-        :class="
-          elements[0].observed ? elements[0].extra.imageAnimation : 'opacity-0'
-        "
-      >
-        <img :src="text.hero.image.src" :alt="text.hero.image.alt" />
-      </div>
-    </div>
-    <div
+    </section>
+
+    <section
       id="description"
-      class="animate__animated"
+      class="svc-detail animate__animated"
       :class="elements[1].observed ? elements[1].animationClasses : 'opacity-0'"
     >
-      <div id="description-header">
-        <h2 class="display-8 extra-bold color-primary display-7-mobile">
-          {{ text.description.title }}
-        </h2>
-        <div class="spacer-24"></div>
-        <p class="paragraph-large color-secondary">
-          {{ text.description.text }}
-        </p>
+      <div class="section-head">
+        <span class="kicker">Какво включва</span>
+        <h2 class="section-title">{{ text.description.title }}</h2>
+        <p class="section-lead">{{ text.description.text }}</p>
       </div>
-      <div class="spacer-32 spacer-48-mobile"></div>
-      <ul class="services">
+
+      <ul class="svc-bullets">
         <li
-          class="service-bullet shadow-02"
-          v-for="service in text.description.bullets"
-          :key="service"
+          class="svc-bullet"
+          v-for="bullet in text.description.bullets"
+          :key="bullet.text"
         >
           <NuxtImg
-            :src="`/icons/light/${service.iconName}.svg`"
-            width="48px"
-            height="48px"
+            class="svc-bullet-icon"
+            :src="`/icons/light/${bullet.iconName}.svg`"
+            width="40"
+            height="40"
             fit="cover"
-            :alt="`${service.iconName} Icon`"
+            :alt="`${bullet.iconName} Icon`"
           />
-          <p class="paragraph-medium color-secondary">{{ service.text }}</p>
+          <p>{{ bullet.text }}</p>
         </li>
-        <li class="service-bullet shadow-02">
+        <li class="svc-bullet svc-bullet-prompt">
           <NuxtImg
+            class="svc-bullet-icon"
             src="/icons/light/Email.svg"
-            width="48px"
-            height="48px"
-            alt="Bullet Icon"
+            width="40"
+            height="40"
+            alt="Email Icon"
           />
           <div>
-            <p class="color-secondary paragraph-medium">
-              Не намерихте това, което търсите?
-            </p>
-            <Nuxt-link to="/#contacts-container" class="learn-more"
-              >Свържете се с нас за решение!</Nuxt-link
-            >
+            <p>Не намерихте това, което търсите?</p>
+            <Nuxt-link to="/#contacts-container" class="svc-bullet-link">
+              Свържете се с нас за решение
+            </Nuxt-link>
           </div>
         </li>
       </ul>
-    </div>
-    <div
+    </section>
+
+    <section
       id="call-to-action"
-      class="animate__animated"
+      class="svc-cta animate__animated"
       :class="elements[2].observed ? elements[2].animationClasses : 'opacity-0'"
     >
-      <div id="cta-content">
-        <h3 class="display-7 extra-bold color-light">
-          Искате да научите повече за нашите услуги?
-        </h3>
-        <div class="spacer-24"></div>
-        <p class="paragraph-medium color-light">
-          Свържете се с нас днес и започнете да създавате по-стабилна и успешна
-          финансова бъдеще.
+      <div class="grid-overlay" aria-hidden="true"></div>
+      <div class="svc-cta-inner">
+        <span class="kicker kicker-accent">Готови за следваща стъпка?</span>
+        <h2 class="svc-cta-title">
+          Искате да научите повече<br />за нашите услуги?
+        </h2>
+        <p class="svc-cta-text">
+          Свържете се с нас днес и започнете да изграждате по-стабилно и успешно
+          финансово бъдеще за вашия бизнес.
         </p>
-        <div class="spacer-32"></div>
-        <Button
-          buttonText="Свържете се с нас"
-          light
-          link="/#contacts-container"
-          arrow
-        />
+        <div class="svc-cta-actions">
+          <Button
+            buttonText="Свържете се с нас"
+            link="/#contacts-container"
+            arrow
+            large
+          />
+        </div>
       </div>
-      <div id="cta-image-container">
-        <img
-          id="cta-image"
-          src="/photos/medium/photo9.webp"
-          alt="Call to Action Image"
-        />
-      </div>
-    </div>
+    </section>
   </main>
 </template>
-
-<style scoped>
-#hero {
-  position: relative;
-  width: 100%;
-  height: 550px;
-  max-width: var(--max-width-medium);
-  padding: var(--section-padding);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.image-container {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  left: 64px;
-  bottom: 0;
-  width: 80%;
-}
-
-#hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-#hero-content {
-  opacity: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 62px 56px;
-  background-color: var(--main-bg-color);
-  border: 1px solid var(--neutral-400);
-  border-radius: 8px;
-  width: 45%;
-  max-width: 500px;
-  z-index: 2;
-}
-
-#description {
-  width: 100%;
-  max-width: var(--max-width-medium);
-  padding: var(--section-padding);
-  position: relative;
-}
-
-#description-header {
-  max-width: 800px;
-}
-
-.services {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: 1fr 1fr;
-  padding-inline-start: 0px;
-  justify-content: space-between;
-}
-
-.service-bullet {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 16px 22px;
-  border-radius: 10px;
-  border: 1px solid var(--neutral-400);
-}
-
-#call-to-action {
-  position: relative;
-  width: calc(100% - 128px);
-  max-width: calc(var(--max-width-medium) - 128px);
-  margin-top: 40px;
-  padding: 100px 80px 68px 80px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-color: var(--secondary-color);
-}
-
-#cta-content {
-  width: 50%;
-  max-width: 500px;
-  display: block;
-}
-
-#cta-image-container {
-  position: absolute;
-  top: -40px;
-  right: 40px;
-  bottom: 0;
-  width: 30%;
-  overflow: hidden;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-#cta-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media screen and (max-width: 768px) {
-  #hero {
-    height: auto;
-    justify-content: center;
-    flex-direction: column;
-    gap: 48px;
-  }
-
-  .image-container {
-    position: static;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    aspect-ratio: 1;
-  }
-
-  #hero-content {
-    width: 100%;
-    padding: 0px;
-    border-radius: 0;
-    border: none;
-    align-items: stretch;
-  }
-
-  #description-header {
-    width: 100%;
-    text-align: center;
-  }
-
-  .services {
-    grid-template-columns: repeat(1, 1fr);
-    width: 100%;
-  }
-
-  #call-to-action {
-    padding: 36px 20px;
-    margin-top: 0px;
-    width: 100%;
-    max-width: none;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-  }
-
-  #cta-content {
-    width: 100%;
-    padding: 0px;
-    text-align: center;
-    margin-bottom: 48px;
-    max-width: none;
-  }
-
-  #cta-image-container {
-    position: static;
-    width: 100%;
-    border-radius: 8px;
-    height: 300px;
-  }
-}
-</style>
-
 
 <script setup>
 definePageMeta({
   middleware: "services",
 });
 
-const { service, path } = useRoute().params;
+const { service } = useRoute().params;
 const { data } = await useFetch(`/api/service`, {
   query: { id: service, type: "service" },
 });
@@ -293,24 +135,15 @@ const { text, seo } = toRaw(data.value);
 useHead(seo);
 
 const elements = reactive([
-  {
-    id: "hero",
-    observed: false,
-    animationClasses: "animate__fadeInLeft animate__delay-500ms",
-    extra: { imageAnimation: "animate__fadeInRight animate__faster" },
-  },
-  {
-    id: "description-header",
-    observed: false,
-    animationClasses: "animate__fadeInUp animate_faster",
-  },
+  { id: "hero", observed: false, animationClasses: "animate__fadeIn" },
+  { id: "description", observed: false, animationClasses: "animate__fadeIn" },
   {
     id: "call-to-action",
     observed: false,
-    animationClasses: "animate__fadeInUp animate_faster",
+    animationClasses: "animate__fadeIn",
   },
-  // Add as many elements as needed
 ]);
+
 let observer;
 
 onMounted(() => {
@@ -341,3 +174,335 @@ onBeforeUnmount(() => {
 });
 </script>
 
+<style scoped>
+.service-page {
+  margin-top: 0;
+  padding-top: 0;
+  gap: 0;
+  align-items: stretch;
+}
+
+/* =========================================================
+   SHARED
+   ========================================================= */
+.kicker {
+  font-family: var(--font-b);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.kicker::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: currentColor;
+  flex: none;
+}
+
+.kicker-accent {
+  color: var(--accent);
+}
+
+.section-head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.016em;
+  color: var(--navy);
+  margin: 20px 0 0;
+  text-wrap: balance;
+}
+
+.section-lead {
+  max-width: 640px;
+  margin: 24px 0 0;
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--slate);
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(var(--line-d2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-d2) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 20%,
+    #000 14%,
+    transparent 68%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 20%,
+    #000 14%,
+    transparent 68%
+  );
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.svc-hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(152deg, #09112e 0%, #06091a 58%);
+}
+
+.svc-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 60%, var(--ink) 100%);
+}
+
+.svc-hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 168px 32px 110px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.eyebrow-line {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+
+.svc-hero-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 28px 0 0;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.svc-hero-sub {
+  max-width: 520px;
+  margin: 26px 0 0;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.72;
+  color: var(--fog);
+}
+
+.svc-hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.svc-hero-media-inner {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border: 1px solid var(--line-d);
+  box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7);
+}
+
+.svc-hero-media-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+.svc-detail {
+  width: 100%;
+  background: var(--paper);
+  color: var(--navy);
+  padding: 120px 0;
+}
+
+.svc-bullets {
+  list-style: none;
+  max-width: var(--maxw);
+  margin: 60px auto 0;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.svc-bullet {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 26px;
+  border-radius: var(--r);
+  background: var(--paper);
+  border: 1px solid var(--line-l);
+  transition: box-shadow 0.28s, border-color 0.28s;
+}
+
+.svc-bullet:hover {
+  box-shadow: 0 10px 36px -18px rgba(0, 24, 80, 0.18);
+  border-color: rgba(26, 106, 255, 0.2);
+}
+
+.svc-bullet-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  opacity: 0.85;
+}
+
+.svc-bullet p {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+.svc-bullet-prompt {
+  background: var(--paper-2);
+}
+
+.svc-bullet-prompt p {
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.svc-bullet-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue-2);
+  text-decoration: none;
+}
+
+.svc-bullet-link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+.svc-cta {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink-2);
+  border-top: 1px solid var(--line-d2);
+}
+
+.svc-cta-inner {
+  position: relative;
+  z-index: 3;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 120px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.svc-cta .kicker {
+  justify-content: center;
+}
+
+.svc-cta-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(32px, 4.2vw, 54px);
+  line-height: 1.07;
+  letter-spacing: -0.018em;
+  color: #fff;
+  margin: 22px 0 0;
+  text-wrap: balance;
+}
+
+.svc-cta-text {
+  max-width: 560px;
+  margin: 22px 0 0;
+  font-size: 17px;
+  line-height: 1.72;
+  color: var(--fog);
+}
+
+.svc-cta-actions {
+  margin-top: 40px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .svc-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 132px 20px 80px;
+  }
+
+  .svc-hero-media {
+    max-width: 420px;
+  }
+
+  .svc-detail {
+    padding: 80px 0;
+  }
+
+  .section-head,
+  .svc-bullets {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .svc-bullets {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-cta-inner {
+    padding: 80px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-bullet,
+  .svc-bullet-icon {
+    transition: none;
+  }
+}
+</style>

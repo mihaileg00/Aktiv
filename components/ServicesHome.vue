@@ -1,354 +1,234 @@
 <template>
-  <section id="serviceContainer">
-    <div id="services">
-      <h2 class="color-primary display-7 extra-bold z-index-5">Услуги</h2>
-      <div class="spacer-24"></div>
-      <p class="color-secondary paragraph-medium align-center z-index-5">
-        Предлагаме широк спектър от счетоводни, данъчни и консултантски
-        услуги,<br />
-        осигуряващи най-доброто решение за вашия бизнес.
+  <section id="serviceContainer" class="services">
+    <div class="section-head">
+      <span class="kicker">Услуги</span>
+      <h2 class="section-title">Създадени за<br />вашето спокойствие</h2>
+      <p class="section-lead">
+        Широк спектър от счетоводни, данъчни и консултантски услуги — гъвкави
+        решения, съобразени с нуждите на вашия бизнес.
       </p>
-      <div class="spacer-32"></div>
-      <div id="services-content">
-        <div id="home-services-navigation">
-          <button
-            v-for="(service, index) in services"
-            :key="index"
-            @click="changeSlide(index)"
-            class="service shadow-02"
-            :class="index === newSlide ? '' : ''"
-          >
-            <NuxtImg
-              width="32px"
-              height="32px"
-              :src="`/icons/light/${service.summary.iconName}.svg`"
-              :alt="`${service.summary.iconName} Icon`"
-            />
-            <p class="display-2 color-secondary">{{ service.summary.name }}</p>
-          </button>
-        </div>
-        <div id="service-container">
-          <div
-            v-for="(service, index) in services"
-            :key="index"
-            class="servicebox shadow-02 animate__animated"
-            :class="
-              index == newSlide
-                ? 'newSlide'
-                : index == currentSlide
-                ? 'currentSlide animate__rotateOutUpRight z-index-4'
-                : 'hidden'
-            "
-          >
-            <div class="service-content">
-              <div>
-                <h2 class="display-5 color-primary">
-                  {{ service.summary.name }}
-                </h2>
-                <div class="spacer-16"></div>
-                <p class="color-secondary paragraph-medium">
-                  {{ service.summary.description }}
-                </p>
-                <div class="spacer-32"></div>
-              </div>
-              <Nuxt-link
-                v-if="service.summary.link"
-                :to="`/Services/${service.id}`"
-                class="link service-link"
-              >
-                <p class="learn-more">Научи повече</p>
-                <svg
-                  width="16"
-                  height="15"
-                  viewBox="0 0 16 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649"
-                    stroke="#6D758F"
-                    stroke-width="1.125"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M13.5369 7.5L3.03699 7.5"
-                    stroke="#6D758F"
-                    stroke-width="1.125"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </Nuxt-link>
-              <div v-else class="">
-                <p class="color-secondary paragraph-medium">Още въпроси?</p>
-                <p
-                  @click="scrollToElement('contacts-container')"
-                  class="learn-more"
-                >
-                  Попитайте тук
-                </p>
-              </div>
-            </div>
-            <NuxtImg
-              width="100%"
-              height="100%"
-              class="service-image"
-              :src="service.summary.image.src"
-              :alt="service.summary.image.alt"
-            />
-          </div>
-        </div>
-      </div>
     </div>
-    <div id="services-mobile">
-      <h2 class="display-7 color-primary extra-bold">Услуги</h2>
-      <div class="spacer-24"></div>
-      <p class="paragraph-medium color-dark align-center">
-        Предлагаме широк спектър от счетоводни, данъчни и консултантски услуги,
-        осигуряващи най-доброто решение за вашия бизнес.
-      </p>
-      <div class="spacer-48"></div>
-      <div id="services-content-mobile">
-        <div
-          id="service-mobile"
-          v-for="(service, index) in services"
-          :key="index"
-        >
-          <NuxtImg
-            width="100%"
-            height="100%"
-            class="service-image"
-            :src="service.summary.image.src"
-            :alt="service.summary.image.alt"
-          />
-          <div class="spacer-24"></div>
-          <h3 class="display-5 color-primary extra-bold">
-            {{ service.summary.name }}
-          </h3>
-          <div class="spacer-24"></div>
-          <p class="color-secondary paragraph-medium">
-            {{ service.summary.descriptionShort }}
+
+    <div class="bento">
+      <article
+        v-for="(service, index) in services"
+        :key="service.id"
+        class="card"
+      >
+        <NuxtImg
+          class="card-icon"
+          width="48"
+          height="48"
+          :src="`/icons/light/${service.summary.iconName}.svg`"
+          :alt="`${service.summary.iconName} Icon`"
+        />
+        <div class="card-body">
+          <span class="card-no">{{ String(index + 1).padStart(2, "0") }}</span>
+          <h3>{{ service.summary.name }}</h3>
+          <p>
+            {{ service.summary.descriptionShort || service.summary.description }}
           </p>
-          <div class="spacer-32"></div>
-          <Nuxt-link :to="`/Services/${service.id}`" class="link service-link">
-            <p class="learn-more">Научи повече</p>
-            <svg
-              width="16"
-              height="15"
-              viewBox="0 0 16 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.1427 2.35095L13.5369 7.49996L8.1427 12.649"
-                stroke="#6D758F"
-                stroke-width="1.125"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M13.5369 7.5L3.03699 7.5"
-                stroke="#6D758F"
-                stroke-width="1.125"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </Nuxt-link>
         </div>
-      </div>
+        <Nuxt-link
+          v-if="service.summary.link"
+          :to="`/Services/${service.id}`"
+          class="card-link"
+        >
+          Научи повече
+          <svg
+            width="14"
+            height="13"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M8.14 2.35L13.54 7.5L8.14 12.65"
+              stroke="currentColor"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M13.54 7.5H3.04"
+              stroke="currentColor"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </Nuxt-link>
+        <span
+          v-else
+          @click="scrollToElement('contacts-container')"
+          class="card-link card-link-prompt"
+        >
+          Попитайте тук
+          <svg
+            width="14"
+            height="13"
+            viewBox="0 0 16 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M8.14 2.35L13.54 7.5L8.14 12.65"
+              stroke="currentColor"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M13.54 7.5H3.04"
+              stroke="currentColor"
+              stroke-width="1.3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      </article>
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Your component's styles go here */
-
-#serviceContainer {
+.services {
   width: 100%;
-  display: flex;
-  max-width: var(--max-width-medium);
-  padding: 0 var(--padding-side);
+  padding: 128px 0;
+  background: var(--paper-2);
+  color: var(--navy);
 }
 
-#services {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: var(--max-width-medium);
+.section-head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
-#services-mobile {
-  display: none;
+.section-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.016em;
+  color: var(--navy);
+  margin: 20px 0 0;
+  text-wrap: balance;
 }
 
-#services-content {
-  display: flex;
-  gap: 40px;
-  width: 100%;
+.section-lead {
+  max-width: 520px;
+  margin: 24px 0 0;
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--slate);
 }
 
-#home-services-navigation {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 14px;
+.bento {
+  max-width: var(--maxw);
+  margin: 68px auto 0;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.service {
-  display: flex;
-  padding: 6px 14px 6px 7px;
-  transition: all 0.2s ease;
-  border-radius: 6px;
-  border: none;
-  gap: 10px;
-  background: white;
-  align-items: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: left;
-}
-
-.service:hover {
-  transform: scale(1.05);
-  background-color: #e0e0e0;
-}
-
-.service:active {
-  transform: scale(0.95);
-  background-color: #d0d0d0;
-}
-
-.service:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: 100%;
-  top: 50%;
-  transform: translate(0, -50%);
-  white-space: nowrap;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #555;
-  color: #fff;
-  font-size: 12px;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  margin-left: 10px;
-}
-
-.service:hover::after {
-  opacity: 1;
-}
-
-.service-icon {
-  width: 32px;
-  height: 32px;
-}
-
-.service-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-#service-container {
+.card {
   position: relative;
-  height: 368px;
-  width: 75%;
-}
-
-.servicebox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding: 20px 20px 20px 40px;
-  height: 368px;
-  gap: 40px;
-  border: 1px solid var(--neutral-300);
-  border-radius: 8px;
-  background: var(--main-bg-color);
-}
-
-.sercivebox.currentSlide {
-  z-index: 4;
-  animation: fadeOut 0.5s ease-in forwards;
-}
-
-.servicebox.hidden {
-  display: none;
-}
-
-.service-content {
+  padding: 44px 42px 38px;
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  border: 1px solid var(--line-l);
   display: flex;
   flex-direction: column;
-  width: 50%;
-  justify-content: space-between;
+  min-height: 285px;
+  transition: box-shadow 0.28s, border-color 0.28s;
 }
 
-.service-image {
-  width: 50%;
-  border-radius: 8px;
+.card:hover {
+  box-shadow: 0 10px 36px -18px rgba(0, 24, 80, 0.18);
+  border-color: rgba(26, 106, 255, 0.2);
 }
 
-.service-link {
-  display: flex;
+.card-icon {
+  width: 48px;
+  height: 48px;
+  opacity: 0.8;
+}
+
+.card-body {
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.card-no {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--blue-2);
+  letter-spacing: 0.14em;
+}
+
+.card h3 {
+  font-family: var(--font-d);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--navy);
+  margin: 10px 0 12px;
+  letter-spacing: -0.01em;
+}
+
+.card p {
+  font-size: 15px;
+  line-height: 1.62;
+  color: var(--slate);
+}
+
+.card-link {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  margin-top: 22px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--blue-2);
+  text-decoration: none;
   cursor: pointer;
+}
+
+.card-link svg {
+  transition: transform 0.28s;
+}
+
+.card:hover .card-link svg {
+  transform: translateX(4px);
 }
 
 @media screen and (max-width: 768px) {
-  #services {
-    display: none;
+  .services {
+    padding: 80px 0;
   }
 
-  #services-mobile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: none;
-    padding: 0px;
+  .section-head,
+  .bento {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  #services-content-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-
-  #service-mobile {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-  }
-  .service-image {
-    border-radius: 8px;
-    width: 100%;
-    aspect-ratio: 10/7;
+  .bento {
+    grid-template-columns: 1fr;
   }
 }
 </style>
 
-
 <script setup>
-const currentSlide = ref(0);
-const newSlide = ref(0);
-
 const scrollToElement = (elementID) => {
   const element = document.getElementById(elementID);
-
-  const offset = element.offsetTop - 110;
-  // Scroll to the element
+  if (!element) return;
   window.scrollTo({
-    top: offset,
+    top: element.offsetTop - 80,
     behavior: "smooth",
   });
 };
@@ -363,10 +243,4 @@ const { data } = await useFetch("/api/service", {
 });
 
 const services = toRaw(data.value);
-
-const changeSlide = (index) => {
-  const oldSlide = newSlide.value;
-  newSlide.value = index;
-  currentSlide.value = oldSlide;
-};
 </script>

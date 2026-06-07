@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap');
 
 
 :root {
@@ -22,6 +23,33 @@
   --section-padding: 0px 64px;
   --padding-topbottom: 0px;
   --padding-side: 64px;
+
+  /* --- 2026 redesign tokens --- */
+  --ink: #06091a;
+  --ink-2: #090d1f;
+  --ink-3: #0d1228;
+  --line-d: rgba(255,255,255,.09);
+  --line-d2: rgba(255,255,255,.05);
+  --fog: rgba(255,255,255,.65);
+  --fog-2: rgba(255,255,255,.38);
+  --blue: #1a6aff;
+  --blue-2: #0058e0;
+  --blue-deep: #004ac4;
+  --accent: #6090ff;
+  --navy: #001850;
+  --navy-2: #002070;
+  --paper: #ffffff;
+  --paper-2: #f6f8fc;
+  --paper-3: #edf0f8;
+  --slate: #4a5178;
+  --slate-2: #6c748e;
+  --line-l: #dfe4f0;
+  --r: 12px;
+  --r-lg: 18px;
+  --maxw: 1240px;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --font-d: 'Newsreader', Georgia, serif;
+  --font-b: 'Inter', system-ui, sans-serif;
 }
 
 

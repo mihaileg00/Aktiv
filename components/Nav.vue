@@ -1,5 +1,5 @@
 <template>
-  <div id="nav-container">
+  <div id="nav-container" :class="{ scrolled: scrolled || !isHome }">
     <nav>
       <!-- Your navigation content goes here -->
       <NuxtImg
@@ -16,29 +16,30 @@
         "
         id="hamburger-mobile"
       />
-      <Nuxt-link to="/" @click="scrollToTop" class="nav-left link">
-        <NuxtImg src="/logo.svg" width="48px" height="48px" alt="Aktiv logo" />
-        <div>
+      <Nuxt-link to="/" @click="scrollToTop" class="brand link">
+        <NuxtImg
+          src="/logo.svg"
+          width="40px"
+          height="40px"
+          alt="Aktiv logo"
+          class="brand-mark"
+        />
+        <div class="brand-name">
           <NuxtImg
-            class="logo-text"
+            class="brand-word"
             width="115px"
             height="20px"
             src="/name.svg"
-            alt="Aktiv logo"
+            alt="Aktiv"
           />
-          <p class="logo-small-text">Постигаме успеха заедно</p>
+          <span class="brand-sub">Постигаме успеха заедно</span>
         </div>
       </Nuxt-link>
       <div class="nav-middle">
-        <Nuxt-link
-          @click="scrollToTop"
-          class="link display-3 color-primary"
-          to="/"
-          >Начало</Nuxt-link
-        >
+        <Nuxt-link @click="scrollToTop" class="nav-link" to="/">Начало</Nuxt-link>
         <div id="services-link">
-          <div class="services-text">
-            <p class="display-3 display-3 color-primary">Услуги</p>
+          <div class="services-text nav-link">
+            <p>Услуги</p>
             <svg
               width="16"
               height="16"
@@ -48,7 +49,7 @@
             >
               <path
                 d="M13.2676 4.53846L7.76758 10.4615L2.26758 4.53846"
-                stroke="#4C5186"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -71,12 +72,8 @@
             </div>
           </div>
         </div>
-        <Nuxt-link
-          @click="scrollToTop"
-          class="link display-3 color-primary"
-          to="/About"
-          >За нас</Nuxt-link
-        >
+        <Nuxt-link class="nav-link" to="/About">За нас</Nuxt-link>
+        <Nuxt-link class="nav-link" to="/#contacts-container">Контакти</Nuxt-link>
       </div>
       <div class="nav-right">
         <Button
@@ -117,7 +114,7 @@
         >
           <path
             d="M16 13.0954L10.5 7.17236L5 13.0954"
-            stroke="white"
+            stroke="currentColor"
             stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -159,8 +156,13 @@
 
 
 <script setup>
+const route = useRoute();
+const isHome = computed(() => route.path === "/");
+
 const menuOn = ref(null);
 const serviceOn = ref(null);
+const scrolled = ref(false);
+
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -186,6 +188,19 @@ const openNav = (actionE) => {
   }
 };
 
+const onScroll = () => {
+  scrolled.value = window.scrollY > 28;
+};
+
+onMounted(() => {
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", onScroll);
+});
+
 const { data } = await useFetch("/api/service", {
   query: {
     type: "nav",
@@ -196,16 +211,22 @@ const routes = toRaw(data.value);
 </script>
 
 <style scoped>
-/* Your component's styles go here */
-
 #nav-container {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: var(--main-bg-color);
   display: flex;
   justify-content: center;
+  transition: background 0.35s, border-color 0.35s;
+  border-bottom: 1px solid transparent;
+}
+
+#nav-container.scrolled {
+  background: rgba(6, 9, 26, 0.9);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid var(--line-d2);
 }
 
 nav {
@@ -213,31 +234,80 @@ nav {
   position: relative;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
   width: 100%;
-  height: 88px;
-  max-width: var(--max-width-medium);
-  padding: var(--section-padding);
+  max-width: var(--maxw);
+  padding: 20px 32px;
 }
 
 #hamburger-mobile {
   display: none;
 }
 
-.logo-text {
-  height: 20px;
-}
-
-.nav-left {
+.brand {
   display: flex;
   align-items: center;
-  gap: 6px;
-  text-align: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-word {
+  height: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.brand-sub {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fog-2);
+  margin-top: 6px;
 }
 
 .nav-middle {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-b);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--fog);
+  padding: 4px 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s var(--ease);
+}
+
+.nav-link:hover {
+  color: #fff;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 #services-link {
@@ -247,9 +317,20 @@ nav {
 }
 
 .services-text {
-  display: flex;
-  align-items: center;
   gap: 4px;
+}
+
+.services-text svg {
+  color: var(--fog);
+  transition: color 0.2s;
+}
+
+#services-link:hover .services-text {
+  color: #fff;
+}
+
+#services-link:hover .services-text::after {
+  width: 100%;
 }
 
 #services-option {
@@ -264,36 +345,35 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   width: 240px;
-  background-color: var(--main-bg-color);
-  border: 1px solid var(--neutral-400);
-  border-radius: 8px;
+  background: rgba(6, 9, 26, 0.96);
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid var(--line-d);
+  border-radius: var(--r);
   padding: 6px;
 }
 
 .service-option {
-  padding: 14px 16px;
+  padding: 12px 16px;
   border-radius: 8px;
-  color: var(--secondary-text-color);
+  font-family: var(--font-b);
+  font-size: 14px;
+  color: var(--fog);
   transition: all 0.2s;
 }
 
 .service-option:hover {
-  background-color: var(--neutral-400);
-  font-weight: 600;
-  color: var(--primary-text-color);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
-  #nav-container {
-  }
-
   nav {
-    height: 70px;
-    padding: 0 16px;
+    padding: 16px 20px;
   }
 
   #hamburger-mobile {
     display: block;
+    filter: brightness(0) invert(1);
   }
 
   .nav-middle {
@@ -302,7 +382,7 @@ nav {
   .nav-right {
     display: none;
   }
-  .nav-left {
+  .brand {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -314,10 +394,10 @@ nav {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 72px);
     left: 0;
     z-index: 1000;
-    background-color: var(--main-bg-color);
+    background-color: var(--ink);
     -webkit-transform: translate3d(-100%, 0, 0);
     transform: translate3d(-100%, 0, 0);
   }
@@ -325,7 +405,7 @@ nav {
   .separation-line-nav {
     width: 100%;
     height: 1px;
-    background-color: var(--neutral-400);
+    background-color: var(--line-d);
   }
 
   .mobile-menu-item {
@@ -333,34 +413,25 @@ nav {
     justify-content: center;
     align-items: center;
     height: 70px;
-    background-color: var(--main-bg-color);
-    color: var(--secondary-color);
+    background-color: var(--ink);
+    color: var(--fog);
     gap: 4px;
     transition: all 0.3s;
   }
 
   .mobile-menu-item path {
-    stroke: var(--secondary-color);
+    stroke: var(--fog);
     transition: all 0.3s;
   }
 
   .mobile-menu-item-active {
-    background-color: var(--secondary-color);
-    color: var(--main-bg-color);
+    background-color: var(--ink-2);
+    color: #fff;
     font-weight: 800;
   }
 
-  .mobile-menu-service-active {
-    background-color: var(--neutral-500);
-    color: var(--main-bg-color);
-  }
-
-  .mobile-menu-service-active path {
-    stroke: var(--main-bg-color);
-  }
-
   .mobile-menu-item-active path {
-    stroke: var(--main-bg-color);
+    stroke: #fff;
   }
 
   #services-option-mobile {
@@ -372,6 +443,7 @@ nav {
     width: 100%;
     height: 0px;
     overflow: hidden;
+    background-color: var(--ink-2);
   }
 
   .services-open {
@@ -390,17 +462,18 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--secondary-text-color);
+    color: var(--fog);
     transition: all 0.2s;
   }
 
   .service-option-mobile-active {
-    background-color: var(--neutral-200);
-    color: var(--neutral-600);
+    background-color: var(--ink-3);
+    color: #fff;
   }
 
   .services-arrow {
     transition: all 0.3s;
+    color: var(--fog);
   }
 
   .rotate-180 {
