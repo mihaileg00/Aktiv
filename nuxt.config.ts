@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [['nuxt-mail', {
     message: {
       to: process.env.SMTP_USER,
+      from: process.env.SMTP_USER,
       name: 'website'
     },
     smtp: {
@@ -57,7 +58,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://aktiv.bg',
-    name: 'Актив Сандански | aktiv.bg',
+    name: 'Актив Сандански',
     description: 'Професионални услуги в областта на счетоводството, данъчното и осигурително законодателство.',
     defaultLocale: 'bg',
     locales: ['bg'],

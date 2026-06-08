@@ -13,13 +13,19 @@
           @click="grantAllConsents()"
           class="button button-dark color-light button-default"
         >
-          <p>Приемам Всички</p>
+          <p>Приемам всички</p>
+        </div>
+        <div
+          @click="rejectAll()"
+          class="button button-light color-primary button-default"
+        >
+          <p>Отхвърлям</p>
         </div>
         <div
           @click="grantAdStorageOnly()"
-          class="button button-light color-primary button-default"
+          class="button button-light color-primary button-default button-tertiary"
         >
-          <p>Приемам само за реклами</p>
+          <p>Само за реклами</p>
         </div>
       </div>
     </div>
@@ -50,7 +56,20 @@
 .buttons {
   margin-top: 12px;
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+}
+
+/* Accept-all and Reject stay equally prominent (GDPR); the optional
+   "ads only" choice is de-emphasised as a tertiary action. */
+.button-tertiary {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.button-tertiary:hover {
+  background: var(--neutral-200);
 }
 .fade-enter-active,
 .fade-leave-active {
@@ -112,5 +131,19 @@ const grantAdStorageOnly = () => {
   });
   initialize();
   cookieConsent.value = "ad_storage";
+};
+
+const rejectAll = () => {
+  const { gtag } = useGtag();
+  gtag("consent", "update", {
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    ad_storage: "denied",
+    analytics_storage: "denied",
+  });
+  // No initialize() — analytics/ads stay off. Record the choice so the
+  // banner doesn't reappear; the cookies plugin's default case leaves
+  // consent denied on subsequent loads.
+  cookieConsent.value = "denied";
 };
 </script>

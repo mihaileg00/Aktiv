@@ -38,14 +38,18 @@
         </div>
         <div>
           <h4>Контакт</h4>
-          <a href="mailto:contact@aktiv.bg">contact@aktiv.bg</a>
-          <a href="tel:+359885164849">(+359)88 516 4849</a>
-          <span>Stanke Dimitrov 7, Sandanski</span>
+          <a :href="`mailto:${company.email}`">{{ company.email }}</a>
+          <a :href="`tel:${company.phone.href}`">{{ company.phone.display }}</a>
+          <span>
+            {{ company.address.street }},
+            {{ company.address.postalCode }} {{ company.address.city }}
+          </span>
+          <span>{{ company.hours.label }}: {{ company.hours.value }}</span>
         </div>
       </div>
     </div>
     <div class="footer-base">
-      <span>© 2003–2026 АКТИВ ЕООД · Всички права запазени</span>
+      <span>© 2003–2026 {{ company.legalName }} · Всички права запазени</span>
       <span class="footer-base-loc">Сандански, България</span>
       <div class="footer-legal">
         <a
@@ -66,6 +70,8 @@
 </template>
 
 <script setup>
+const company = useCompanyInfo();
+
 const { data } = await useFetch("/api/service", {
   query: {
     type: "nav",

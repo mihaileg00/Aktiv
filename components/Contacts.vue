@@ -1,399 +1,596 @@
 <template>
-  <div id="contacts-container">
-    <h2 class="display-9 extra-bold color-primary display-8-mobile">
-      Свържете се с нас!
-    </h2>
-    <div class="spacer-24"></div>
-    <p class="color-secondary paragraph-medium">
-      Моля, не се колебайте да се свържете с нас чрез предоставената<br />
-      информация за контакт за всякакви запитвания или помощ,<br />
-      от която може да се нуждаете.
-    </p>
-    <div class="spacer-32"></div>
-    <div id="contacts">
-      <div class="contact">
-        <NuxtImg
-          src="/icons/dark/Email.svg"
-          width="48px"
-          height="48px"
-          alt="email-icon"
-        />
-        <div class="contact-text">
-          <p class="display-2 color-secondary">Имейл:</p>
-          <p class="display-2 semi-bold color-primary">contact@aktiv.bg</p>
-        </div>
-      </div>
-      <div class="separator-contacts-small"></div>
-      <div class="contact">
-        <NuxtImg
-          src="/icons/light/Phone.svg"
-          width="48px"
-          height="48px"
-          alt="phone-icon"
-        />
-        <div class="contact-text">
-          <p class="display-2 color-secondary">Телефон</p>
-          <p class="display-2 semi-bold color-primary">(+359)88 516 4849</p>
-        </div>
-      </div>
-      <div class="separator-contacts-small"></div>
-      <div class="contact">
-        <NuxtImg
-          src="/icons/light/Location.svg"
-          width="48px"
-          height="48px"
-          alt="location-icon"
-        />
-        <div class="contact-text">
-          <p class="display-2 color-secondary">Адрес:</p>
-          <p class="display-2 semi-bold color-primary">
-            Stanke Dimitrov 7,<br />Sandanski
-          </p>
-        </div>
-      </div>
+  <section id="contacts-container" class="contacts">
+    <div class="section-head">
+      <span class="kicker">Контакти</span>
+      <h2 class="section-title">Свържете се<br />с нас</h2>
+      <p class="section-lead">
+        Имате въпрос или искате оферта? Пишете ни чрез формата или използвайте
+        данните за контакт — ще се свържем с вас възможно най-скоро.
+      </p>
     </div>
-    <div class="spacer-48"></div>
-    <div class="separator-contacts"></div>
-    <div class="spacer-48 mobile-hidden"></div>
-    <div id="form-container">
-      <div id="maps-container">
-        <iframe
-          loading="lazy"
-          allowFullScreen
-          width="100%"
-          height="100%"
-          title="location"
-          :src="`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=${mapsApiKey}`"
-        />
-      </div>
-      <form id="form" class="shadow-mobile-02">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="display-2 semi-bold color-primary" for="name"
-              >Име</label
-            >
+
+    <div class="contacts-grid">
+      <aside class="contacts-aside">
+        <ul class="contact-list">
+          <li class="contact-item">
+            <NuxtImg
+              class="contact-ic"
+              src="/icons/dark/Email.svg"
+              width="48"
+              height="48"
+              alt=""
+            />
+            <div>
+              <span class="contact-label">Имейл</span>
+              <a class="contact-value" :href="`mailto:${companyInfo.email}`">{{
+                companyInfo.email
+              }}</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <NuxtImg
+              class="contact-ic"
+              src="/icons/dark/Phone.svg"
+              width="48"
+              height="48"
+              alt=""
+            />
+            <div>
+              <span class="contact-label">Телефон</span>
+              <a class="contact-value" :href="`tel:${companyInfo.phone.href}`">{{
+                companyInfo.phone.display
+              }}</a>
+            </div>
+          </li>
+          <li class="contact-item">
+            <NuxtImg
+              class="contact-ic"
+              src="/icons/dark/Location.svg"
+              width="48"
+              height="48"
+              alt=""
+            />
+            <div>
+              <span class="contact-label">Адрес</span>
+              <span class="contact-value"
+                >{{ companyInfo.address.street }},<br />{{
+                  companyInfo.address.postalCode
+                }}
+                {{ companyInfo.address.city }}</span
+              >
+            </div>
+          </li>
+          <li class="contact-item">
+            <NuxtImg
+              class="contact-ic"
+              src="/icons/dark/Time.svg"
+              width="48"
+              height="48"
+              alt=""
+            />
+            <div>
+              <span class="contact-label">Работно време</span>
+              <span class="contact-value"
+                >{{ companyInfo.hours.label }}<br />{{
+                  companyInfo.hours.value
+                }}</span
+              >
+            </div>
+          </li>
+        </ul>
+
+        <div class="map-card">
+          <iframe
+            loading="lazy"
+            allowfullscreen
+            width="100%"
+            height="100%"
+            title="Местоположение на Актив Сандански на картата"
+            :src="`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJGbYT6ngxqhQRUaFum_7dAkA&key=${mapsApiKey}`"
+          />
+        </div>
+      </aside>
+
+      <form class="contact-form" @submit.prevent="sendEmail">
+        <!-- honeypot: hidden from users; bots that fill it are dropped -->
+        <div class="hp" aria-hidden="true">
+          <label
+            >Не попълвайте това поле
             <input
-              class="display-2 color-secondary shadow-02"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+              v-model="website"
+            />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Име <span class="req">*</span></label>
+            <input
+              id="name"
+              type="text"
               autocomplete="name"
               placeholder="Иван Иванов"
-              type="text"
-              id="name"
-              v-model="name"
+              v-model.trim="name"
+              :disabled="sending"
               required
             />
           </div>
-          <div class="form-group">
-            <label class="display-2 semi-bold color-primary" for="email"
-              >Имейл</label
-            >
+          <div class="field">
+            <label for="email">Имейл <span class="req">*</span></label>
             <input
-              class="display-2 color-secondary shadow-02"
-              autocomplete="email"
-              placeholder="example@gmail.com"
-              type="email"
               id="email"
-              v-model="email"
+              type="email"
+              autocomplete="email"
+              placeholder="ivan@example.com"
+              v-model.trim="email"
+              :disabled="sending"
               required
             />
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="display-2 semi-bold color-primary" for="phone"
-              >Телефон</label
-            >
+
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Телефон</label>
             <input
-              class="display-2 color-secondary shadow-02"
+              id="phone"
+              type="tel"
               autocomplete="tel"
               placeholder="088 888 8888"
-              type="tel"
-              id="phone"
-              v-model="phone"
-              required
+              v-model.trim="phone"
+              :disabled="sending"
             />
           </div>
-          <div class="form-group">
-            <label class="display-2 semi-bold color-primary" for="company"
-              >Компания</label
-            >
+          <div class="field">
+            <label for="company">Компания</label>
             <input
-              class="display-2 color-secondary shadow-02"
-              autocomplete="organization"
-              type="text"
-              placeholder="Фирма"
               id="company"
-              v-model="company"
-              required
+              type="text"
+              autocomplete="organization"
+              placeholder="Фирма"
+              v-model.trim="company"
+              :disabled="sending"
             />
           </div>
         </div>
-        <div class="form-group">
-          <label class="display-2 semi-bold color-primary" for="message"
-            >Съобщение</label
-          >
+
+        <div class="field">
+          <label for="message">Съобщение <span class="req">*</span></label>
           <textarea
-            class="color-secondary display-2 shadow-02"
-            placeholder="Съобщение"
             id="message"
-            rows="3"
-            v-model="message"
+            rows="5"
+            placeholder="Как можем да помогнем?"
+            v-model.trim="message"
+            :disabled="sending"
             required
           ></textarea>
         </div>
-        <div
-          @click="sendEmail"
-          type="submit"
-          class="button button-dark color-light button-default"
-        >
-          <p>Изпрати съобщение</p>
+
+        <button type="submit" class="submit-btn" :disabled="sending">
+          <span>{{ sending ? "Изпращане…" : "Изпрати съобщение" }}</span>
           <svg
-            width="10"
-            height="10"
+            v-if="!sending"
+            width="13"
+            height="13"
             viewBox="0 0 10 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
             <path
               d="M4.88452 0.880772L9.19988 4.99998L4.88452 9.11919"
-              stroke="white"
+              stroke="currentColor"
               stroke-width="1.28571"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
             <path
               d="M9.19984 4.99999L0.799896 4.99999"
-              stroke="white"
+              stroke="currentColor"
               stroke-width="1.28571"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
           </svg>
-        </div>
+        </button>
+
+        <p
+          class="form-status"
+          :class="{
+            'is-ok': status === 'success',
+            'is-err': status === 'error',
+          }"
+          role="status"
+          aria-live="polite"
+        >
+          {{ statusMessage }}
+        </p>
       </form>
     </div>
-    <div v-if="alert" id="alert">
-      <h3 class="display-2 color-primary">
-        Благодарим ви за вашето запитване!
-      </h3>
-      <div
-        @click="alert = false"
-        type="submit"
-        class="button button-dark color-light button-default"
-      >
-        <p>Затвори</p>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
-<script>
-// Your script setup goes here
+<script setup>
+const companyInfo = useCompanyInfo();
+const { mapsApiKey } = useRuntimeConfig().public;
+const { $mail } = useNuxtApp();
 
-export default {
-  name: "Contacts",
-  data() {
-    return {
-      // Your data properties go here
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      message: "",
-      alert: false,
-      mapsApiKey: this.$config.public.mapsApiKey,
-    };
-  },
+const name = ref("");
+const email = ref("");
+const phone = ref("");
+const company = ref("");
+const message = ref("");
+const website = ref(""); // honeypot
 
-  methods: {
-    // Your methods go here
-    sendEmail() {
-      const messageFull = `
-                Name: ${this.name}\n
-                Email: ${this.email}\n
-                Phone: ${this.phone}\n
-                Company: ${this.company}\n
-                Message: ${this.message}
-                `;
+const sending = ref(false);
+const status = ref(""); // "" | "success" | "error"
 
-      this.$mail
-        .send({
-          from: process.env.SMTP_USER,
-          subject: "Contact Form Submission",
-          html: messageFull,
-        })
-        .then(() => {
-          this.alert = true;
-          const { gtag } = useGtag();
+const statusMessage = computed(() => {
+  if (status.value === "success")
+    return "Благодарим ви! Съобщението е изпратено успешно — ще се свържем с вас възможно най-скоро.";
+  if (status.value === "error")
+    return "Възникна грешка при изпращането. Моля, опитайте отново или ни пишете директно на contact@aktiv.bg.";
+  return "";
+});
 
-          gtag("event", "form_submit");
-          // Clear the form
-          this.name = "";
-          this.email = "";
-          this.phone = "";
-          this.company = "";
-          this.message = "";
-          // Show a success message
-        })
-        .catch((error) => {
-          console.error("Error sending email: ", error);
-        });
-    },
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+const sendEmail = async () => {
+  if (website.value) return; // honeypot tripped — silently drop
+  if (sending.value) return;
+
+  sending.value = true;
+  status.value = "";
+
+  const html = `
+    <p><strong>Име:</strong> ${escapeHtml(name.value)}</p>
+    <p><strong>Имейл:</strong> ${escapeHtml(email.value)}</p>
+    <p><strong>Телефон:</strong> ${escapeHtml(phone.value) || "—"}</p>
+    <p><strong>Компания:</strong> ${escapeHtml(company.value) || "—"}</p>
+    <p><strong>Съобщение:</strong><br>${escapeHtml(message.value).replace(
+      /\n/g,
+      "<br>"
+    )}</p>
+  `;
+
+  try {
+    await $mail.send({
+      subject: `Запитване от сайта — ${name.value}`,
+      replyTo: email.value,
+      html,
+    });
+
+    status.value = "success";
+    const { gtag } = useGtag();
+    gtag("event", "form_submit");
+
+    name.value = "";
+    email.value = "";
+    phone.value = "";
+    company.value = "";
+    message.value = "";
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    status.value = "error";
+  } finally {
+    sending.value = false;
   }
-  // Your component-specific properties go h
 };
 </script>
 
 <style scoped>
-/* Your component-specific styles go here */
+.contacts {
+  width: 100%;
+  background: var(--paper-2);
+  color: var(--navy);
+  padding: 128px 0;
+}
 
-#contacts-container {
+.kicker {
+  font-family: var(--font-b);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.kicker::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: currentColor;
+  flex: none;
+}
+
+.section-head {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section-title {
+  font-family: var(--font-d);
+  font-weight: 400;
+  font-size: clamp(36px, 4.8vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.016em;
+  color: var(--navy);
+  margin: 20px 0 0;
+  text-wrap: balance;
+}
+
+.section-lead {
+  max-width: 520px;
+  margin: 24px 0 0;
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--slate);
+}
+
+/* =========================================================
+   GRID
+   ========================================================= */
+.contacts-grid {
+  max-width: var(--maxw);
+  margin: 60px auto 0;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* =========================================================
+   ASIDE — contact details + map
+   ========================================================= */
+.contacts-aside {
   display: flex;
   flex-direction: column;
-  text-align: center;
+  gap: 28px;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-item {
+  display: flex;
   align-items: center;
-  width: 100%;
-  max-width: var(--max-width-medium);
-  margin-bottom: 40px;
-  padding: 0 var(--padding-side);
-}
-
-#contacts {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  width: 100%;
-}
-
-.contact {
-  display: flex;
   gap: 16px;
-  align-items: flex-start;
-  align-self: center;
 }
 
-.contact-icon {
+.contact-ic {
   width: 48px;
   height: 48px;
+  flex: none;
 }
 
-.contact-text {
+.contact-label {
+  display: block;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--slate-2);
+  margin-bottom: 3px;
+}
+
+.contact-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s;
+}
+
+a.contact-value:hover {
+  color: var(--blue-2);
+}
+
+.map-card {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line-l);
+  aspect-ratio: 4 / 3;
+  background: var(--paper-3);
+}
+
+.map-card iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+.contact-form {
+  background: var(--paper);
+  border: 1px solid var(--line-l);
+  border-radius: var(--r-lg);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 16px 40px -28px rgba(0, 24, 80, 0.18);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  text-align: left;
 }
 
-.separator-contacts-small {
+.field label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.req {
+  color: var(--blue-2);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  font-family: var(--font-b);
+  font-size: 15px;
+  color: var(--navy);
+  background: var(--paper);
+  border: 1px solid var(--line-l);
+  border-radius: var(--r);
+  padding: 13px 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--slate-2);
+  opacity: 0.7;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(96, 144, 255, 0.18);
+}
+
+.field input:disabled,
+.field textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.field input:user-invalid,
+.field textarea:user-invalid {
+  border-color: #e0566f;
+}
+
+.field input:user-invalid:focus,
+.field textarea:user-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(224, 86, 111, 0.16);
+}
+
+.submit-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-b);
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  background: var(--blue-2);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px -6px rgba(0, 88, 224, 0.42);
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--blue-deep);
+  box-shadow: 0 6px 22px -6px rgba(0, 88, 224, 0.52);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.form-status.is-ok {
+  color: #1c7d4d;
+  font-weight: 600;
+}
+
+.form-status.is-err {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+/* visually-hidden honeypot */
+.hp {
+  position: absolute;
+  left: -9999px;
   width: 1px;
-  background-color: var(--neutral-400);
-}
-
-.separator-contacts {
   height: 1px;
-  width: 100%;
-  background-color: var(--neutral-400);
-}
-
-#form-container {
-  display: flex;
-  width: 100%;
-  gap: 40px;
-  height: min-content;
-}
-
-#maps-container {
-  width: 50%;
-  aspect-ratio: 10/7;
-  background-color: var(--neutral-500);
   overflow: hidden;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  gap: 24px;
-  height: min-content;
-}
-
-.form-row {
-  display: flex;
-  width: 100%;
-  gap: 32px;
-}
-
-.form-group {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 12px;
-  text-align: left;
-}
-
-input {
-  padding: 18px 16px;
-  background-color: var(--background-color);
-  border: 1px solid var(--neutral-300);
-  border-radius: 6px;
-}
-
-textarea {
-  padding: 16px;
-  background-color: var(--background-color);
-  border: 1px solid var(--neutral-300);
-  border-radius: 6px;
-}
-
-#alert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-top: 40px;
-  gap: 24px;
-}
-
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media screen and (max-width: 768px) {
-  #contacts-container {
-    padding: 0 16px;
+  .contacts {
+    padding: 80px 0;
   }
 
-  #contacts {
-    flex-direction: column;
-    gap: 16px;
+  .section-head,
+  .contacts-grid {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .contact-text {
-    gap: 4px;
+  .contacts-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
-  .separator-contacts-small {
-    width: auto;
-    height: 1px;
+  .field-row {
+    grid-template-columns: 1fr;
   }
 
-  .separator-contacts {
-    display: none;
+  .contact-form {
+    padding: 24px 18px;
   }
 
-  #form-container {
-    flex-direction: column;
+  .submit-btn {
+    align-self: stretch;
+    justify-content: center;
   }
+}
 
-  #maps-container {
-    display: none;
-  }
-
-  form {
-    width: 100%;
-    border: 1px solid var(--neutral-300);
-    border-radius: 8px;
-    padding: 24px 16px;
-  }
-
-  .form-row {
-    flex-direction: column;
-    gap: 24px;
+@media (prefers-reduced-motion: reduce) {
+  .contact-value,
+  .field input,
+  .field textarea,
+  .submit-btn {
+    transition: none;
   }
 }
 </style>

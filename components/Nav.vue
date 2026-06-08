@@ -1,5 +1,9 @@
 <template>
-  <div id="nav-container" :class="{ scrolled: scrolled || !isHome }">
+  <div
+    id="nav-container"
+    class="animate__animated animate__fadeIn"
+    :class="{ scrolled: scrolled || !isHome }"
+  >
     <nav>
       <!-- Your navigation content goes here -->
       <NuxtImg
@@ -359,6 +363,13 @@ nav {
   font-size: 14px;
   color: var(--fog);
   transition: all 0.2s;
+}
+
+/* The row text lives inside an <a class="link">, whose global color
+   (--secondary-color) would otherwise win and render dark on the dark
+   dropdown. Inherit from the row so it stays light (and turns #fff on hover). */
+#services-option .link {
+  color: inherit;
 }
 
 .service-option:hover {

@@ -47,7 +47,12 @@
       </div>
     </section>
 
-    <section class="trust-strip" aria-hidden="true">
+    <section
+      id="trust"
+      class="trust-strip animate__animated"
+      :class="elements[5].observed ? elements[5].animationClasses : 'opacity-0'"
+      aria-hidden="true"
+    >
       <div class="trust-inner">
         <span>Счетоводство</span><i></i>
         <span>Данъци</span><i></i>
@@ -180,11 +185,6 @@ useHead({
       content:
         "Актив Сандански предлага професионални счетоводни услуги за бизнеси от всички сфери. Счетоводство, данъци, одит, ТРЗ, заплати и други услуги.",
     },
-    {
-      name: "keywords",
-      content:
-        "Актив, счетоводни услуги, accounting, услуги Сандански, данъци, одит, ТРЗ, заплати, счетоводно приключване, данъчни консултации Сандански",
-    },
   ],
   link: [
     {
@@ -198,7 +198,9 @@ const numbers = ref([0, 0, 0]);
 const numbersMax = [21, 100, 100];
 
 const elements = reactive([
-  { id: "hero", observed: false, animationClasses: "animate__fadeIn" },
+  // Hero is above the fold: start it revealed so it paints (and fades in via
+  // CSS) on first load instead of sitting at opacity-0 until JS/observer runs.
+  { id: "hero", observed: true, animationClasses: "animate__fadeIn" },
   { id: "statistics", observed: false, animationClasses: "animate__fadeIn" },
   {
     id: "serviceContainer",
@@ -211,6 +213,7 @@ const elements = reactive([
     observed: false,
     animationClasses: "animate__fadeInUp",
   },
+  { id: "trust", observed: false, animationClasses: "animate__fadeIn" },
 ]);
 
 let observer;
