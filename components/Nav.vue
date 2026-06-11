@@ -78,6 +78,23 @@
         </div>
         <Nuxt-link class="nav-link" to="/About">За нас</Nuxt-link>
         <Nuxt-link class="nav-link" to="/#contacts-container">Контакти</Nuxt-link>
+        <a
+          href="https://aktivbg.com"
+          class="nav-link nav-cross"
+          target="_blank"
+          rel="noopener"
+        >
+          Недвижими имоти
+          <svg width="12" height="12" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+            <path
+              d="M2 8L8 2M8 2H3.5M8 2V6.5"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
       </div>
       <div class="nav-right">
         <Button
@@ -153,6 +170,25 @@
       >
         <p class="display-3">За нас</p>
       </Nuxt-link>
+      <div class="separation-line-nav"></div>
+      <a
+        @click="openNav(false)"
+        class="mobile-menu-item link"
+        href="https://aktivbg.com"
+        target="_blank"
+        rel="noopener"
+      >
+        <p class="display-3">Недвижими имоти</p>
+        <svg width="18" height="18" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+          <path
+            d="M2 8L8 2M8 2H3.5M8 2V6.5"
+            stroke="currentColor"
+            stroke-width="1.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
       <div class="separation-line-nav"></div>
     </div>
   </div>
@@ -312,6 +348,19 @@ nav {
 
 .nav-link:hover::after {
   width: 100%;
+}
+
+.nav-cross {
+  gap: 4px;
+}
+
+.nav-cross svg {
+  color: var(--fog-2);
+  transition: color 0.2s;
+}
+
+.nav-cross:hover svg {
+  color: #fff;
 }
 
 #services-link {

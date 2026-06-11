@@ -35,6 +35,9 @@
           <h4>Компания</h4>
           <Nuxt-link to="/About">За нас</Nuxt-link>
           <Nuxt-link to="/#contacts-container">Контакти</Nuxt-link>
+          <a href="https://aktivbg.com" target="_blank" rel="noopener">
+            Недвижими имоти
+          </a>
         </div>
         <div>
           <h4>Контакт</h4>
