@@ -59,7 +59,7 @@
             />
           </svg>
         </Nuxt-link>
-        <span
+        <button
           v-else
           @click="scrollToElement('contacts-container')"
           class="card-link card-link-prompt"
@@ -88,7 +88,7 @@
               stroke-linejoin="round"
             />
           </svg>
-        </span>
+        </button>
       </article>
     </div>
   </section>
@@ -196,6 +196,10 @@
   color: var(--blue-2);
   text-decoration: none;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
 }
 
 .card-link svg {
@@ -208,7 +212,7 @@
 
 @media screen and (max-width: 768px) {
   .services {
-    padding: 80px 0;
+    padding: 64px 0;
   }
 
   .section-head,
@@ -219,6 +223,21 @@
 
   .bento {
     grid-template-columns: 1fr;
+    margin-top: 32px;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 28px 20px 24px;
+    min-height: auto;
+  }
+
+  .card-body {
+    padding-top: 20px;
+  }
+
+  .card h3 {
+    font-size: 22px;
   }
 }
 </style>

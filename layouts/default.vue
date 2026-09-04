@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Cookies />
+    <ClientOnly>
+      <Cookies />
+    </ClientOnly>
     <Nav />
     <slot />
     <Footer />

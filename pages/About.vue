@@ -41,6 +41,7 @@
               width="640"
               height="800"
               fit="cover"
+              loading="lazy"
               alt="Екипът на АКТИВ"
             />
           </div>
@@ -136,15 +137,17 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: "За нас — Актив Сандански",
+  ogTitle: "За нас — Актив Сандански",
+  description: "Научете повече за Актив ООД, водеща счетоводна къща в Сандански, предлагаща професионални счетоводни, данъчни и осигурителни услуги. Открийте как нашата мисия и опит допринасят за успеха на вашия бизнес.",
+  ogDescription: "Научете повече за Актив ООД с над две десетилетия опит в счетоводството, данъчното и осигурително законодателство.",
+  ogImage: "https://aktiv.bg/photos/large/photo8.webp",
+  ogType: "website",
+  twitterCard: "summary_large_image",
+});
+
 useHead({
-  title: "За нас",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Научете повече за Актив ООД, водеща счетоводна къща в Сандански, предлагаща професионални счетоводни, данъчни и осигурителни услуги. Открийте как нашата мисия и опит допринасят за успеха на вашия бизнес.",
-    },
-  ],
   link: [
     {
       rel: "canonical",
@@ -154,7 +157,7 @@ useHead({
 });
 
 const elements = reactive([
-  { id: "hero", observed: false, animationClasses: "animate__fadeIn" },
+  { id: "hero", observed: true, animationClasses: "animate__fadeIn" },
   { id: "intro", observed: false, animationClasses: "animate__fadeIn" },
   { id: "values", observed: false, animationClasses: "animate__fadeIn" },
   {
@@ -167,18 +170,24 @@ const elements = reactive([
 let observer;
 
 onMounted(() => {
-  if (typeof IntersectionObserver === "undefined") return;
+  if (typeof IntersectionObserver === "undefined") {
+    elements.forEach((el) => (el.observed = true));
+    return;
+  }
 
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const element = elements.find((el) => el.id === entry.target.id);
-        if (element && element.observed == false) {
-          element.observed = entry.isIntersecting;
+        if (element && !element.observed) {
+          if (entry.isIntersecting) {
+            element.observed = true;
+            observer.unobserve(entry.target);
+          }
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.05, rootMargin: "150px 0px" }
   );
 
   elements.forEach((element) => {
@@ -568,10 +577,24 @@ onBeforeUnmount(() => {
    ========================================================= */
 @media screen and (max-width: 768px) {
   .about-hero-inner {
-    padding: 140px 20px 80px;
+    padding: 104px 20px 48px;
+  }
+
+  .about-hero-title {
+    font-size: clamp(32px, 7.5vw, 44px);
+    margin: 20px 0 0;
+    line-height: 1.08;
+  }
+
+  .about-hero-sub {
+    margin: 18px 0 0;
+    font-size: 15.5px;
+    line-height: 1.6;
   }
 
   .about-chips {
+    margin-top: 36px;
+    padding-top: 24px;
     flex-direction: column;
   }
 
@@ -582,8 +605,8 @@ onBeforeUnmount(() => {
     padding-right: 0;
     margin-right: 0;
     border-right: 0;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
     border-bottom: 1px solid var(--line-d);
   }
 
@@ -594,31 +617,7 @@ onBeforeUnmount(() => {
   }
 
   .chip b {
-    font-size: 30px;
-  }
-
-  .about-intro-inner {
-    grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 80px 20px;
-  }
-
-  .about-media {
-    max-width: 400px;
-  }
-
-  .about-badge {
-    right: 0;
-  }
-
-  .about-values {
-    padding: 80px 0;
-  }
-
-  .values-grid {
-    grid-template-columns: 1fr;
-    padding-left: 20px;
-    padding-right: 20px;
+    font-size: 28px;
   }
 
   .section-head {
@@ -626,8 +625,81 @@ onBeforeUnmount(() => {
     padding-right: 20px;
   }
 
+  .section-title {
+    font-size: clamp(28px, 6.5vw, 40px);
+    margin: 16px 0 0;
+  }
+
+  .section-lead {
+    margin: 16px 0 0;
+    font-size: 15.5px;
+  }
+
+  .about-intro-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 60px 20px;
+  }
+
+  .about-media {
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .about-badge {
+    right: 12px;
+    bottom: 16px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .about-badge img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .about-badge b {
+    font-size: 13.5px;
+  }
+
+  .about-badge span {
+    font-size: 11.5px;
+  }
+
+  .about-text {
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 18px 0 0;
+  }
+
+  .about-values {
+    padding: 64px 0;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    margin-top: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 16px;
+  }
+
+  .value-card {
+    padding: 28px 20px;
+  }
+
   .about-cta-inner {
-    padding: 80px 20px;
+    padding: 64px 20px;
+  }
+
+  .about-cta-title {
+    font-size: clamp(26px, 6vw, 36px);
+    margin: 16px 0 0;
+  }
+
+  .about-cta-actions {
+    margin-top: 28px;
   }
 }
 

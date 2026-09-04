@@ -125,17 +125,39 @@ definePageMeta({
   middleware: "services",
 });
 
-const { service } = useRoute().params;
+const route = useRoute();
+const serviceId = Array.isArray(route.params.service)
+  ? route.params.service[0]
+  : route.params.service;
+
 const { data } = await useFetch(`/api/service`, {
-  query: { id: service, type: "service" },
+  query: { id: serviceId, type: "service" },
 });
 
-const { text, seo } = toRaw(data.value);
+const text = computed(() => data.value?.text || { hero: { title: "", description: "", image: { src: "", alt: "" } }, description: { title: "", text: "", bullets: [] } });
+const seo = computed(() => data.value?.seo || {});
 
-useHead(seo);
+useSeoMeta({
+  title: () => `${seo.value?.title || ''} — Актив Сандански`,
+  ogTitle: () => `${seo.value?.title || ''} — Актив Сандански`,
+  description: () => seo.value?.meta?.find((m) => m.name === 'description')?.content || '',
+  ogDescription: () => seo.value?.meta?.find((m) => m.name === 'description')?.content || '',
+  ogImage: () => text.value?.hero?.image?.src ? `https://aktiv.bg${text.value.hero.image.src}` : '',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+});
+
+useHead({
+  link: () => [
+    {
+      rel: 'canonical',
+      href: seo.value?.link?.find((l) => l.rel === 'canonical')?.href || `https://aktiv.bg/Services/${serviceId}`,
+    }
+  ]
+});
 
 const elements = reactive([
-  { id: "hero", observed: false, animationClasses: "animate__fadeIn" },
+  { id: "hero", observed: true, animationClasses: "animate__fadeIn" },
   { id: "description", observed: false, animationClasses: "animate__fadeIn" },
   {
     id: "call-to-action",
@@ -147,18 +169,24 @@ const elements = reactive([
 let observer;
 
 onMounted(() => {
-  if (typeof IntersectionObserver === "undefined") return;
+  if (typeof IntersectionObserver === "undefined") {
+    elements.forEach((el) => (el.observed = true));
+    return;
+  }
 
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         const element = elements.find((el) => el.id === entry.target.id);
-        if (element && element.observed == false) {
-          element.observed = entry.isIntersecting;
+        if (element && !element.observed) {
+          if (entry.isIntersecting) {
+            element.observed = true;
+            observer.unobserve(entry.target);
+          }
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.05, rootMargin: "150px 0px" }
   );
 
   elements.forEach((element) => {
@@ -472,16 +500,35 @@ onBeforeUnmount(() => {
 @media screen and (max-width: 768px) {
   .svc-hero-inner {
     grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 132px 20px 80px;
+    gap: 36px;
+    padding: 104px 20px 48px;
+  }
+
+  .svc-hero-title {
+    font-size: clamp(30px, 7vw, 42px);
+    margin: 18px 0 0;
+    line-height: 1.08;
+  }
+
+  .svc-hero-sub {
+    margin: 18px 0 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  .svc-hero-cta {
+    margin-top: 28px;
+    gap: 12px;
   }
 
   .svc-hero-media {
-    max-width: 420px;
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .svc-detail {
-    padding: 80px 0;
+    padding: 64px 0;
   }
 
   .section-head,
@@ -490,12 +537,47 @@ onBeforeUnmount(() => {
     padding-right: 20px;
   }
 
+  .section-title {
+    font-size: clamp(28px, 6.5vw, 40px);
+    margin: 16px 0 0;
+  }
+
+  .section-lead {
+    margin: 16px 0 0;
+    font-size: 15.5px;
+  }
+
   .svc-bullets {
     grid-template-columns: 1fr;
+    margin-top: 32px;
+    gap: 14px;
+  }
+
+  .svc-bullet {
+    padding: 16px 18px;
+    gap: 14px;
+  }
+
+  .svc-bullet p {
+    font-size: 14.5px;
   }
 
   .svc-cta-inner {
-    padding: 80px 20px;
+    padding: 64px 20px;
+  }
+
+  .svc-cta-title {
+    font-size: clamp(26px, 6vw, 36px);
+    margin: 16px 0 0;
+  }
+
+  .svc-cta-text {
+    margin: 16px 0 0;
+    font-size: 15.5px;
+  }
+
+  .svc-cta-actions {
+    margin-top: 28px;
   }
 }
 

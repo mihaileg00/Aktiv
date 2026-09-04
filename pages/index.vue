@@ -38,21 +38,10 @@
             large
           />
         </div>
-
-        <div class="hero-chips">
-          <div class="chip"><b>+21</b><span>години опит</span></div>
-          <div class="chip"><b>+100</b><span>доволни клиенти</span></div>
-          <div class="chip"><b>100%</b><span>ангажираност</span></div>
-        </div>
       </div>
     </section>
 
-    <section
-      id="trust"
-      class="trust-strip animate__animated"
-      :class="elements[5].observed ? elements[5].animationClasses : 'opacity-0'"
-      aria-hidden="true"
-    >
+    <section id="trust" class="trust-strip" aria-hidden="true">
       <div class="trust-inner">
         <span>Счетоводство</span><i></i>
         <span>Данъци</span><i></i>
@@ -124,6 +113,7 @@
               src="/photos/large/photo2.webp"
               width="640"
               height="800"
+              loading="lazy"
               alt="Екипът на АКТИВ"
             />
           </div>
@@ -177,15 +167,17 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: "Счетоводни услуги — Актив Сандански",
+  ogTitle: "Счетоводни услуги — Актив Сандански",
+  description: "Актив Сандански предлага професионални счетоводни услуги за бизнеси от всички сфери. Счетоводство, данъци, одит, ТРЗ, заплати и други услуги.",
+  ogDescription: "Актив Сандански предлага професионални счетоводни услуги за бизнеси от всички сфери. Счетоводство, данъци, одит, ТРЗ, заплати и други услуги.",
+  ogImage: "https://aktiv.bg/photos/large/photo2.webp",
+  ogType: "website",
+  twitterCard: "summary_large_image",
+});
+
 useHead({
-  title: "Счетоводни услуги",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Актив Сандански предлага професионални счетоводни услуги за бизнеси от всички сфери. Счетоводство, данъци, одит, ТРЗ, заплати и други услуги.",
-    },
-  ],
   link: [
     {
       rel: "canonical",
@@ -194,12 +186,11 @@ useHead({
   ],
 });
 
-const numbers = ref([0, 0, 0]);
 const numbersMax = [21, 100, 100];
+const numbers = ref([...numbersMax]);
 
 const elements = reactive([
-  // Hero is above the fold: start it revealed so it paints (and fades in via
-  // CSS) on first load instead of sitting at opacity-0 until JS/observer runs.
+  // Hero is above the fold: start revealed so it paints on first load
   { id: "hero", observed: true, animationClasses: "animate__fadeIn" },
   { id: "statistics", observed: false, animationClasses: "animate__fadeIn" },
   {
@@ -213,13 +204,18 @@ const elements = reactive([
     observed: false,
     animationClasses: "animate__fadeInUp",
   },
-  { id: "trust", observed: false, animationClasses: "animate__fadeIn" },
 ]);
 
 let observer;
 
 onMounted(() => {
-  if (typeof IntersectionObserver === "undefined") return;
+  if (typeof IntersectionObserver === "undefined") {
+    elements.forEach((el) => (el.observed = true));
+    return;
+  }
+
+  // Reset to 0 for client-side count animation
+  numbers.value = [0, 0, 0];
 
   const reducedMotion =
     window.matchMedia &&
@@ -229,29 +225,32 @@ onMounted(() => {
     (entries) => {
       entries.forEach((entry) => {
         const element = elements.find((el) => el.id === entry.target.id);
-        if (element && element.observed == false) {
-          element.observed = entry.isIntersecting;
-          if (entry.target.id === "statistics") {
-            if (reducedMotion) {
-              numbers.value = [...numbersMax];
-              return;
-            }
-            let i = 0;
-            const interval = setInterval(() => {
-              if (i < 100) {
-                i++;
-                numbers.value = numbersMax.map((max) =>
-                  Math.round((i / 100) * max)
-                );
-              } else {
-                clearInterval(interval);
+        if (element && !element.observed) {
+          if (entry.isIntersecting) {
+            element.observed = true;
+            observer.unobserve(entry.target);
+            if (entry.target.id === "statistics") {
+              if (reducedMotion) {
+                numbers.value = [...numbersMax];
+                return;
               }
-            }, 15);
+              let i = 0;
+              const interval = setInterval(() => {
+                if (i < 100) {
+                  i++;
+                  numbers.value = numbersMax.map((max) =>
+                    Math.round((i / 100) * max)
+                  );
+                } else {
+                  clearInterval(interval);
+                }
+              }, 15);
+            }
           }
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.05, rootMargin: "150px 0px" }
   );
 
   elements.forEach((element) => {
@@ -321,7 +320,7 @@ onBeforeUnmount(() => {
   z-index: 3;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 160px 32px 120px;
+  padding: 160px 32px 90px;
   width: 100%;
 }
 
@@ -383,44 +382,6 @@ onBeforeUnmount(() => {
   gap: 14px;
   margin-top: 44px;
   flex-wrap: wrap;
-}
-
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  margin-top: 72px;
-  padding-top: 44px;
-  border-top: 1px solid var(--line-d);
-}
-
-.chip {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding-right: 48px;
-  margin-right: 48px;
-  border-right: 1px solid var(--line-d);
-}
-
-.chip:last-child {
-  border-right: 0;
-  margin-right: 0;
-  padding-right: 0;
-}
-
-.chip b {
-  font-family: var(--font-d);
-  font-size: 38px;
-  font-weight: 400;
-  color: #fff;
-  line-height: 1;
-}
-
-.chip span {
-  font-size: 12.5px;
-  color: var(--fog-2);
-  letter-spacing: 0.04em;
 }
 
 /* =========================================================
@@ -705,56 +666,129 @@ onBeforeUnmount(() => {
    RESPONSIVE
    ========================================================= */
 @media screen and (max-width: 768px) {
-  .stat-grid {
-    grid-template-columns: 1fr;
+  .hero {
+    min-height: auto;
   }
 
-  .why {
-    grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 80px 20px;
+  .hero-inner {
+    padding: 104px 20px 48px;
   }
 
-  .why-media {
-    max-width: 400px;
+  .hero-title {
+    font-size: clamp(32px, 7.5vw, 44px);
+    margin: 20px 0 0;
+    line-height: 1.08;
   }
 
-  .why-badge {
-    right: 0;
+  .hero-sub {
+    margin: 18px 0 0;
+    font-size: 15.5px;
+    line-height: 1.6;
   }
 
-  .hero-inner,
-  .section-head,
-  .stat-grid,
+  .hero-cta {
+    margin-top: 28px;
+    gap: 12px;
+  }
+
   .trust-inner {
+    padding: 16px 20px;
+    gap: 8px 14px;
+  }
+
+  .trust-inner i {
+    display: none;
+  }
+
+  .trust-inner span {
+    padding: 4px 8px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  .section-head {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .hero-chips {
-    flex-direction: column;
+  .section-title {
+    font-size: clamp(28px, 6.5vw, 40px);
+    margin: 16px 0 0;
   }
 
-  .chip {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 10px;
-    padding-right: 0;
-    margin-right: 0;
-    border-right: 0;
-    padding-bottom: 20px;
+  .section-lead {
+    margin: 16px 0 0;
+    font-size: 15.5px;
+  }
+
+  .stats {
+    padding: 64px 0;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+    margin-top: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .stat {
+    padding: 28px 20px;
+  }
+
+  .stat-bar {
     margin-bottom: 20px;
-    border-bottom: 1px solid var(--line-d);
   }
 
-  .chip:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
+  .stat-num {
+    font-size: clamp(40px, 8vw, 56px);
   }
 
-  .chip b {
-    font-size: 30px;
+  .stat h3 {
+    margin: 14px 0 8px;
+  }
+
+  .why {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 64px 20px;
+  }
+
+  .why-media {
+    max-width: 380px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .why-badge {
+    right: 12px;
+    bottom: 16px;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .why-badge img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .why-badge b {
+    font-size: 13.5px;
+  }
+
+  .why-badge span {
+    font-size: 11.5px;
+  }
+
+  .why-text {
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 18px 0 0;
+  }
+
+  .why-list {
+    margin: 24px 0 0;
+    gap: 18px;
   }
 }
 </style>

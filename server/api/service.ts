@@ -1,5 +1,64 @@
+interface ServiceImage {
+  src: string;
+  alt: string;
+}
 
-const services =[
+interface ServiceBullet {
+  text: string;
+  iconName: string;
+}
+
+interface ServiceSummary {
+  name: string;
+  description: string;
+  descriptionShort: string;
+  iconName: string;
+  image: ServiceImage;
+  link?: string;
+}
+
+interface ServiceHero {
+  title: string;
+  description: string;
+  image: ServiceImage;
+}
+
+interface ServiceDescription {
+  title: string;
+  text: string;
+  bullets: ServiceBullet[];
+}
+
+interface ServicePageData {
+  hero: ServiceHero;
+  description: ServiceDescription;
+}
+
+interface ServiceSeoLink {
+  rel: string;
+  href: string;
+}
+
+interface ServiceSeoMeta {
+  name: string;
+  content: string;
+}
+
+interface ServiceSeo {
+  title: string;
+  meta: ServiceSeoMeta[];
+  link: ServiceSeoLink[];
+}
+
+interface Service {
+  id: string;
+  name: string;
+  summary: ServiceSummary;
+  pageData: ServicePageData;
+  seo: ServiceSeo;
+}
+
+const services: Service[] = [
   {
     "id": "subscription-services",
     "name": "Абонаментно обслужване",
@@ -209,24 +268,24 @@ const services =[
 
 
 export default defineEventHandler((event) => {
+  const query = getQuery(event);
 
-    const query = getQuery(event)
-    let service
-    if(Object.keys(query).length === 0){
-      return services
-    }
+  if (Object.keys(query).length === 0) {
+    return services;
+  }
 
-    if(query.type === "nav"){
-      service = services.map(service => {
-        return {id : service.id, name : service.name}
-      })
-    }
+  if (query.type === "nav") {
+    return services.map((s) => ({
+      id: s.id,
+      name: s.name,
+    }));
+  }
 
-    if(query.type === "service"){
-      service = services.find(service => service.id === query.id)
-      service = { text : service?.pageData, seo : service?.seo }
-    }
-
-
-    return service
-    })  
+  if (query.type === "service") {
+    const s = services.find((item) => item.id === query.id);
+    return {
+      text: s?.pageData,
+      seo: s?.seo,
+    };
+  }
+});  

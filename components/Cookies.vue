@@ -9,24 +9,24 @@
         преживяване.
       </p>
       <div class="buttons">
-        <div
+        <button
           @click="grantAllConsents()"
           class="button button-dark color-light button-default"
         >
           <p>Приемам всички</p>
-        </div>
-        <div
+        </button>
+        <button
           @click="rejectAll()"
           class="button button-light color-primary button-default"
         >
           <p>Отхвърлям</p>
-        </div>
-        <div
+        </button>
+        <button
           @click="grantAdStorageOnly()"
           class="button button-light color-primary button-default button-tertiary"
         >
           <p>Само за реклами</p>
-        </div>
+        </button>
       </div>
     </div>
   </div>

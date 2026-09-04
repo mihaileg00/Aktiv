@@ -75,13 +75,9 @@
 <script setup>
 const company = useCompanyInfo();
 
-const { data } = await useFetch("/api/service", {
-  query: {
-    type: "nav",
-  },
-});
+const { data } = await useServicesNav();
 
-const routes = toRaw(data.value);
+const routes = computed(() => data.value || []);
 </script>
 
 <style scoped>
@@ -116,7 +112,7 @@ const routes = toRaw(data.value);
   font-size: 8px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--fog-2);
+  color: var(--fog);
   display: block;
   margin-top: 6px;
 }
@@ -178,6 +174,10 @@ const routes = toRaw(data.value);
 }
 
 @media screen and (max-width: 768px) {
+  .footer {
+    padding: 48px 0 24px;
+  }
+
   .footer-inner {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -189,10 +189,11 @@ const routes = toRaw(data.value);
   }
 
   .footer-base {
+    margin-top: 32px;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    padding: 24px 20px 0;
+    padding: 20px 20px 0;
   }
 }
 </style>

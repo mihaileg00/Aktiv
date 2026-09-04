@@ -6,11 +6,8 @@
   >
     <nav>
       <!-- Your navigation content goes here -->
-      <NuxtImg
-        src="/Menu.svg"
-        height="24px"
-        width="24px"
-        alt="Hamburger menu"
+      <button
+        id="hamburger-mobile"
         @click="
           () => {
             if (menuOn == 'animate__slideInLeft') {
@@ -18,8 +15,17 @@
             } else openNav(true);
           }
         "
-        id="hamburger-mobile"
-      />
+        aria-label="Отвори менюто"
+        :aria-expanded="menuOn == 'animate__slideInLeft'"
+      >
+        <NuxtImg
+          src="/Menu.svg"
+          height="24px"
+          width="24px"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
       <Nuxt-link to="/" @click="scrollToTop" class="brand link">
         <NuxtImg
           src="/logo.svg"
@@ -214,17 +220,10 @@ const scrollToTop = () => {
 const openNav = (actionE) => {
   if (actionE) {
     menuOn.value = "animate__slideInLeft";
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft =
-      window.pageXOffset || document.documentElement.scrollLeft;
-
-    // A function to prevent scrolling:
-    window.onscroll = () => {
-      window.scrollTo(scrollLeft, scrollTop);
-    };
+    document.body.style.overflow = "hidden";
   } else {
     menuOn.value = "animate__slideOutLeft";
-    window.onscroll = null;
+    document.body.style.overflow = "";
   }
 };
 
@@ -241,13 +240,9 @@ onBeforeUnmount(() => {
   window.removeEventListener("scroll", onScroll);
 });
 
-const { data } = await useFetch("/api/service", {
-  query: {
-    type: "nav",
-  },
-});
+const { data } = await useServicesNav();
 
-const routes = toRaw(data.value);
+const routes = computed(() => data.value || []);
 </script>
 
 <style scoped>
@@ -277,11 +272,21 @@ nav {
   gap: 24px;
   width: 100%;
   max-width: var(--maxw);
-  padding: 20px 32px;
+  padding: 24px 32px 20px;
+  transition: padding 0.3s var(--ease);
+}
+
+#nav-container.scrolled nav {
+  padding: 16px 32px;
 }
 
 #hamburger-mobile {
   display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
 }
 
 .brand {
@@ -307,7 +312,7 @@ nav {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--fog-2);
+  color: var(--fog);
   margin-top: 6px;
 }
 
@@ -428,7 +433,13 @@ nav {
 
 @media screen and (max-width: 768px) {
   nav {
-    padding: 16px 20px;
+    padding: 24px 20px 14px;
+    padding-top: max(24px, calc(16px + env(safe-area-inset-top, 0px)));
+  }
+
+  #nav-container.scrolled nav {
+    padding: 14px 20px 12px;
+    padding-top: max(14px, calc(8px + env(safe-area-inset-top, 0px)));
   }
 
   #hamburger-mobile {

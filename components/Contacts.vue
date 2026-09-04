@@ -83,6 +83,8 @@
           <iframe
             loading="lazy"
             allowfullscreen
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            referrerpolicy="no-referrer-when-downgrade"
             width="100%"
             height="100%"
             title="Местоположение на Актив Сандански на картата"
@@ -216,7 +218,6 @@
 <script setup>
 const companyInfo = useCompanyInfo();
 const { mapsApiKey } = useRuntimeConfig().public;
-const { $mail } = useNuxtApp();
 
 const name = ref("");
 const email = ref("");
@@ -236,35 +237,23 @@ const statusMessage = computed(() => {
   return "";
 });
 
-const escapeHtml = (value) =>
-  String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
 const sendEmail = async () => {
-  if (website.value) return; // honeypot tripped — silently drop
   if (sending.value) return;
 
   sending.value = true;
   status.value = "";
 
-  const html = `
-    <p><strong>Име:</strong> ${escapeHtml(name.value)}</p>
-    <p><strong>Имейл:</strong> ${escapeHtml(email.value)}</p>
-    <p><strong>Телефон:</strong> ${escapeHtml(phone.value) || "—"}</p>
-    <p><strong>Компания:</strong> ${escapeHtml(company.value) || "—"}</p>
-    <p><strong>Съобщение:</strong><br>${escapeHtml(message.value).replace(
-      /\n/g,
-      "<br>"
-    )}</p>
-  `;
-
   try {
-    await $mail.send({
-      subject: `Запитване от сайта — ${name.value}`,
-      replyTo: email.value,
-      html,
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: name.value,
+        email: email.value,
+        phone: phone.value,
+        company: company.value,
+        message: message.value,
+        website: website.value, // honeypot
+      }
     });
 
     status.value = "success";
@@ -557,7 +546,7 @@ a.contact-value:hover {
    ========================================================= */
 @media screen and (max-width: 768px) {
   .contacts {
-    padding: 80px 0;
+    padding: 64px 0;
   }
 
   .section-head,
@@ -568,7 +557,8 @@ a.contact-value:hover {
 
   .contacts-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    margin-top: 32px;
+    gap: 32px;
   }
 
   .field-row {

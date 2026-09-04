@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     v-if="isScrollButton"
     @click="scrollToSection"
     class="btn"
@@ -32,7 +32,7 @@
         stroke-linejoin="round"
       />
     </svg>
-  </div>
+  </button>
   <Nuxt-link
     v-else
     :to="link"

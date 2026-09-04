@@ -1,23 +1,10 @@
+import { VALID_SERVICES } from './shared/services'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-07',
   css: ['animate.css/animate.min.css', '~/assets/css/style.css'],
-  modules: [['nuxt-mail', {
-    message: {
-      to: process.env.SMTP_USER,
-      from: process.env.SMTP_USER,
-      name: 'website'
-    },
-    smtp: {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      }
-    },
-  }], 'nuxt-gtag', "@nuxt/image", '@nuxtjs/seo'],
+  modules: ['nuxt-gtag', '@nuxt/image', '@nuxtjs/seo'],
   app: {
     head: {
       htmlAttrs: {
@@ -33,14 +20,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: [
-        // Add routes for dynamic content (e.g., services)
-        '/Services/subscription-services',
-        '/Services/annual-closure',
-        '/Services/hr-services',
-        '/Services/quarterly-service',
-        // Add more routes as needed
-      ],
+      routes: VALID_SERVICES.map(route => `/Services/${route}`),
     },
   },
   gtag: {

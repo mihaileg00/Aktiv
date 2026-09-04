@@ -1,14 +1,9 @@
+import { VALID_SERVICES } from '~/shared/services'
+
 export default defineNuxtRouteMiddleware(to => {
+    const serviceParam = to.params.service
 
-    const services = [
-        { route: 'subscription-services' },
-        { route: 'annual-closure' },
-        { route: 'hr-services' },
-        { route: 'quarterly-service' }
-    ]
-
-    if (!services.some(service => service.route === to.params.service)) {
+    if (typeof serviceParam !== 'string' || !VALID_SERVICES.includes(serviceParam)) {
         return navigateTo('/')
     }
-
-})
+})
