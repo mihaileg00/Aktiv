@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cookieConsent == undefined" class="cookie-consent shadow-02">
+  <div v-if="ready && cookieConsent == undefined" class="cookie-consent shadow-02">
     <div class="content">
       <h3 class="display-7 display-5-mobile color-primary extra-bold">
         Бисквитки
@@ -106,6 +106,22 @@
 </style>
 
 <script setup>
+const ready = ref(false);
+
+onMounted(() => {
+  if (typeof window !== "undefined") {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => {
+        ready.value = true;
+      }, { timeout: 1500 });
+    } else {
+      setTimeout(() => {
+        ready.value = true;
+      }, 1000);
+    }
+  }
+});
+
 const cookieConsent = useCookie("cookie_consent", {
   path: "/",
   maxAge: 60 * 60 * 24 * 30,

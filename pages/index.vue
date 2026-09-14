@@ -2,8 +2,7 @@
   <main class="home">
     <section
       id="hero"
-      class="hero animate__animated"
-      :class="elements[0].observed ? elements[0].animationClasses : 'opacity-0'"
+      class="hero"
     >
       <div class="grid-overlay" aria-hidden="true"></div>
       <div class="hero-inner">
@@ -113,6 +112,7 @@
               src="/photos/large/photo2.webp"
               width="640"
               height="800"
+              sizes="xs:100vw sm:100vw md:640px"
               loading="lazy"
               alt="Екипът на АКТИВ"
             />
@@ -410,7 +410,7 @@ onBeforeUnmount(() => {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fog-2);
+  color: var(--fog);
   padding: 4px 22px;
 }
 

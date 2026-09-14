@@ -22,7 +22,7 @@
       </div>
       <div class="footer-cols">
         <div>
-          <h4>Услуги</h4>
+          <h3 class="footer-col-title">Услуги</h3>
           <Nuxt-link
             v-for="(route, index) in routes"
             :key="index"
@@ -32,7 +32,7 @@
           </Nuxt-link>
         </div>
         <div>
-          <h4>Компания</h4>
+          <h3 class="footer-col-title">Компания</h3>
           <Nuxt-link to="/About">За нас</Nuxt-link>
           <Nuxt-link to="/#contacts-container">Контакти</Nuxt-link>
           <a href="https://aktivbg.com" target="_blank" rel="noopener">
@@ -40,7 +40,7 @@
           </a>
         </div>
         <div>
-          <h4>Контакт</h4>
+          <h3 class="footer-col-title">Контакт</h3>
           <a :href="`mailto:${company.email}`">{{ company.email }}</a>
           <a :href="`tel:${company.phone.href}`">{{ company.phone.display }}</a>
           <span>
@@ -123,6 +123,8 @@ const routes = computed(() => data.value || []);
   gap: 32px;
 }
 
+.footer-cols .footer-col-title,
+.footer-cols h3,
 .footer-cols h4 {
   font-family: var(--font-b);
   font-size: 11px;
@@ -137,7 +139,7 @@ const routes = computed(() => data.value || []);
 .footer-cols span {
   display: block;
   font-size: 14px;
-  color: var(--fog-2);
+  color: var(--fog);
   margin-bottom: 10px;
   transition: color 0.2s;
 }
@@ -156,7 +158,7 @@ const routes = computed(() => data.value || []);
   justify-content: space-between;
   gap: 16px;
   font-size: 12.5px;
-  color: var(--fog-2);
+  color: var(--fog);
 }
 
 .footer-legal {
@@ -165,7 +167,7 @@ const routes = computed(() => data.value || []);
 }
 
 .footer-legal a {
-  color: var(--fog-2);
+  color: var(--fog);
   transition: color 0.2s;
 }
 

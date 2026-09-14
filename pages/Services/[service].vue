@@ -2,8 +2,7 @@
   <main class="service-page">
     <section
       id="hero"
-      class="svc-hero animate__animated"
-      :class="elements[0].observed ? elements[0].animationClasses : 'opacity-0'"
+      class="svc-hero"
     >
       <div class="grid-overlay" aria-hidden="true"></div>
       <div class="svc-hero-inner">
@@ -40,6 +39,7 @@
               :alt="text.hero.image.alt"
               width="640"
               height="760"
+              sizes="xs:100vw sm:100vw md:640px"
               fit="cover"
             />
           </div>

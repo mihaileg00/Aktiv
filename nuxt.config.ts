@@ -3,13 +3,21 @@ import { VALID_SERVICES } from './shared/services'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-07',
-  css: ['animate.css/animate.min.css', '~/assets/css/style.css'],
+  css: ['~/assets/css/style.css'],
   modules: ['nuxt-gtag', '@nuxt/image', '@nuxtjs/seo'],
   app: {
     head: {
       htmlAttrs: {
         lang: 'bg'
       },
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap'
+        }
+      ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
@@ -21,6 +29,15 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: VALID_SERVICES.map(route => `/Services/${route}`),
+    },
+    routeRules: {
+      '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/photos/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/icons/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/logo.svg': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/name.svg': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+      '/Menu.svg': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     },
   },
   gtag: {

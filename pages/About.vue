@@ -2,8 +2,7 @@
   <main class="about-page">
     <section
       id="hero"
-      class="about-hero animate__animated"
-      :class="elements[0].observed ? elements[0].animationClasses : 'opacity-0'"
+      class="about-hero"
     >
       <div class="grid-overlay" aria-hidden="true"></div>
       <div class="about-hero-inner">
@@ -40,6 +39,7 @@
               src="/photos/large/photo8.webp"
               width="640"
               height="800"
+              sizes="xs:100vw sm:100vw md:640px"
               fit="cover"
               loading="lazy"
               alt="Екипът на АКТИВ"
