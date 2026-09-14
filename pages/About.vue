@@ -37,9 +37,9 @@
           <div class="about-media-inner">
             <NuxtImg
               src="/photos/large/photo8.webp"
-              width="640"
-              height="800"
-              sizes="xs:100vw sm:100vw md:640px"
+              width="480"
+              height="600"
+              sizes="xs:360px sm:480px md:480px"
               fit="cover"
               loading="lazy"
               alt="Екипът на АКТИВ"

@@ -37,9 +37,9 @@
             <NuxtImg
               :src="text.hero.image.src"
               :alt="text.hero.image.alt"
-              width="640"
-              height="760"
-              sizes="xs:100vw sm:100vw md:640px"
+              width="480"
+              height="570"
+              sizes="xs:360px sm:480px md:480px"
               fit="cover"
             />
           </div>
